@@ -1,19 +1,18 @@
-import express, {json} from 'express';
-import { routLibrary } from './Routes/RoutLibrary.js';
-import {MdwbodyParser} from './Middelwares/Middelwares.js'
-import { corsMiddelware } from './Middelwares/cors.js';
+import express from 'express';
+import {routerLibrary} from './Routes/libraryRoute.js'
 const app = express();
 
-//Middelwares
-MdwbodyParser(app);
-app.use(corsMiddelware);
+//Middlewares
 
-//Rutas
-app.use('/library', routLibrary);
+//ROUTES
+app.use('/library', routerLibrary);
 
-//Port
-app.set('port', cvxvxv.env.PORT || 3000);
-app.get('port')
-app.listen(app.get('port'), ()=>{
-    console.log(`Server on port http://localhost:${app.get('port')}`)
-})
+//PORT
+app.set('port', process.env.PORT || 3000);
+
+
+// Iniciar el servidor
+app.listen(app.get('port'), () => {
+    console.log(`Servidor Express escuchando en el puerto ${app.get('port')}`);
+});
+
