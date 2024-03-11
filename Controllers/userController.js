@@ -13,10 +13,6 @@ export class userCtrl {
         catch(err){
             console.log('error', err);
         }
-        // const result = this.userMdl.userCreate({body});
-        // if(!result) res.json({message:'Hubo un error al crear el usuario'});
-
-
     }
 
 }

@@ -1,0 +1,13 @@
+.container{
+    width: 20% ;
+    height: 20%;
+}
+.carousel-item img {
+    width: 20% ;
+    height: 20%;
+}
+
+.carousel-item{
+    width: auto;
+    height: auto;
+}
