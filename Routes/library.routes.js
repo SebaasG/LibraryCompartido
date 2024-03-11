@@ -1,14 +1,14 @@
 
 import router from 'express';
 import { userCtrl } from '../Controllers/userController.js';
-import { bookController } from '../Controllers/bookController.js'
-
+import { bookController } from '../Controllers/bookController.js';
+import { userMdl } from '../Models/userModel.js';
 
 export const routerLibrary = () => {
-    const librartyRouter = router();
-    const UserCtrl = new userCtrl({ userMdl });
-    librartyRouter.post('/', UserCtrl.createUser)
-    return librartyRouter;
+    const libraryRouter = router();
+    const UserCtrl = new userCtrl({userMdl});
+    libraryRouter.post('/', UserCtrl.createUser)
+    return libraryRouter;
 }
 
 export const createBookRoutes = ({bookModel}) => {

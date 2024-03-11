@@ -1,19 +1,18 @@
 import express, { json } from 'express';
-import express from 'express';
-import {routerLibrary} from './Routes/library.routes.js'
-import { routerLibrary } from './Routes/library.routes.js'
+import { routerLibrary } from './Routes/library.routes.js';
 import { createBookRoutes } from './Routes/library.routes.js'
 import { bookModel } from './Models/bookModel.js'
-
-
+import { userMdl } from './Models/userModel.js';
+import bodyParser from 'body-parser';
 
 const app = express();
 app.use(json());
+app.use(bodyParser.urlencoded({ extended: true }));
 //Middlewares
 
 
 //ROUTES
-app.use('/library', routerLibrary);
+app.use('/library', routerLibrary({userMdl: userMdl}));
 app.use('/book', createBookRoutes({ bookModel: bookModel })); // Pasa el controlador en lugar del modelo
 
 //PORT
