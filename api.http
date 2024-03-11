@@ -1,0 +1,2 @@
+###
+GET http://localHost:3000/book/all
