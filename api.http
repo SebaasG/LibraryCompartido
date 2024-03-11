@@ -1,2 +1,16 @@
 ###
 GET http://localHost:3000/book/all
+
+###
+POST http://localHost:3000/book/save
+Content-Type: application/json
+
+{
+    "nameBook": "pruebita",
+    "amountBook": 10,
+    "genBook": "comedio?",
+    "sumBook": "si mi chamos",
+    "yearbook": 2024,
+    "authbook": "que es auth",
+    "postbook":"www.rear"
+}

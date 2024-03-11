@@ -1,12 +1,12 @@
-import express from 'express';
+import express, { json } from 'express';
 import { routerLibrary } from './Routes/library.routes.js'
 import { createBookRoutes } from './Routes/library.routes.js'
 
 import { bookModel } from './Models/bookModel.js'
-import { bookController } from './Controllers/bookController.js' // Importa el controlador
+
 
 const app = express();
-
+app.use(json());
 //Middlewares
 
 

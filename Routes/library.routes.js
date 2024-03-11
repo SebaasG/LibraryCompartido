@@ -14,6 +14,7 @@ export const routerLibrary = () => {
 export const createBookRoutes = ({bookModel}) => {
     const bookRouter = router();
     const BookController = new bookController({bookModel})
-    bookRouter.get('/all', BookController.getBooks)
+    bookRouter.get('/all', BookController.getBooks);
+    bookRouter.post('/save', BookController.postBooks);
     return bookRouter;
 }
