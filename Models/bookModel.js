@@ -1,7 +1,7 @@
-import {createConnection} from '../Database/ConfigDatabase.js';
+import {createConnection} from '../Databases/config.js';
 const connection =  createConnection();
 
-console.log(connection);
+console.log(createConnection);
 
 export class bookModel{
     static async getBooks(){
