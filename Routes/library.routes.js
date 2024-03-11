@@ -7,7 +7,8 @@ import { userMdl } from '../Models/userModel.js';
 export const routerLibrary = () => {
     const libraryRouter = router();
     const UserCtrl = new userCtrl({userMdl});
-    libraryRouter.post('/', UserCtrl.createUser)
+    libraryRouter.post('/register', UserCtrl.createUser);
+    libraryRouter.post('/login', UserCtrl.verifyUser);
     return libraryRouter;
 }
 
