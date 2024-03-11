@@ -1,0 +1,90 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-color: #080700;
+}
+.form-login{
+    background-color: #fff9f9;
+    padding: 10px;
+    width: 400px;
+    height:auto;
+    margin: 10% auto;
+    border-radius: 20px;
+    font-family: cursive;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+.form-register{
+    background-color: #fff9f9;
+    padding: 10px;
+    width: 500px;
+    height:auto;
+    margin: 4% auto;
+    border-radius: 20px;
+    font-family: cursive;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+.form-register_title, .form-login_title{
+    text-align: center;
+    margin: 20px;
+    
+}
+.form-register_input, .form-login_input{
+    margin: 10px auto;
+    border-radius: 7px;
+    padding: 12px;
+    width: 280px;
+    background-color: transparent;
+    border: none;
+    box-shadow: 1px 5px 5px 2px  #080700;
+    transition: border-color 0.8s ease;
+    
+}
+
+.form-register_input::placeholder{
+    font-family: cursive;
+    font-size: 15px;
+}
+.form-register_button, .form-login_button{
+    margin: 5px auto;
+    padding: 12px;
+    width: 80px;
+    border-radius: 15px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+}
+.form-register_button:hover{
+    background-color: #fff;
+    color: #000;
+}
+.form-login_button:hover{
+    background-color: #fff;
+    color: #000;
+}
+.form-register_link, .form-login_link{
+    color: #000;
+    margin: 10px auto;
+    text-decoration: none;
+}
+input :focus{
+    outline: none;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
