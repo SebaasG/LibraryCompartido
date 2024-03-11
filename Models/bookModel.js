@@ -16,8 +16,7 @@ export class bookModel {
 
     static async postBook(body){
         try {
-            const {nameBook,amountBook,genBook,sumBook,yearbook,authbook,postbook} = body
-            const books = await connection.query("INSERT INTO book (nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook)VALUES (?,?,?,?,?,?,?)", [nameBook,amountBook,genBook,sumBook,yearbook,authbook,postbook])
+            const books = await connection.query("INSERT INTO book (nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook)VALUES (?,?,?,?,?,?,?')", [body.nameBook,body.amountBook,body.genBook,body.sumBook,body.yearbook,body.authbook, body.postbook])
             if(books){
                 return 1
             }

@@ -1,18 +1,39 @@
 export class userCtrl {
-    constructor ({ userMdl }){
-        this.userMdl = userMdl
+  constructor({ userMdl }) {
+    this.userMdl = userMdl;
+  }
+  // Crear el Usuario
+  createUser = async (req, res) => {
+    try {
+      const body = req.body;
+      const result = await this.userMdl.userCreate({ body });
+      if (!result) {
+        res.status(500).send("Hubo un error en la verificacion del usuario");
+      }
+      res.status(200).send("Se creo el usuario correctamente");
+    } catch (err) {
+      console.log("Error en el controlador, CreateUser", err);
+      res.status(500).send("Hubo un error interno en el servidor");
     }
-
-    createUser = async (req,res)=>{
-        try{
-            if(!req.body) return 'Error, no esta insertando correctamente los datos.'
-            const body = req.body;
-            console.log(body);
-            res.status(200).send('Se subio el usuario correctamente');
+};
+    // Verificar el usuario
+    verifyUser = async (req, res) => {
+      try {
+        const body = req.body;
+        const result = await this.userMdl.verifyUser({ body });
+        if (!result) {
+          res.status(500).send("Hubo un error en la verificacion del usuario.");
         }
-        catch(err){
-            console.log('error', err);
-        }
-    }
-
+        res.status(200).send("Se verifico el usuario correctamente");
+      } catch (err) {
+        console.log("Error en el controlador, verifyUser", err);
+        res
+          .status(404)
+          .send("Hubo un error interno en la verificacion del usuario");
+      }
+    };
+    // const result = this.userMdl.userCreate({body});
+    // if(!result) res.json({message:'Hubo un error al crear el usuario'});
+  
 }
+
