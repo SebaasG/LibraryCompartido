@@ -1,11 +1,16 @@
-import {createConnection} from '../Databases/config.js';
-const connection =  createConnection();
+import { createConnection } from '../Databases/config.js';
 
-console.log(createConnection);
+const connection = await createConnection();
 
-export class bookModel{
-    static async getBooks(){
-        const book = await connection.query('Select * from book');
-        return book;
+export class bookModel {
+    static async getBooks() {
+        try {
+            console.log('Entra al modelo');
+            const [books] = await connection.query('SELECT * FROM book');
+            return books;
+        } catch (error) {
+            console.log('Modelo:', error);
+            throw error; // Lanzar el error para manejarlo en el controlador
+        }
     }
 }

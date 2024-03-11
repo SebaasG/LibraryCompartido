@@ -1,2 +1,5 @@
 #POST
 POST 'http://localhost:3000/library'
+
+###
+GET http://localHost:3000/book/all
