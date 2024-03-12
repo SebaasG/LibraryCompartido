@@ -3,6 +3,7 @@ import { hashPass } from "../public/js/hashPass.js";
 
 const connection = await createConnection();
 
+//funcion para verificar la existencia del usuario en la base de datos
 const verifyExistenceUser = async ({ body }) => {
   const { docUser, emailUser } = body;
   console.log(docUser, emailUser);
@@ -15,12 +16,10 @@ const verifyExistenceUser = async ({ body }) => {
 };
 // Modelo
 export class userMdl {
-  //funcion para verificar la existencia del usuario en la base de datos
 
   //Crear un usuario
   static async userCreate({ body }) {
     try {
-
       let response;
       //Verificar si el usuario ya existe, si no para registrarlo.
       const result = await verifyExistenceUser({ body });
@@ -51,7 +50,6 @@ export class userMdl {
       console.log(`El usuario puede ser registrado ${result[0]}`);
       response = "El usuario se ha registrado correctamente";
       return response;
-
     } catch (err) {
       console.log("Hubo un error");
       throw err;
@@ -61,6 +59,7 @@ export class userMdl {
   //Verificar Usuario
   static async verifyUser({ body }) {
     try {
+      let response;
       let newBody = { ...body };
       //Hash Password
       const passHash = await hashPass(newBody.passUser);
@@ -72,9 +71,12 @@ export class userMdl {
         passUser,
       ]);
       console.log(sql[0][0].result);
-      if (sql[0][0].result === 2) return false;
-
-      return true;
+      if (sql[0][0].result === 2) {
+        response = "El usuario no existe, verifique la contraseña o el usuario";
+        return response;
+      }
+      response = "Se ha inciado sesion correctamente";
+      return response;
     } catch (err) {
       console.log("Hubo un error");
       throw err;

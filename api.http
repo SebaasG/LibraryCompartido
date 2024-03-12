@@ -10,7 +10,6 @@ Content-Type: application/json
     "phoneUser":3219567693,
     "addressUser":"Piedecuesta-Santander"
 }
-
 ###
 GET http://localHost:3000/book/all
 

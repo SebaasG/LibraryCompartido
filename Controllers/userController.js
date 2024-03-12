@@ -1,7 +1,10 @@
+
+
 export class userCtrl {
   constructor({ userMdl }) {
     this.userMdl = userMdl;
   }
+
   // Crear el Usuario
   createUser = async (req, res) => {
     try {
@@ -18,10 +21,7 @@ export class userCtrl {
       try {
         const body = req.body;
         const result = await this.userMdl.verifyUser({ body });
-        if (!result) {
-          res.status(500).send("Hubo un error en la verificacion del usuario.");
-        }
-        res.status(200).send("Se verifico el usuario correctamente");
+        res.status(200).send(result);
       } catch (err) {
         console.log("Error en el controlador, verifyUser", err);
         res
