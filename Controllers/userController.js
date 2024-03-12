@@ -33,3 +33,4 @@ export class userCtrl {
     // if(!result) res.json({message:'Hubo un error al crear el usuario'});
   
 }
+

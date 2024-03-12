@@ -1,0 +1,38 @@
+.headerBook {
+    background-color: black;
+}
+
+.tittle {
+    color: white;
+    border: solid white;
+}
+
+.root {
+    font-family: monospace;
+
+}
+
+.navbarBook {}
+
+.tittleNav {
+    margin-top: 20px;
+}
+
+.inputSearchBook {
+    width: 500px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.filter {
+    border: solid black;
+    height: 20px;
+    width: 20px;
+}
+
+.allBooksCont {
+    border: solid black;
+    height: 20px;
+    width: 20px;
+}

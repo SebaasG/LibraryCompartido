@@ -19,12 +19,12 @@ POST http://localHost:3000/book/save
 Content-Type: application/json
 
 {
-    "nameBook": "pruebita",
-    "amountBook": 10,
-    "genBook": "comedio?",
-    "sumBook": "si mi chamos",
-    "yearbook": 2024,
-    "authbook": "que es auth",
-    "postbook":"www.rear"
+    "nameBook": "Harry Potter don varitas",
+    "amountBook": 2,
+    "genBook": "Potterorrifico",
+    "sumBook": "La historia de potter y su varita",
+    "yearbook": 1889,
+    "authbook": "yo",
+    "postbook":"https://cdn.culturagenial.com/es/imagenes/harry-potter-libros-1-cke.jpg"
 }
 
