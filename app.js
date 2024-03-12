@@ -39,5 +39,5 @@ app.disable('x-powered-by');
 
 // Iniciar el servidor
 app.listen(app.get('port'), () => {
-    console.log(`Servidor Express escuchando en el puerto http://localHost:${app.get('port')}`);
+    console.log(`Servidor Express escuchando en el puerto http://localHost:${app.get('port')}/library/index.html`);
 });
