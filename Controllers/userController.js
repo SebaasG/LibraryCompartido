@@ -7,10 +7,7 @@ export class userCtrl {
     try {
       const body = req.body;
       const result = await this.userMdl.userCreate({ body });
-      if (!result) {
-        res.status(500).send("Hubo un error en la verificacion del usuario");
-      }
-      res.status(200).send("Se creo el usuario correctamente");
+      res.status(200).send(result);
     } catch (err) {
       console.log("Error en el controlador, CreateUser", err);
       res.status(500).send("Hubo un error interno en el servidor");
