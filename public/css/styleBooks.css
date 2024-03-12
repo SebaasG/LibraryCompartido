@@ -14,10 +14,12 @@
 
 .navbarBook {}
 
-.tittleNav {
-    margin-top: 20px;
-}
 
+
+.contentHeaderNav{
+    margin-top: 20px;
+    margin-bottom: 2%;
+}
 .inputSearchBook {
     width: 500px;
     height: 40px;
@@ -26,13 +28,34 @@
 }
 
 .filter {
-    border: solid black;
-    height: 20px;
-    width: 20px;
+    
+    margin-left: 3%;
+    height: auto;
 }
 
 .allBooksCont {
-    border: solid black;
-    height: 20px;
-    width: 20px;
+    
+    /* margin-right: 4%; */
+    height: auto;
+    margin-left: 3%;
+}
+
+.contBookSection{
+    margin-top: 2px;
+}
+.imgBookContainer{
+    width: 70px;
+    height: 100px;
+}
+.contBookSection{
+    margin: 15px;
+    padding: 15px;
+}
+.cardBookContainer{
+   margin-bottom: 20px;
+   margin-left: 30px;
+   margin-top: 15px;
+}
+.containerCards{
+margin-top: 2%;
 }
