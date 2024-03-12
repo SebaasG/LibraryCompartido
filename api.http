@@ -1,16 +1,15 @@
 #POST
-POST http://localhost:3000/library
+POST http://localhost:3000/library/register
 Content-Type: application/json
 
 {
-    "docUser":1095299063,
+    "docUser":123456789,
     "nameUser":"Andrey",
-    "emailUser":"andreyvr07@gmail.com",
+    "emailUser":"Andrey@example.com",
     "passUser":"12345",
     "phoneUser":3219567693,
     "addressUser":"Piedecuesta-Santander"
 }
-
 ###
 GET http://localHost:3000/book/all
 
