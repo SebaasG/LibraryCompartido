@@ -33,6 +33,8 @@ async function register (){
                 icon: 'error',
                 title: 'Algo salio Mal',
                 text: 'Hubo un error en el registro.',
+                iconColor: 'red',
+                confirmButtonColor:'#000',
                 didClose: () => {
                     // Redirige a la página deseada
                     window.location.href = 'http://localhost:3000/library/index.html';
@@ -43,6 +45,8 @@ async function register (){
                 icon: 'error',
                 title: 'El usuario ya esta Registrado',
                 text: 'El correo o la contraseña, ya estan en uso.',
+                iconColor: 'red',
+                confirmButtonColor:'#000',
                 didClose: () => {
                     // Redirige a la página deseada
                     window.location.href = 'http://localhost:3000/library/index.html';
@@ -53,6 +57,8 @@ async function register (){
                 icon: 'success',
                 title: 'Registro de usuario exitoso',
                 text: 'Se ha registrado correctamente, Inicie Sesion.',
+                iconColor: 'green',
+                confirmButtonColor:'#000',
                 didClose: () => {
                     // Redirige a la página deseada
                     window.location.href = 'http://localhost:3000/library/index.html';

@@ -6,14 +6,13 @@ const connection = await createConnection();
 //funcion para verificar la existencia del usuario en la base de datos
 const verifyExistenceUser = async ({ body }) => {
   const { docUser, emailUser } = body;
-  console.log(docUser, emailUser);
   const [sql] = await connection.query(
     "SELECT docUser, emailUser FROM user WHERE docUser = ? OR emailUser = ?",
     [docUser, emailUser]
   );
-  console.log("HPATAAA:", sql[0]);
   return sql;
 };
+
 // Modelo
 export class userMdl {
   //Crear un usuario
@@ -58,6 +57,10 @@ export class userMdl {
       const passHash = await hashPass(newBody.passUser);
       newBody.passUser = passHash;
       const { emailUser, passUser } = newBody;
+
+      // Verifica el rol del usuario, si admin o usuario.
+       const [result] = await connection.query('SELECT rolUser FROM user WHERE emailUser = ?',[emailUser]);
+
       //Llama el proceso almacenado para verificar si el usuario si existe
       const [sql] = await connection.query("CALL verifySession(?,?)", [
         emailUser,
@@ -65,6 +68,8 @@ export class userMdl {
       ]);
       console.log(sql[0][0].result);
       if (sql[0][0].result === 2) return 2;
+      
+      if(result[0].rolUser === 1)return 3;
       
       return 1;
     } catch (err) {
