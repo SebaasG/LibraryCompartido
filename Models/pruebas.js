@@ -1,4 +1,4 @@
-// // import { createConnection } from "../Databases/config.js";
+
 
 // // const connection = await createConnection();
 // // // console.log(`connection: ${ connection}`)
@@ -77,33 +77,38 @@
 
 
 
-import express from 'express';
-import bodyParser from 'body-parser';
-import Swal from 'sweetalert2'
+// import express from 'express';
+// import bodyParser from 'body-parser';
+// import Swal from 'sweetalert2'
 
-const app = express();
+// const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/mensaje',(req,res)=>{
-    try{
-        console.log(req.body)
-        const {mensaje} = req.body;
-            console.log(mensaje);
-            res.status(200).send('R');
-    }catch(err){
-        console.log(err)
-        res.send('CHupelo loca');
-    }
+// app.post('/mensaje',(req,res)=>{
+//     try{
+//         console.log(req.body)
+//         const {mensaje} = req.body;
+//             console.log(mensaje);
+//             res.status(200).send('R');
+//     }catch(err){
+//         console.log(err)
+//         res.send('CHupelo loca');
+//     }
 
-})
+// })
 
-app.listen(3000,()=>{
-    console.log('Server on port http://localhost:3000/mensaje');
-})
-
-
+// app.listen(3000,()=>{
+//     console.log('Server on port http://localhost:3000/mensaje');
+// })
 
 
 
+ import { createConnection } from "../Databases/config.js";
 
+ const connection = await createConnection();
+
+
+ const [sql] = await connection.query('SELECT rolUser FROM user WHERE docUser = 1095299063');
+
+ console.log(sql[0].rolUser);

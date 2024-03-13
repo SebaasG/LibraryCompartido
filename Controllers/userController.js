@@ -23,6 +23,7 @@ export class userCtrl {
       const result = await this.userMdl.verifyUser({ body });
       console.log(result);
       if(result === 2) res.status(404).json();
+      if(result === 3) res.status(201).json();
       res.status(200).json();
     } catch (err) {
       console.log("Error en el controlador, verifyUser", err);
