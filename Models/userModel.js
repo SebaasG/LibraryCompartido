@@ -38,6 +38,7 @@ export class userMdl {
           "VALUES (?,?,?,?,?,?,2)",
         [docUser, nameUser, emailUser, passUser, phoneUser, addressUser]
       );
+      console.log(`Como se esta mandando el sql: ${sql}`);
       if (!sql) return 3;
       
       return 1;
@@ -51,7 +52,7 @@ export class userMdl {
   //Verificar Usuario
   static async verifyUser({ body }) {
     try {
-      let response;
+
       let newBody = { ...body };
       //Hash Password
       const passHash = await hashPass(newBody.passUser);
@@ -63,12 +64,9 @@ export class userMdl {
         passUser,
       ]);
       console.log(sql[0][0].result);
-      if (sql[0][0].result === 2) {
-        response = "El usuario no existe, verifique la contraseña o el usuario";
-        return response;
-      }
-      response = "Se ha inciado sesion correctamente";
-      return response;
+      if (sql[0][0].result === 2) return 2;
+      
+      return 1;
     } catch (err) {
       console.log("Hubo un error");
       throw err;

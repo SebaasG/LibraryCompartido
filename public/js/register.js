@@ -28,24 +28,36 @@ async function register (){
         }
     }).then(res=>{
         console.log(res.status);
-        if(res.ok){
+        if(res.status == 500){
             Swal.fire({
-                icon: 'success',
-                title: 'Inicio de sesión exitoso',
-                text: 'Se ha iniciado sesión correctamente.',
+                icon: 'error',
+                title: 'Algo salio Mal',
+                text: 'Hubo un error en el registro.',
+                didClose: () => {
+                    // Redirige a la página deseada
+                    window.location.href = 'http://localhost:3000/library/index.html';
+                  }
               });
         }else if(res.status == 409){
             Swal.fire({
                 icon: 'error',
                 title: 'El usuario ya esta Registrado',
                 text: 'El correo o la contraseña, ya estan en uso.',
-              });
+                didClose: () => {
+                    // Redirige a la página deseada
+                    window.location.href = 'http://localhost:3000/library/index.html';
+                  }
+            });
         }else{
             Swal.fire({
-                icon: 'error',
-                title: 'Algo salio Mal',
-                text: 'Hubo un error en el registro.',
-              });
+                icon: 'success',
+                title: 'Registro de usuario exitoso',
+                text: 'Se ha registrado correctamente, Inicie Sesion.',
+                didClose: () => {
+                    // Redirige a la página deseada
+                    window.location.href = 'http://localhost:3000/library/index.html';
+                  }
+            });
         }
     }).catch(err =>{
         console.log('Hubo un error',err);
