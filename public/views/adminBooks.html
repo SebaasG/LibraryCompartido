@@ -1,11 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-</head>
-<body>
-    <h1>El admin mi fai</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="../css/styleAdmin.css" />
+
+    <title>Library-Admin</title>
+  </head>
+  <body>
+    <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <!-- Texto "Library" alineado a la izquierda -->
+            <h3 class="navbar-brand mb-0">Library</h3>
+            <!-- Iconos alineados a la derecha -->
+            <div class="d-flex justify-content-end">
+              <a class="navbar-brand" href="#"><img src="../images/comprobacion-de-lista.png" alt="History"></a>
+              <a class="navbar-brand" href="#" type="button"><img src="../images/usuario.png" alt="Profile"></a>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <table class="table m-5">
+        <h1 class="text-center m-3">Books</h1>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Year</th>
+            <th scope="col">Auth</th>
+            <th scope="col">Amount</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">El Principito</th>
+            <td>Fábula</td>
+            <td>1943</td>
+            <td>Antoine de Saint-Exupér</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <th scope="row">El Principito</th>
+            <td>Fábula</td>
+            <td>1943</td>
+            <td>Antoine de Saint-Exupér</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <tr>
+                <th scope="row">El Principito</th>
+                <td>Fábula</td>
+                <td>1943</td>
+                <td>Antoine de Saint-Exupér</td>
+                <td>10</td>
+              </tr>
+              <tr>
+        </tbody>
+      </table>
+  </body>
 </html>
