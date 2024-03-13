@@ -16,18 +16,14 @@ const verifyExistenceUser = async ({ body }) => {
 };
 // Modelo
 export class userMdl {
-
   //Crear un usuario
   static async userCreate({ body }) {
     try {
-      let response;
+     
       //Verificar si el usuario ya existe, si no para registrarlo.
       const result = await verifyExistenceUser({ body });
-      if (result[0]) {
-        console.log("El usuario ya esta registrado.", result[0]);
-        response = "El usuario ya esta registrado";
-        return response;
-      }
+      if (result[0])  return 2;
+    
 
       // Hash para la contraseña
       let newBody = { ...body };
@@ -42,14 +38,10 @@ export class userMdl {
           "VALUES (?,?,?,?,?,?,2)",
         [docUser, nameUser, emailUser, passUser, phoneUser, addressUser]
       );
-      if (!sql) {
-        response = "Hubo un error al insertar los datos";
-        return response;
-      }
+      if (!sql) return 3;
+      
+      return 1;
 
-      console.log(`El usuario puede ser registrado ${result[0]}`);
-      response = "El usuario se ha registrado correctamente";
-      return response;
     } catch (err) {
       console.log("Hubo un error");
       throw err;
