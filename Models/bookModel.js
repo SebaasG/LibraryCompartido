@@ -5,7 +5,7 @@ const connection = await createConnection();
 export class bookModel {
     static async getBooks() {
         try {
-            const [books] = await connection.query('SELECT * FROM book');
+            const [books] = await connection.query('SELECT BIN_TO_UUID(idBook) as id,nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook from book ');
             return books;
         } catch (error) {
             console.log('Modelo:', error);
