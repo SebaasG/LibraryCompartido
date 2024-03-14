@@ -1,15 +1,40 @@
 .headerBook {
     background-color: black;
+    width: 100%;
 }
 
 .tittle {
     color: white;
-    border: solid white;
+    /* padding: 15px; */
+    margin-left: 30px;
+    margin-right: 30px;
+
+}   
+/* .tittlebook{
+    margin-left: 45px;
+} */
+.butonProfile{
+    background: black;
+    color: white;
+    border: none;
+}
+
+.butonclean{
+    background: white;
+    color: black;
+    border: none;
+    text-decoration: underline;
+    margin: 10px 0px;
 }
 
 .root {
     font-family: monospace;
 
+}
+
+.img{
+    height: 35px;
+    width: 40px;
 }
 
 .contentHeaderNav{
@@ -55,3 +80,4 @@
 .containerCards{
 margin-top: 2%;
 }
+
