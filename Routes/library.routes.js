@@ -3,6 +3,7 @@ import router from 'express';
 import { userCtrl } from '../Controllers/userController.js';
 import { bookController } from '../Controllers/bookController.js';
 import { userMdl } from '../Models/userModel.js';
+import { adminCtrl } from '../Controllers/adminController.js';
 
 export const routerLibrary = () => {
     const libraryRouter = router();
@@ -12,10 +13,20 @@ export const routerLibrary = () => {
     return libraryRouter;
 }
 
-export const createBookRoutes = ({bookModel}) => {
+export const createBookRoutes = ({bookModel, adminMdl}) => {
     const bookRouter = router();
-    const BookController = new bookController({bookModel})
+    const BookController = new bookController({bookModel});
+    const adminController = new adminCtrl({adminMdl});
+    bookRouter.get('/:idBook', adminController.getBookById);
     bookRouter.get('/all', BookController.getBooks);
     bookRouter.post('/save', BookController.postBooks);
     return bookRouter;
+}
+
+export const adminBookRoute = ({adminMdl})=>{
+    const adminRouter = router();
+    const adminController = new adminCtrl({adminMdl});
+    adminRouter.get('/books', adminController.getBooks);
+    adminRouter.get('/books/:idBook', adminController.getBookById);
+    return adminRouter;
 }

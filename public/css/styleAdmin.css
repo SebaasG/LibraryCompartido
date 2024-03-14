@@ -22,6 +22,22 @@
 .navbar-brand:hover{
     color: rgb(187, 184, 184);
 }
-h2{
-    
+.table>:not(caption)>*>*{
+    background-color: #000;
+    color:#fff;
+    border-radius: 5px;
+    font-family: monospace;
+}
+.btn-dark{
+    background-color: #000;
+    color: #fff;
+
+}
+.container{
+    font-family:monospace;
+}
+.btn-td{
+    background-color: transparent;
+    color: #fff;
+    border: none;
 }
