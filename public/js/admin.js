@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 let count = 0;
 let idBook = localStorage.getItem("idBook");
+
 async function getBooks() {
   try {
     const response = await fetch("http://localHost:3000/admin/books");
     const data = await response.json();
 
     const tableBody = document.getElementById("body-table");
-    console.log(data.nameBook);
     data.forEach((data) => {
       const tr = document.createElement("tr");
       count++;
@@ -27,6 +27,8 @@ async function getBooks() {
         .addEventListener("click", async () => {
           localStorage.setItem("idBook", data.idBook);
           // await getBooksById(localStorage.setItem('idBook', data.idBook));
+          
+        
           await getBooksById(data.idBook);
         });
     });
@@ -41,8 +43,18 @@ async function getBooksById(idBook) {
   const response = await fetch(`http://localHost:3000/admin/books/${idBook}`);
   const book = await response.json();
   try{
-    console.log(book);
-  }catch(err){
+      const {nameBook, amountBook, yearbook, authbook, postbook, sumBook, genBook} = book[0]; // Destructurar la query.
+      //Elementos del html 
+      const modalTitle = document.getElementById('modal-title'); // llamar modelo.
+      const modalBody = document.getElementById('modal-body');  
+      //Creacion del modal
+    const poster = document.createElement('div');
+    poster.innerHTML=` <img src="${postbook}" alt="${nameBook}">`
+
+    //Agregar el contenido a html
+    modalTitle.innerHTML = nameBook;
+    modalBody.appendChild(poster);
+}catch(err){
     console.log('hubo un error a mostrar el libro por el id ',err);
   }
 }

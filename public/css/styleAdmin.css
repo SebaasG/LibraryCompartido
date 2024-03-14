@@ -22,9 +22,8 @@
 .navbar-brand:hover{
     color: rgb(187, 184, 184);
 }
-.table>:not(caption)>*>*{
+.table>thead:not(caption)>*>*{
     background-color: #000;
-    color:#fff;
     border-radius: 5px;
     font-family: monospace;
 }
@@ -37,7 +36,15 @@
     font-family:monospace;
 }
 .btn-td{
+    width: 100%;
     background-color: transparent;
     color: #fff;
     border: none;
+    text-align: start;
+}
+
+.post-book{
+    width: auto;
+    height: 200px;
+    margin: 5px;
 }
