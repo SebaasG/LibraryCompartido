@@ -12,9 +12,9 @@
 
 <body>
   <div class="root">
-      <header class="headerBook d-flex justify-content-around">
-        <div class="tittle fs-3">Library</div>
-        <div class="tittle fs-4">Your books</div>
+      <header class="headerBook d-flex mb-3 ">
+        <div class="tittlebook me-auto p-2 tittle fs-3">The best library</div>
+        <div class=" p-2 tittle fs-4"><button class="butonProfile"><img class="img" src="../images/icons8-usuario-50.png" alt=""></button></div>
       </header>
 
     <div class="contentHeaderNav">
@@ -25,7 +25,7 @@
           <nav class="navbarBook bg-body-tertiary">
             <div class="container-fluid">
               <form class="d-flex" role="search">
-                <input class="inputSearchBook " type="search" placeholder="Search for name" aria-label="Search">
+                <input class="inputSearchBook " type="search" placeholder=" Search for name" aria-label="Search">
                 <button class="btn btn-dark" type="submit">Search</button>
               </form>
             </div>
@@ -38,6 +38,7 @@
           
           <div class="filter col-lg-3 col-12 mb-5">
             <div class="fs-5 d-flex justify-content-center" >filters </div>
+            <div class="cleanFilter d-flex justify-content-center"><button class="butonclean">clear filters</button></div>
             <div class="accordion accordion-flush" id="accordionFlushExample">
               <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -97,6 +98,22 @@
           </ul>
         </nav>
   </div>
+
+  <div class="modal" id="miModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="modalContent"></div> </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+          <button type="button" id = "deleteModal" class= "btn btn-outline-danger" >delete</button>
+        </div>
+      </div>
+    </div>
+    </div>
 </body>
 <script src="../js/bookIndex.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
