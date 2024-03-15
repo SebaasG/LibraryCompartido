@@ -7,7 +7,7 @@
     
     background-color: #000;
     color: #fff;
-    font-family: monospace;
+    font-family: cursive;
 }
 .navbar-brand{
     text-decoration: none;
@@ -15,17 +15,17 @@
     margin: 5px;
     
 }
-.navbar-brand>img{
-    width: 25px;
-    height: 22px;
-}
+/* .navbar-brand>img{
+    width: 35px;
+    height: 35px;
+} */
 .navbar-brand:hover{
     color: rgb(187, 184, 184);
 }
 .table>thead:not(caption)>*>*{
     background-color: #000;
     border-radius: 5px;
-    font-family: monospace;
+    font-family: cursive;
 }
 .btn-dark{
     background-color: #000;
@@ -33,7 +33,7 @@
 
 }
 .container{
-    font-family:monospace;
+    font-family:cursive;
 }
 .btn-td{
     width: 100%;
@@ -44,7 +44,62 @@
 }
 
 .post-book{
-    width: auto;
-    height: 200px;
-    margin: 5px;
+    width: 250px;
+    height: 350px;
+    box-shadow: 7px 7px 7px #fff;
+    border-radius: 5px;
+    margin: 5px auto;
+    display: flex;
+    justify-content: center;
+}
+.modal-content{
+    background-color: #000;
+    color: #fff;
+    font-family:cursive ;
+    text-align: center;
+}
+.btn-modal_update{
+    background-color: rgb(53, 227, 53);
+    color: #fff;
+
+}
+.btn-modal_delete{
+    background-color: rgb(255, 40, 40);
+    color: #fff;
+}
+
+.form-update{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin:5px;
+    flex-direction: column;
+    border-radius: 10px;
+    text-align: start;
+}
+.form-update > input{
+    background-color: transparent;
+    border: none;
+    box-shadow: 2px 2px 1px 1px  #fff;
+    margin-bottom: 12px;
+    width: 100%;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 17px;
+}
+.form-update > label{
+    font-family: cursive;
+    font-size: 17px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.form-update > textarea{
+    background-color: transparent;
+    border: none;
+    box-shadow: 2px 2px 1px 1px  #fff;
+    margin-bottom: 12px;
+    width: 100%;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 17px;
 }
