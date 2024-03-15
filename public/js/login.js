@@ -7,6 +7,19 @@ btn.addEventListener('click', async()=>{
 async function login(){
     const emailUser = document.getElementById('emailUser').value;
     const passUser = document.getElementById('passUser').value;
+   
+ 
+    if (!emailUser || !passUser) {
+        // Si alguno de los campos está vacío, muestra una alerta
+        Swal.fire({
+            icon: 'error',
+            title: 'Campos requeridos.',
+            text: 'Por favor llene todos los campos para iniciar sesion.',
+            iconColor: 'red',
+            confirmButtonColor: '#000',
+        });
+        return;
+    }
     fetch('http://localhost:3000/library/login',{
         method: 'POST',
         body: JSON.stringify({
@@ -55,5 +68,6 @@ async function login(){
             });
         }
     })
+  
 
 }

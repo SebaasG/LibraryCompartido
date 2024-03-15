@@ -8,17 +8,46 @@ btn.addEventListener('click',async ()=>{
 async function register (){
     const docUser = document.getElementById('docUser').value;
     const nameUser = document.getElementById('nameUser').value;
-    const emailUserUser = document.getElementById('emailUser').value;
+    const emailUser = document.getElementById('emailUser').value;
     const passUser = document.getElementById('passUser').value;
     const phoneUser = document.getElementById('phoneUser').value;
     const addressUser = document.getElementById('addressUser').value;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Verificar si algún campo obligatorio está vacío
+    if (!docUser || !nameUser || !emailUser || !passUser || !phoneUser || !addressUser) {
+        // Si algún campo está vacío, muestra una alerta
+        Swal.fire({
+            icon: 'error',
+            title: 'Campos requeridos.',
+            text: 'Por favor, llene todos los campos para continuar.',
+            iconColor: 'red',
+            confirmButtonColor: '#000',
+        });
+        return;
+    }
+
+    if (!emailUser.match(emailRegex)) {
+        // Si la dirección de correo electrónico no es válida, muestra una alerta
+        Swal.fire({
+            icon: 'error',
+            title: 'Correo electrónico inválido.',
+            text: 'Por favor, ingrese una dirección de correo electrónico válida.',
+            iconColor: 'red',
+            confirmButtonColor: '#000',
+        });
+        return;
+    }
+
     
+  
     await fetch('http://localhost:3000/library/register',{
         method: 'POST',
         body: JSON.stringify({
             "docUser": docUser,
         "nameUser": nameUser,
-        "emailUser": emailUserUser,
+        "emailUser": emailUser,
         "passUser":passUser,
         "phoneUser":phoneUser,
        "addressUser":addressUser
@@ -49,7 +78,7 @@ async function register (){
                 confirmButtonColor:'#000',
                 didClose: () => {
                     // Redirige a la página deseada
-                    window.location.href = 'http://localhost:3000/library/index.html';
+                    window.location.href = 'http://localhost:3000/library/views/register.html';
                   }
             });
         }else{

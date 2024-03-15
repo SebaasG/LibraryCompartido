@@ -36,11 +36,19 @@
     font-family:cursive;
 }
 .btn-td{
-    width: 100%;
     background-color: transparent;
-    color: #fff;
+    justify-content: center;
+    display: flex;
+    padding: 10px;
     border: none;
     text-align: start;
+    margin:  auto;
+}
+.btn-td>img{
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    
 }
 
 .post-book{

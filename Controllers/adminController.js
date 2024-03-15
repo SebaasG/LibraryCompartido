@@ -7,7 +7,6 @@ export class adminCtrl {
     try{
         const result = await this.adminMdl.getBooks();
         
-        console.log('Si se esta trayendo algo');
         res.status(200).json(result);
 
         }catch(err){
@@ -26,6 +25,21 @@ export class adminCtrl {
         console.log('Error en el Controlador', err);
         res.status(404).json(err)
 
+        }
+    }
+
+    updateBooks = async(req,res)=>{
+        try{
+            console.log(`epa: ${req.body}`)
+            const {body}= req
+            if(body){
+                console.log('Si mi fai si va algo')
+            };
+            // const result = await this.adminMdl.updateBooks({body});
+            res.status(200).json({message:'Todo bien'})
+        }catch(err){
+            console.log('Error en el controlador', err);
+            res.status(404).json(err);
         }
     }
     

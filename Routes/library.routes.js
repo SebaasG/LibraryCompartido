@@ -27,5 +27,6 @@ export const adminBookRoute = ({adminMdl})=>{
     const adminController = new adminCtrl({adminMdl});
     adminRouter.get('/books', adminController.getBooks);
     adminRouter.get('/books/:idBook', adminController.getBookById);
+    adminRouter.put('/books/update', adminController.updateBooks);
     return adminRouter;
 }

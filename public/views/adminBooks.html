@@ -73,6 +73,8 @@
             <th scope="col">Year</th>
             <th scope="col">Author</th>
             <th scope="col">Amount</th>
+            <th scope="col">Acctions</th>
+         
           </tr>
         </thead>
         <tbody id="body-table"></tbody>
@@ -81,7 +83,7 @@
 
     <!-- El modal del book -->
     <div class="modal fade" id="modal-table" tabindex="-1">
-      <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header text-center">
             <h4 class="text-center d-flex" id="modal-title">R</h4>
@@ -111,7 +113,7 @@
 
     <!-- Actualizar Book -->
     <div class="modal fade" id="modal-update_book" tabindex="-1">
-      <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header text-center aling-content-center">
             <h4 class="title" id="modal-title">Update Book</h4>
@@ -130,13 +132,13 @@
                 <label for="inpt-amountBook" > Amount:</label>
                 <input type="text" name="inpt-amountBook" id="inpt-amountBook" placeholder="Amount Book"><br>
                 <label for="inpt-sumBook" > Sumary:</label>
-                <textarea name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br>
+                <textarea minlength="100" maxlength="250" name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br>
                 <label for="inpt-postBook" > Poster:</label>
                 <input type="text" name="inpt-postBook" id="inpt-postBook" placeholder="Poster Book">
               </div>
             </div>
             <div class="modal-footer"></div>
-            <button class="form-btn btn btn-success">Save</button>
+            <button class="form-btn btn btn-success" id="btn-save_update">Save</button>
           </form>
         </div>
       </div>
