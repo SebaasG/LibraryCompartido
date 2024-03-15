@@ -30,33 +30,32 @@ async function getBooks() {
             document.querySelector('#tarjet' + contador).addEventListener('click', function () {
                 // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
                 localStorage.setItem('idBookUser', dato.id)
+                console.log(dato.id)
+                llenarModal(dato.id)
 
-                // llenarModal(datos.id)
             });
         });
 
 
         async function llenarModal(idBook) {
-            const response = await fetch('http://localHost:1234/task/doc/' + idBook);
+            const response = await fetch('http://localHost:3000/book/index/' + idBook);
             const datos = await response.json();
-            const cate = validarCate(datos[0].cateTask);
-            const formDate = newDate(datos[0].dateStart, true);
-            const states = state(datos[0].stateTask);
+            console.log(datos)
 
-            document.getElementById('modalTitle').innerText = datos[0].nameTask;
+            document.getElementById('modalTitle').innerText = datos[0].nameBook;
 
             document.getElementById('modalContent').innerHTML = `
-                <label  class="col-form-label">Description task:</label> 
-                <p> ${datos[0].descTask}</p>
-                <label  class="col-form-label">Date:</label> 
-                <p> ${formDate}</p>
-                <label  class="col-form-label">State:</label> 
-                <p> ${states}</p>
-                <label  class="col-form-label">Category:</label> 
-                <p> ${cate}</p> `;
+                <label  class="col-form-label">Gender:</label> 
+                <p> ${datos[0].genBook}</p>
+                <label  class="col-form-label">Year:</label> 
+                <p> ${datos[0].yearbook}</p>
+                <label  class="col-form-label">Author:</label> 
+                <p> ${datos[0].authbook}</p> 
+                <label  class="col-form-label">Summary:</label> 
+                <p> ${datos[0].sumBook}</p>`;
+                
         }
 
-        console.log(datos);
     } catch (error) {
         console.error('Error al obtener los libros:', error);
     }

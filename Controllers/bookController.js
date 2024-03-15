@@ -35,15 +35,11 @@ export class bookController {
     getBooksById = async(req,res ) =>{
         try {
             console.log('Entra aqui controller')
-            const [id] = req.params.id
+            const id = req.params.id
             console.log(id)
-            const book = await this.bookModel.getBooksById(id);
-            console.log(book)
-            if(book === 1){
-                console.log('todo bien loco')
-            } else{
-                console.log('paila lolo')
-            }
+            const book = await this.bookModel.getBookById(id);
+            res.status(200).json(book);
+        
         } catch (error) {
             console.log(error)
         }

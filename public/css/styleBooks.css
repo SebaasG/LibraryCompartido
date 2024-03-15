@@ -97,3 +97,8 @@ height: 40px;
 .tittleNav {
     margin-bottom: 10px;
 }
+
+.miModalBook .modal-content {
+    background-color: rgba(0,0, 0, 0.7); /* Cambia el fondo a negro */
+    color: white; /* Cambia el color del texto a blanco */
+  }
