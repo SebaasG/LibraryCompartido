@@ -38,4 +38,17 @@ export class bookModel {
         }
     }
 
+
+    static async getBookByName(nameBook){
+        try {
+            console.log('entraqui');
+            const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook FROM book WHERE nameBook LIKE ?', [`%${nameBook}%`]);
+            console.log(book);
+            return book;
+        } catch(err) {
+            console.log('Hubo un error en la búsqueda del libro');
+            throw err;
+        }
+    }
+    
 }

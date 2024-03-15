@@ -22,6 +22,9 @@ GET http://localHost:3000/book/index/059aa762-e14f-11ee-a7d6-ec8eb55104fd
 
 
 ###
+GET http://localHost:3000/book/name/me
+
+###
 POST http://localHost:3000/book/save
 Content-Type: application/json
 
