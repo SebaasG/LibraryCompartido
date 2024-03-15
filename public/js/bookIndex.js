@@ -1,4 +1,5 @@
 let contador = 0;
+const searchButton = document.getElementById('btnSearchBook');
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -59,6 +60,39 @@ async function getBooks() {
     } catch (error) {
         console.error('Error al obtener los libros:', error);
     }
+
 }
 
+async function SearchBook(){
+    const name = document.getElementById('searchNameBook').value
+    const container = document.getElementById('containerBook');
+    container.innerHTML = '';
+     const response = await fetch ('http://localHost:3000/book/name/'+ name)
+    const datos = await response.json();
+    datos.forEach(dato => {
+        contador = contador + 1
+        console.log(contador)
+        let column = document.createElement('div');
+        
+        column.classList.add("justify-content-center", "col-lg-4", "col-md-6", "mb-4");
+        column.innerHTML = `<div id="tarjet${contador}" class="cardBookContainer card align-content-center fs-5 "data-bs-toggle="modal" data-bs-target="#miModal" style="width: 100%; ">
+        <img src="${dato.postbook}" class="card-img-top" alt="Imagen de libro" onerror="this.onerror=null; this.src='https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">
+        <div class="card-body">
+        <p class="card-text justify-content-center ">${dato.nameBook}<br><strong> ${dato.authbook}</strong></p>
+        </div>
+        </div>`;
+        container.appendChild(column);
+        document.querySelector('#tarjet' + contador).addEventListener('click', function () {
+            // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
+            localStorage.setItem('idBookUser', dato.id)
+            console.log(dato.id)
+            llenarModal(dato.id)
 
+        });
+    });
+
+}
+
+searchButton.addEventListener('click', ()=>{
+    SearchBook()
+})
