@@ -12,7 +12,7 @@ async function getBooks() {
         const datos = await response.json();
 
         const container = document.getElementById('containerBook');
-        container.innerHTML = ''; // Limpiamos el contenido anterior antes de agregar nuevos elementos
+        container.innerHTML = ''; 
 
         datos.forEach(dato => {
             contador = contador + 1
@@ -30,7 +30,7 @@ async function getBooks() {
                 // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
                 localStorage.setItem('idBookUser', dato.id)
 
-                // llenarModal(datos.id)
+                llenarModal(datos.id)
             });
         });
 

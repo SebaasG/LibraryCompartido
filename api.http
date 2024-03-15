@@ -11,9 +11,14 @@ Content-Type: application/json
     "addressUser":"Piedecuesta-Santander"
 }
 ###
+
+
 GET http://localHost:3000/admin/books/73ef9c04-dd95-11ee-83f2-00090faa0001
 ###
 GET http://localHost:3000/book/all
+
+###
+GET http://localHost:3000/book/index/059ac1d8-e14f-11ee-a7d6-ec8eb55104fd
 
 ###
 POST http://localHost:3000/book/save

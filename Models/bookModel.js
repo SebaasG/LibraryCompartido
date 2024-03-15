@@ -31,9 +31,11 @@ export class bookModel {
     static async getBookById(idBook){
         try{
             console.log(`Este es lo que esta trayendo como parametro: ${idBook}`);
-            const [sql] = await connection.query('SELECT BIN_TO_UUID(idBook) as id,nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook FROM book WHERE BIN_TO_UUID(idBook) = ?',[idBook]);
-            console.log(`Esto es lo que me esta trayendo la query ${sql}`)
-            return sql;
+            const [sql] = await connection.query('SELECT BIN_TO_UUID(idBook) as id,nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook FROM book WHERE BIN_TO_UUID(idBook) = ?',idBook);
+            if(sql){
+                return 1
+            }
+            return 2;
         }catch(err){
             console.log('Hubo un error en la busqueda del libro');
             throw err;
