@@ -27,8 +27,7 @@ async function getBooks() {
         .addEventListener("click", async () => {
           localStorage.setItem("idBook", data.idBook);
           // await getBooksById(localStorage.setItem('idBook', data.idBook));
-          
-        
+
           await getBooksById(data.idBook);
         });
     });
@@ -42,19 +41,32 @@ async function getBooksById(idBook) {
 
   const response = await fetch(`http://localHost:3000/admin/books/${idBook}`);
   const book = await response.json();
-  try{
-      const {nameBook, amountBook, yearbook, authbook, postbook, sumBook, genBook} = book[0]; // Destructurar la query.
-      //Elementos del html 
-      const modalTitle = document.getElementById('modal-title'); // llamar modelo.
-      const modalBody = document.getElementById('modal-body');  
-      //Creacion del modal
-    const poster = document.createElement('div');
-    poster.innerHTML=` <img src="${postbook}" alt="${nameBook}">`
+  try {
+    const {
+      nameBook,
+      amountBook,
+      yearbook,
+      authbook,
+      postbook,
+      sumBook,
+      genBook,
+    } = book[0]; // Destructurar la query.
+
+    //Elementos del html
+    const modalTitle = document.getElementById("modal-title"); // llamar modelo.
+    const modalBody = document.getElementById("modal-body");
+
+    modalBody.innerHTML = "";
+
+    //Creacion del modal
+    const poster = document.createElement("div");
+    poster.innerHTML = `<img class="post-book" src="${postbook}" alt="${nameBook}" onerror="this.onerror=null; this.src=' https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">`
 
     //Agregar el contenido a html
+
     modalTitle.innerHTML = nameBook;
     modalBody.appendChild(poster);
-}catch(err){
-    console.log('hubo un error a mostrar el libro por el id ',err);
+  } catch (err) {
+    console.log("hubo un error a mostrar el libro por el id ", err);
   }
 }
