@@ -33,8 +33,6 @@ async function getBooks() {
                 localStorage.setItem('idBookUser', dato.id)
                 console.log(dato.id)
                 window.location.href = '../views/BookData.html';
-                // llenarModal(dato.id)
-
             });
         });
 
@@ -42,25 +40,7 @@ async function getBooks() {
         console.error('Error al obtener los libros:', error);
     }
 
-        // async function llenarModal(idBook) {
-        //     const response = await fetch('http://localHost:3000/book/index/' + idBook);
-        //     const datos = await response.json();
-        //     console.log(datos)
-
-        //     document.getElementById('modalTitle').innerText = datos[0].nameBook;
-
-        //     document.getElementById('modalContent').innerHTML = `
-        //         <label  class="col-form-label">Gender:</label> 
-        //         <p> ${datos[0].genBook}</p>
-        //         <label  class="col-form-label">Year:</label> 
-        //         <p> ${datos[0].yearbook}</p>
-        //         <label  class="col-form-label">Author:</label> 
-        //         <p> ${datos[0].authbook}</p> 
-        //         <label  class="col-form-label">Summary:</label> 
-        //         <p> ${datos[0].sumBook}</p>`;
-                
-        // }
-
+   
 
 }
 
@@ -89,8 +69,6 @@ async function SearchBook(){
             document.querySelector('#tarjet' + contador).addEventListener('click', function () {
                 // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
                 localStorage.setItem('idBookUser', dato.id)
-                console.log(dato.id)
-                llenarModal(dato.id)
     
             });
         });
@@ -108,5 +86,5 @@ nameint.addEventListener('input', ()=>{
     SearchBook();
 })
 searchButton.addEventListener('click    ', ()=>{
-    SearchBook()
+    SearchBook();
 })
