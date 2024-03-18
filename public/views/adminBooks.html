@@ -27,9 +27,9 @@
           <div  class="container-vinculo">
 
             <a href="../views/adminDisabledBooks.html" class="vinculo-a">Disabled Books</a>
-            <button id="btn-newBook" style="background-color: transparent;
+            <button style="background-color: transparent;
             border: none;" data-bs-toggle="modal"  data-bs-target="#modal-create_book">
-              <a href="#" class="vinculo-a">New Book</a>
+              <a  class="vinculo-a">New Book</a>
             </button>
             <a href="#" class="vinculo-a">History</a>
             
@@ -93,6 +93,8 @@
         </div>
       </div>
     </div>
+
+
       <!-- Crear nuevo libro -->
     <div class="modal fade" id="modal-create_book" tabindex="-1">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog">
@@ -114,11 +116,13 @@
                 <label for="inpt-amountBook" > Amount:</label>
                 <input type="text" name="inpt-amountBook" id="inpt-amountBook" placeholder="Amount Book"><br>
                 <label for="inpt-sumBook" > Sumary:</label>
-                <textarea minlength="100" maxlength="800" name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br>  
+                <textarea minlength="100" maxlength="800" name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br> 
+                <label for="inpt-postBook">Poster:</label> 
+                <input type="text" name="inpt-postBook" id="inpt-postBook" placeholder="Direccion Poster">
             </div>
             </div>
             <div class="modal-footer"></div>
-            <button class="form-btn btn btn-success" id="btn-save_update">Save</button>
+            <button  id="btn-newBook" class="form-btn btn btn-success" id="btn-save_update">Create</button>
           </form>
         </div>
       </div>

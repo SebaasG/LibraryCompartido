@@ -39,6 +39,7 @@ export class adminMdl {
     static async createBooks({body}){
             const { nameBook, yearbook, amountBook, postbook, sumBook, authbook, genBook } = body;
             console.log('Si se esta pasando algo')
-            const sql = await connection.query('INSERT INTO book () VALUES')
-    }
+            const sql = await connection.query('INSERT INTO book (nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook) VALUES (?,?,?,?,?,?,?,1)',[nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook])
+            return sql;
+        }
 }

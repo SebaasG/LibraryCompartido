@@ -2,7 +2,7 @@ const newBookBtn = document.getElementById('btn-newBook');
 
 newBookBtn.addEventListener('click', async()=>{
 console.log('R')
-    await createBook();
+        await createBook();
 })
 
 async function createBook(){
@@ -15,6 +15,7 @@ async function createBook(){
             const amountBook =  document.getElementById("inpt-amountBook").value ;
             const sumBook = document.getElementById("inpt-sumBook").value;
             const postbook =  document.getElementById("inpt-postBook").value;
+
 
             await fetch('http://localhost:3000/admin/books/create',{
                 method:'POST',
