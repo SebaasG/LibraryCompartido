@@ -28,18 +28,29 @@ export class adminCtrl {
         }
     }
 
+    // Actualizar
     updateBooks = async(req,res)=>{
         try{
-            console.log(`epa: ${req.body}`)
-            const {body}= req
-            if(body){
-                console.log('Si mi fai si va algo')
-            };
-            // const result = await this.adminMdl.updateBooks({body});
+
+            const {body} = req;
+            const result = await this.adminMdl.updateBooks({body});
+            console.log(result)
             res.status(200).json({message:'Todo bien'})
         }catch(err){
             console.log('Error en el controlador', err);
-            res.status(404).json(err);
+            res.status(404).json({message:'Hubo un error en el controlador actualizar'});
+        }
+    }
+    // Create
+    createBooks = async(req,res)=>{
+        try{
+            const {body} = req;
+            const result = await this.adminMdl.createBooks({body});
+            console.log(result);
+            res.status(200).json({message:'Todo bien'});
+        }catch(err){
+            console.log('Error en el controlador, crear', err);
+            res.status(404).json({message:'Hubo un error en el controlador crear'});
         }
     }
     
