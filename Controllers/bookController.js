@@ -16,11 +16,8 @@ export class bookController {
 
     postBooks = async (req, res) => {
         try {
-            console.log('entra quis')
             const { body } = req
-            console.log(body);
             const books = await this.bookModel.postBook(body);
-            console.log(books)
             if (books === 1) {
                 res.status(201).json('creado con éxito:' + body)
             } else {
@@ -34,9 +31,9 @@ export class bookController {
 
     getBooksById = async (req, res) => {
         try {
-            console.log('Entra aqui controller')
+         
             const id = req.params.id
-            console.log(id)
+          
             const book = await this.bookModel.getBookById(id);
             if(book){
                 res.status(200).json(book);
@@ -53,7 +50,7 @@ export class bookController {
     getBookByName = async (req, res) => {
         try {
             const name = req.params.nameBook
-            console.log(name+'controller')
+    
             const book = await this.bookModel.getBookByName(name)
             if(book){
                 res.status(200).json(book);
