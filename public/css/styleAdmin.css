@@ -27,27 +27,54 @@
     border-radius: 5px;
     font-family: cursive;
 }
+.container-vinculo{
+    justify-content: center;
+    margin-left:200px ;
+}
+.vinculo-a{
+    text-decoration: none;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    margin:5px ;
+    font-size: 17px;
+
+}
+.vinculo-a:hover{
+    color: #f5cbcb;
+    border-bottom: #f5cbcb solid 1px ;
+
+}
 .btn-dark{
-    background-color: #000;
+    background-color: #8f8b8b;
     color: #fff;
 
 }
 .container{
     font-family:cursive;
 }
-.btn-td{
-    background-color: transparent;
+.container-td_buttons{
     justify-content: center;
     display: flex;
-    padding: 10px;
-    border: none;
-    text-align: start;
-    margin:  auto;
+    margin: auto;
+   
 }
+.btn-td1{
+    background-color:transparent;
+    border-radius: 5px;
+    padding:1px;
+
+}
+
+.btn-td2{
+    background-color:transparent;
+    border-radius: 5px;
+    padding:1px;
+}
+
 .btn-td>img{
     align-items: center;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     
 }
 
@@ -111,3 +138,16 @@
     border-radius: 5px;
     font-size: 17px;
 }
+.form-update >select{
+    background-color: transparent;
+    color: #fff;
+    padding: 6px;
+    width: 100%;
+}
+.form-update >select>option{
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 16px;
+
+}
+

@@ -26,13 +26,8 @@
         
           <div  class="container-vinculo">
 
-            <a href="../views/adminDisabledBooks.html" class="vinculo-a">Disabled Books</a>
-            <button style="background-color: transparent;
-            border: none;" data-bs-toggle="modal"  data-bs-target="#modal-create_book">
-              <a  class="vinculo-a">New Book</a>
-            </button>
-            <a href="#" class="vinculo-a">History</a>
-            
+            <a href="../views/adminBooks.html" class="vinculo-a">Active Books</a>
+          
           </div>
           
           <div class="justify-content-end">
@@ -52,7 +47,7 @@
           height="40"
           src="../images/icons8-libro.gif"
           alt="gif"
-          />Active Books
+          />Disabled Books
         </h2>
         <div class="d-flex justify-content-end">
         </div>
@@ -81,26 +76,14 @@
       </table>
     </div>
 
-    <!-- El modal del book -->
-    <div class="modal fade" id="modal-table" tabindex="-1">
+
+
+    <!-- Actualizar Book -->
+    <div class="modal fade" id="modal-update_book" tabindex="-1">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header text-center">
-            <h4 class="text-center d-flex" id="modal-title"></h4>
-          </div>
-          <div class="modal-body" id="modal-body"></div>
-         
-        </div>
-      </div>
-    </div>
-
-
-      <!-- Crear nuevo libro -->
-    <div class="modal fade" id="modal-create_book" tabindex="-1">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog">
-        <div class="modal-content">
           <div class="modal-header text-center aling-content-center">
-            <h4 class="title" id="modal-title">Create Book</h4>
+            <h4 class="title" id="modal-title">Update Book</h4>
           </div>
           <div class="modal-body" id="modal-body">
             <div class="container">
@@ -116,21 +99,28 @@
                 <label for="inpt-amountBook" > Amount:</label>
                 <input type="text" name="inpt-amountBook" id="inpt-amountBook" placeholder="Amount Book"><br>
                 <label for="inpt-sumBook" > Sumary:</label>
-                <textarea minlength="100" maxlength="800" name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br> 
-                <label for="inpt-postBook">Poster:</label> 
-                <input type="text" name="inpt-postBook" id="inpt-postBook" placeholder="Direccion Poster">
+                <textarea minlength="100" maxlength="800" name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br>
+                <label for="inpt-postBook" > Poster:</label>
+                <input type="text" name="inpt-postBook" id="inpt-postBook" placeholder="Poster Book">
+                <label for="inpt-stateBook" > State:</label><br>
+                <select name="inpt-stateBook" id="inpt-stateBook">
+                    <option value="1">Habilitado</option>
+                    <option value="2">Desabilitado</>
+                </select>
+
+                
             </div>
             </div>
             <div class="modal-footer"></div>
-            <button  id="btn-newBook" class="form-btn btn btn-success" id="btn-save_update">Create</button>
+            <button class="form-btn btn btn-success" id="btn-save_update">Save</button>
           </form>
         </div>
       </div>
     </div>
+
    
     <!-- Scripts -->
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/NewBook.js"></script>
-    <script src="../js/adminActive.js"></script>
+    <script src="../js/adminDisabled.js"></script>
   </body>
 </html>

@@ -19,7 +19,7 @@ export const createBookRoutes = ({bookModel, adminMdl}) => {
     bookRouter.get('/index/:id', BookController.getBooksById);
     bookRouter.get('/name/:nameBook', BookController.getBookByName);
     bookRouter.get('/all', BookController.getBooks);
-    bookRouter.post('/save', BookController.postBooks);
+    bookRouter.put('/save', BookController.postBooks);
     return bookRouter;
 }
 
@@ -29,5 +29,6 @@ export const adminBookRoute = ({adminMdl})=>{
     adminRouter.get('/books', adminController.getBooks);
     adminRouter.get('/books/:idBook', adminController.getBookById);
     adminRouter.put('/books/update', adminController.updateBooks);
+    adminRouter.post('/books/create', adminController.createBooks);
     return adminRouter;
 }

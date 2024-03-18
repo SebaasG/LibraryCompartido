@@ -14,25 +14,33 @@ async function getBooks() {
     data.forEach((data) => {
       const tr = document.createElement("tr");
       count++;
-      console.log(count);
-      tr.innerHTML = `
-            <td>${data.nameBook}</td>
-            <td>${data.genBook}</td>
-            <td>${data.yearbook}</td>
-            <td>${data.authbook}</td>
-            <td>${data.amountBook}</td>
-            <td ><button id="idBook${count}" data-bs-toggle="modal" class="btn-td"  data-bs-target="#modal-table">  <img src="../images/icons8-visible-30.png" alt="View"></button></td>
-            `;
-      tableBody.appendChild(tr);
-      document
-        .querySelector("#idBook" + count)
-        .addEventListener("click", async () => {
-          localStorage.setItem("idBook", data.idBook);
-          // await getBooksById(localStorage.setItem('idBook', data.idBook));
 
-          await getBooksById(data.idBook);
+      if(data.disableBook === 1){
+        tr.innerHTML = `
+              <td>${data.nameBook}</td>
+              <td>${data.genBook}</td>
+              <td>${data.yearbook}</td>
+              <td>${data.authbook}</td>
+              <td>${data.amountBook}</td>
+              <td class="container-td_buttons"><button title="View" id="idBook${count}" data-bs-toggle="modal" class="btn-td1"  data-bs-target="#modal-table">  <img src="../images/icons8-visible-30.png" alt="View"></button>
+      
+              <button title="Disabled" id="btn-update${count}" class="btn-td2" >  <img src="../images/icons8-x-30.png" alt="Disabled"></button></td>
+             `;
+        tableBody.appendChild(tr);
+        document
+          .querySelector("#idBook" + count)
+          .addEventListener("click", async () => {
+            localStorage.setItem("idBook", data.idBook);
+            // await getBooksById(localStorage.setItem('idBook', data.idBook));
+            
+            await getBooksById(data.idBook);
+          });
+          document.getElementById('btn-update'+ count).addEventListener('click',async()=>{
+            console.log('Si se esta habilitando')
+            await updateBook(data.idBook, data);
+          })
+        }
         });
-    });
   } catch (err) {
     console.log("No sirve");
   }
@@ -45,7 +53,7 @@ async function getBooksById(idBook) {
   const response = await fetch(`http://localHost:3000/admin/books/${idBook}`);
   const book = await response.json();
   try {
-    const { nameBook, amountBook, yearbook, authbook, postbook, genBook } =
+    const { nameBook, amountBook, yearbook, authbook, postbook, genBook, sumBook } =
       book[0]; // Destructurar la query.
 
     //Elementos del html
@@ -60,6 +68,8 @@ async function getBooksById(idBook) {
     const amount = document.createElement("div");
     const auth = document.createElement("div");
     const gen = document.createElement("div");
+    const sumary = document.createElement("div");
+
 
     //Agregar el contenido a html
     poster.innerHTML = `<img class="post-book" src="${postbook}" alt="${nameBook}" onerror="this.onerror=null; this.src=' https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">`;
@@ -67,7 +77,8 @@ async function getBooksById(idBook) {
     amount.innerHTML = `<p class="fs-4 m-0"> <b>Amount:</b>${amountBook}</p>`;
     auth.innerHTML = `<p class="fs-4 mt-4 m-0"> <b>Auth:</b>${authbook}</p>`;
     gen.innerHTML = `<p class="fs-4 m-0"> <b>Gendre:</b>${genBook}</p>`;
-
+    sumary.innerHTML = `<p class="fs-4 m-0"> <b>Sumary:</b>${sumBook}</p>`;
+    
     // Agregar al modal
     modalTitle.innerHTML = nameBook;
     modalBody.appendChild(poster);
@@ -75,69 +86,47 @@ async function getBooksById(idBook) {
     modalBody.appendChild(gen);
     modalBody.appendChild(year);
     modalBody.appendChild(amount);
+    modalBody.appendChild(sumary);
 
-    //Update
-    const btnUpdate = document.getElementById("btn-update");
-    btnUpdate.addEventListener("click", async () => {
-      await viewBook(idBook, book);
-    });
   } catch (err) {
     console.log("hubo un error a mostrar el libro por el id ", err);
   }
 }
 
-// Funcion para actualizar
-async function viewBook(idBook, book) {
-  try {
-    const {
-      nameBook,
-      amountBook,
-      yearbook,
-      authbook,
-      postbook,
-      sumBook,
-      genBook,
-    } = book[0];
-    //Llamar form
-    document.getElementById("inpt-nameBook").value = nameBook;
-    document.getElementById("inpt-authBook").value = authbook;
-    document.getElementById("inpt-yearBook").value = yearbook;
-    document.getElementById("inpt-genBook").value = genBook;
-    document.getElementById("inpt-amountBook").value = amountBook;
-    document.getElementById("inpt-sumBook").value = sumBook;
-    document.getElementById("inpt-postBook").value = postbook;
-    const btnSaveUpdate = document.getElementById("btn-save_update");
-    //Mostrar en el Html
+// Funcion que actualiza
+async function updateBook( idBook, data ) {
+ 
+  console.log('R');
+console.log(data)
 
-    btnSaveUpdate.addEventListener('click',async() => {
-     console.log('R PAPA');
-      await updateBook(book, idBook)
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-async function updateBook(body, idBook ) {
-  console.log(body[0]);
-  alert(body[0].sumBook)
     try{
+      const {
+        nameBook,
+        amountBook,
+        yearbook,
+        authbook,
+        postbook,
+        sumBook,
+        genBook
+      } = data;
      await fetch ('http://localHost:3000/admin/books/update',{
        method: 'PUT',
        headers:{
            'Content-Type':'application/json'
        },
       body: JSON.stringify({
-      "idBook": idBook,
-      "nameBook": body[0].nameBook,
-      "yearbook": body[0].yearbook,
-      "genBook":body[0].genBook,
-      "amountBook":body[0].amountBook,
-     "postbook":body[0].postbook,
-     "authbook":body[0].authbook,
-     "sumBook": body[0].sumBook
+        "idBook": idBook,
+        "nameBook":nameBook,
+        "yearbook": yearbook,
+        "genBook": genBook,
+        "amountBook":amountBook,
+       "postbook":postbook,
+       "authbook":authbook,
+       "sumBook": sumBook,
+       "disableBook": 2
       })
      }).then(res=>{
+      window.location.reload();
       console.log(res.status);
      })
 
