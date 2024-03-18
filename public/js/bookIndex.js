@@ -40,8 +40,6 @@ async function getBooks() {
         console.error('Error al obtener los libros:', error);
     }
 
-   
-
 }
 
 async function SearchBook(){
@@ -69,6 +67,7 @@ async function SearchBook(){
             document.querySelector('#tarjet' + contador).addEventListener('click', function () {
                 // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
                 localStorage.setItem('idBookUser', dato.id)
+                window.location.href = '../views/BookData.html';
     
             });
         });
