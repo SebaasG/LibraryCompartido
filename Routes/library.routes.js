@@ -13,12 +13,13 @@ export const routerLibrary = () => {
     return libraryRouter;
 }
 
-export const createBookRoutes = ({bookModel, adminMdl}) => {
+export const createBookRoutes = ({bookModel}) => {
     const bookRouter = router();
     const BookController = new bookController({bookModel});
     bookRouter.get('/index/:id', BookController.getBooksById);
     bookRouter.get('/index/author/:authbook', BookController.getBookByAuthor);
-    bookRouter.get('/index/gen/:genBook', BookController.getBookByGen);
+    bookRouter.get('/index', BookController.getGender);
+    bookRouter.get('/index/gen/:genName', BookController.getBookByGender);
     bookRouter.get('/name/:nameBook', BookController.getBookByName);
     bookRouter.get('/all', BookController.getBooks);
     bookRouter.put('/save', BookController.postBooks);

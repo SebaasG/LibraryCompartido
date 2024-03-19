@@ -31,9 +31,7 @@ export class bookController {
 
     getBooksById = async (req, res) => {
         try {
-         
             const id = req.params.id
-          
             const book = await this.bookModel.getBookById(id);
             if(book){
                 res.status(200).json(book);
@@ -63,10 +61,8 @@ export class bookController {
 
     getBookByAuthor = async (req, res) => {
         try {
-            console.log('entra')
             const clave= 'authbook'
             const name = req.params.authbook;
-            console.log(name)
             const book = await this.bookModel.getBookByAuthor(clave,name)
             if(book){
                 res.status(200).json(book);
@@ -77,19 +73,31 @@ export class bookController {
         }
     }
 
-    getBookByGen = async (req, res) => {
+    getBookByGender = async (req, res) => {
         try {
-            console.log('entra aqui ')
-            const clave= 'genBook';
-            const gen = req.params.genBook
-            const book = await this.bookModel.getBookByAuthor(clave,gen)
+            const name = req.params.genName;
+            const book = await this.bookModel.getBookByGender(name)
             if(book){
                 res.status(200).json(book);
             }
             res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
-
+            console.log(error)
         }
     }
+
+    getGender = async (req, res) => {
+        try {
+            const gender = await this.bookModel.getGender()
+            console.log(gender[0])
+            if(gender){
+                res.status(200).json(gender);
+            }
+            res.status(404).json("no se encontro el libro loco ");
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }
 

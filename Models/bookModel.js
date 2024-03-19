@@ -1,11 +1,10 @@
 import { createConnection } from '../Databases/config.js';
 
 const connection = await createConnection();
-
 export class bookModel {
     static async getBooks() {
         try {
-            const [books] = await connection.query('SELECT BIN_TO_UUID(idBook) as id,nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook from book where disableBook = 1');
+            const [books] = await connection.query("SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE b.disableBook=1 GROUP BY b.idBook;");
             return books;
         } catch (error) {
             console.log('Modelo:', error);
@@ -14,61 +13,71 @@ export class bookModel {
     }
 
 
-    static async postBook(body){
+    static async postBook(body) {
         try {
 
-            const {nameBook,amountBook,genBook,sumBook,yearbook,authbook,postbook,disableBook} = body
-            const books = await connection.query("INSERT INTO book (nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook)VALUES (?,?,?,?,?,?,?,?)", [nameBook,amountBook,genBook,sumBook,yearbook,authbook,postbook,disableBook])
+            const { nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook } = body
+            const books = await connection.query("INSERT INTO book (nameBook, amountBook, sumBook, yearbook, authbook, postbook, disableBook)VALUES (?,?,?,?,?,?,?,?)", [nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook])
 
-            if(books){
+            if (books) {
                 return 1
             }
             return books
         } catch (error) {
-            
+
         }
     }
-    static async getBookById(idBook){
-        try{
-            const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id,nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE BIN_TO_UUID(idBook) = ?',[idBook]);
-            return book;
-        }catch(err){
-            console.log('Hubo un error en la busqueda del libro');
-            throw err;
-        }
-    }
-
-
-    static async getBookByName(nameBook){
+    static async getBookById(idBook) {
         try {
-            const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE nameBook LIKE ?', [`%${nameBook}%`]);
+            const [book] = await connection.query("SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE BIN_TO_UUID(b.idBook)= ? GROUP BY b.idBook;", [idBook]);
             return book;
-        } catch(err) {
+        } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
             throw err;
         }
     }
 
-    static async getBookByAuthor(criterio,clave){
+
+
+    static async getBookByName(nameBook) {
         try {
-            console.log('entra aqui model: '+ criterio+clave)
-            const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE ?? = ?', [criterio,clave]);
-            console.log(book)
+            const [book] = await connection.query("SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE b.nameBook LIKE ?  GROUP BY b.idBook;", [`%${nameBook}%`]);
             return book;
-        } catch(err) {
+        } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
             throw err;
         }
     }
 
-    // static async getBookByAuthor(authbook){
-    //     try {
-    //         const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE genBook = ?', [authbook]);
-    //         return book;
-    //     } catch(err) {
-    //         console.log('Hubo un error en la búsqueda del libro');
-    //         throw err;
-    //     }
-    // }
-    
+
+    static async getBookByAuthor(criterio, clave) {
+        try {
+            const [book] = await connection.query('SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE ?? = ?', [criterio, clave]);
+            return book;
+        } catch (err) {
+            console.log('Hubo un error en la búsqueda del libro');
+            throw err;
+        }
+    }
+
+    static async getBookByGender(nameGen) {
+        try {
+            const [book] = await connection.query("SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE g.nameGen = ? GROUP BY b.idBook", [nameGen]);
+            return book;
+        } catch (err) {
+            console.log('Hubo un error en la búsqueda del libro');
+            throw err;
+        }
+    }
+
+    static async getGender() {
+        try {
+            const [book] = await connection.query('select DISTINCT nameGen from gender');
+            return book;
+        } catch (err) {
+            console.log('Hubo un error en la búsqueda del libro');
+            throw err;
+        }
+    }
+
 }
