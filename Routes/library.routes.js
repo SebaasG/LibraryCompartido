@@ -17,6 +17,7 @@ export const createBookRoutes = ({bookModel, adminMdl}) => {
     const bookRouter = router();
     const BookController = new bookController({bookModel});
     bookRouter.get('/index/:id', BookController.getBooksById);
+    bookRouter.get('/index/author/:authbook', BookController.getBookByAuthor);
     bookRouter.get('/name/:nameBook', BookController.getBookByName);
     bookRouter.get('/all', BookController.getBooks);
     bookRouter.put('/save', BookController.postBooks);
