@@ -53,5 +53,18 @@ export class adminCtrl {
             res.status(404).json({message:'Hubo un error en el controlador crear'});
         }
     }
+    //Shearch
+    shearchBooks = async (req,res)=>{
+            try{
+                const {filter, data} = req.params;
+                console.log(`El filtro es: ${filter}, los datos son: ${data}`);
+                const result = await this.adminMdl.shearchBooks(filter, data);
+                console.log(result);
+                res.status(200).json({message:'Todo bien mi fai'});
+            }catch(err){
+                console.log('Error en el controlador, Shearch Book', err);
+                res.status(404).json({message:'Hubo un error en el controlador buscar.'})
+            }
+    }
     
 }
