@@ -40,7 +40,6 @@ export class adminMdl {
         genBook,
         disableBook,
       } = body;
-      console.log(`id: ${idBook}, nameBook = ${nameBook}`);
 
       const sql = await connection.query(
         "UPDATE book SET nameBook = ?, yearbook = ?,amountBook = ?,postbook=?, sumBook = ?, authbook = ?, genBook = ?, disableBook = ?   WHERE BIN_TO_UUID(idBook) = ?",
@@ -83,7 +82,7 @@ export class adminMdl {
   static async shearchBooks(filter, data) {
     try {
       console.log("Si se esta mandando algo al modelo", filter, data);
-      const sql = await connection.query(
+      const [sql] = await connection.query(
         "SELECT * FROM book WHERE " + filter + " LIKE ?", [`%${data}%`]
       );
       return sql;
