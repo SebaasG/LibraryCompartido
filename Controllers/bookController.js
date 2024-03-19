@@ -63,7 +63,7 @@ export class bookController {
 
     getBookByAuthor = async (req, res) => {
         try {
-            const name = req.params.authbooks
+            const name = req.params.authbook
             const book = await this.bookModel.getBookByAuthor(name)
             if(book){
                 res.status(200).json(book);
