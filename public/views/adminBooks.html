@@ -34,9 +34,17 @@
             <a href="#" class="vinculo-a">History</a>
             
           </div>
-          
+
+          <!--Shearch Button-->
           <div class="justify-content-end">
-            <input style="width: 200px; height: 37px; " class="inputSearchBook p-1 mt-2" type="search" placeholder="Search Book" aria-label="Search" />
+            <label for="shearchBoook">Shearch By:</label>
+            <select id="shearchBoook" name="shearchBoook" class="shearchBoook">
+              <option value="nameBook">Name Book</option>
+              <option value="yearbook">Year Book</option>
+              <option value="authobook">Author</option>
+              <option value="genBook">Gender Book</option>
+            </select>
+            <input style="width: 200px; height: 37px; " class="inputSearchBook p-1 mt-2" type="search" placeholder="Search Book" aria-label="Search" id="inputSearchBook" />
             <button class="btn btn-dark mb-1" type="submit">Search</button>
             <a class="navbar-brand" href="#" type="button"><img width="25" height="25" class="img" src="..//images/icons8-usuario-40.png"  alt="Profile"  /></a>
           </div>
