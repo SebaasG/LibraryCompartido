@@ -83,7 +83,7 @@ export class adminMdl {
     try {
       console.log("Si se esta mandando algo al modelo", filter, data);
       const [sql] = await connection.query(
-        "SELECT * FROM book WHERE " + filter + " LIKE ?", [`%${data}%`]
+        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook, genBook,  yearbook, authbook, disableBook, postbook, disableBook sumBook FROM book WHERE " + filter + " LIKE ?", [`%${data}%`]
       );
       return sql;
     } catch (err) {

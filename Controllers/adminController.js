@@ -57,9 +57,11 @@ export class adminCtrl {
     shearchBooks = async (req,res)=>{
             try{
                 const {filter, data} = req.params;
-                console.log(`El filtro es: ${filter}, los datos son: ${data}`);
+
+                
+                // console.log(`El filtro es: ${filter}, los datos son: ${data}`);
                 const result = await this.adminMdl.shearchBooks(filter, data);
-                console.log(result);
+                console.log(result)
                 res.status(200).json(result);
             }catch(err){
                 console.log('Error en el controlador, Shearch Book', err);
