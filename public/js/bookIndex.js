@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     getBooks();
     getAllFilters();
+    getGender();
 
 });
 async function getAllFilters() {
@@ -13,7 +14,6 @@ async function getAllFilters() {
 
     const containers = {
         'AgesFilter': 'yearbook',
-        'GenderFilter': 'genBook',
         'AuthFilter': 'authbook'
     };
 
@@ -29,53 +29,97 @@ async function getAllFilters() {
 
             document.querySelector(`#${key}Button${index + 1}`).addEventListener('click', function () {
                 localStorage.setItem(key, dato[key]);
-                alert('eligio: ' + dato[key]);
                 // getAuthor(dato[key]);
             });
         });
     }
 }
 
+async function getGender() {
+    const response = await fetch('http://localhost:3000/book/index');
+    const datos = await response.json();
+    const container = document.getElementById('GenderFilter')
+    container.innerHTML = '';
+
+    datos.forEach((dato, index) => {
+        contador = contador + 1
+        const column = document.createElement('div');
+        column.classList.add("justify-content-center");
+        column.innerHTML = `<button id="Button${contador}"> ${dato.nameGen} </button>`;
+        container.appendChild(column);
+
+        document.querySelector(`#Button${contador}`).addEventListener('click', function () {
+            localStorage.setItem('GenderBook', dato.nameGen);
+            getGenderByName(dato.nameGen);
+        });
+    });
+}
 
 
 
-async function getAllAges(){
+
+async function getAllAges() {
 
     const response = await fetch('http://localhost:3000/book/all');
     const datos = await response.json();
-  
+
     const container = document.getElementById('AuthFilter');
     container.innerHTML = ''; // Limpiamos el contenido anterior antes de agregar nuevos elementos
 
     datos.forEach(dato => {
         contador = contador + 1
-        let column = document.createElement('div');AuthFilter
+        let column = document.createElement('div'); AuthFilter
         column.classList.add("justify-content-center");
         column.innerHTML = `<button id="authorButton${contador}"> ${dato.authbook} </button>`;
         container.appendChild(column);
         document.querySelector('#authorButton' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
-            localStorage.setItem('nameAuthor',dato.authbook)
+            localStorage.setItem('nameAuthor', dato.authbook)
             getAuthor(dato.authbook);
         });
-    
+
     });
 
 }
 
-async function getAuthor(authbook){
-    const response = await fetch('http://localhost:3000/book/index/author/'+authbook);
+
+async function getGenderByName(nameGender) {
+    const response = await fetch('http://localHost:3000/book/index/gen/' + nameGender);
     const datos = await response.json();
-    
-    console.log('HOla si buenos dias'+datos);
+
     const container = document.getElementById('containerBook');
     container.innerHTML = '';
     datos.forEach(dato => {
         contador = contador + 1
-        console.log(contador)
-      
+
         let column = document.createElement('div');
-        
+
+        column.classList.add("justify-content-center", "col-lg-4", "col-md-6", "mb-4");
+        column.innerHTML = `<div id="tarjet${contador}" class="cardBookContainer card align-content-center fs-5 "data-bs-toggle="modal" data-bs-target="#miModal" style="width: 100%; ">
+        <img src="${dato.postbook}" class="card-img-top" alt="Imagen de libro" onerror="this.onerror=null; this.src='https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">
+        <div class="card-body">
+        <p class="card-text justify-content-center ">${dato.nameBook}<br><strong> ${dato.authbook}</strong></p>
+        </div>
+        </div>`;
+        container.appendChild(column);
+        document.querySelector('#tarjet' + contador).addEventListener('click', function () {
+            // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
+            localStorage.setItem('idBookUser', dato.id)
+            window.location.href = '../views/BookData.html';
+
+        });
+    });
+}
+
+async function getAuthor(authbook) {
+    const response = await fetch('http://localhost:3000/book/index/author/' + authbook);
+    const datos = await response.json();
+    const container = document.getElementById('containerBook');
+    container.innerHTML = '';
+    datos.forEach(dato => {
+        contador = contador + 1
+        let column = document.createElement('div');
+
         column.classList.add("justify-content-center", "col-lg-4", "col-md-6", "mb-4");
         column.innerHTML = `<div id="tarjet${contador}" class="cardBookContainer card align-content-center fs-5 "data-bs-toggle="modal" data-bs-target="#miModal" style="width: 100%; ">
         <img src="${dato.postbook}" class="card-img-top" alt="Imagen de libro" onerror="this.onerror=null; this.src='https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">
@@ -103,9 +147,8 @@ async function getBooks() {
 
         datos.forEach(dato => {
             contador = contador + 1
-            console.log(contador)
             let column = document.createElement('div');
-            
+
             column.classList.add("justify-content-center", "col-lg-4", "col-md-6", "mb-4");
             column.innerHTML = `<div id="tarjet${contador}" class="cardBookContainer card align-content-center fs-5  style="width: 100%; ">
             <img src="${dato.postbook}" class="card-img-top" alt="Imagen de libro" onerror="this.onerror=null; this.src='https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">
@@ -117,7 +160,6 @@ async function getBooks() {
             document.querySelector('#tarjet' + contador).addEventListener('click', function () {
                 // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
                 localStorage.setItem('idBookUser', dato.id)
-                console.log(dato.id)
                 window.location.href = '../views/BookData.html';
             });
         });
@@ -128,20 +170,19 @@ async function getBooks() {
 
 }
 
-async function SearchBook(){
+async function SearchBook() {
     const name = document.getElementById('searchNameBook').value
     const container = document.getElementById('containerBook');
     container.innerHTML = '';
-    if(name === ''){
+    if (name === '') {
         getBooks()
-    }else{
-        const response = await fetch ('http://localHost:3000/book/name/'+ name)
+    } else {
+        const response = await fetch('http://localHost:3000/book/name/' + name)
         const datos = await response.json();
         datos.forEach(dato => {
             contador = contador + 1
-            console.log(contador)
             let column = document.createElement('div');
-            
+
             column.classList.add("justify-content-center", "col-lg-4", "col-md-6", "mb-4");
             column.innerHTML = `<div id="tarjet${contador}" class="cardBookContainer card align-content-center fs-5 "data-bs-toggle="modal" data-bs-target="#miModal" style="width: 100%; ">
             <img src="${dato.postbook}" class="card-img-top" alt="Imagen de libro" onerror="this.onerror=null; this.src='https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">
@@ -154,23 +195,23 @@ async function SearchBook(){
                 // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
                 localStorage.setItem('idBookUser', dato.id)
                 window.location.href = '../views/BookData.html';
-    
+
             });
         });
     }
-    
+
 
 }
 
 const nameint = document.getElementById('searchNameBook')
 const cleanFilter = document.getElementById('cleanFiltrer')
-cleanFilter.addEventListener('click', ()=>{
+cleanFilter.addEventListener('click', () => {
     location.reload();
 
 })
-nameint.addEventListener('input', ()=>{
+nameint.addEventListener('input', () => {
     SearchBook();
 })
-searchButton.addEventListener('click    ', ()=>{
+searchButton.addEventListener('click    ', () => {
     SearchBook();
 })

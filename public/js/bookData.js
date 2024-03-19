@@ -1,47 +1,8 @@
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     llenarform();
-// });
-
-// async function llenarform(idBook) {
-//     const divTittle = document.getElementById('tittle');
-//     const divContent = document.getElementById('container');
-//     const idbook = localStorage.getItem("idBookUser");
-
-//     try {
-//         const response = await fetch('http://localHost:3000/book/index/' + idbook);
-//         const datos = await response.json();
-//         const book = datos[0]; 
-
-//         // Crear elemento para el título
-//         const titleElement = document.createElement('div');
-//         titleElement.innerHTML = `<strong>${book.nameBook}</strong>`;
-//         divTittle.appendChild(titleElement);
-
-//         // Crear elemento para el contenido
-//         const bodyElement = document.createElement('div');
-//         bodyElement.classList.add("row", 'justify-content-center'); // Reducir el espacio horizontal entre las columnas
-//         bodyElement.innerHTML = `
-//             <div class ='col-5'>    
-//                 <img class='imgDataBook img-fluid' src="${book.postbook}" alt="Imagen de libro" style="max-width: 100%;" onerror="this.onerror=null; this.src='https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">
-//             </div>
-//             <div class ='col-3'>
-//                 <p>${book.sumBook}</p>
-//             </div>`;
-//         divContent.appendChild(bodyElement);
-
-
-
-//     } catch (error) {
-//         console.error('Error al obtener los datos del libro:', error);
-//     }
-// }
-
 document.addEventListener('DOMContentLoaded', function () {
     llenarform();
 });
 
-async function llenarform(idBook) {
+async function llenarform() {
     const divTittle = document.getElementById('tittle');
     const divContent = document.getElementById('container');
     const idbook = localStorage.getItem("idBookUser");
@@ -50,7 +11,6 @@ async function llenarform(idBook) {
         const response = await fetch('http://localHost:3000/book/index/' + idbook);
         const datos = await response.json();
         const book = datos[0];
-        console.log(datos[0]);
         // Crear elemento para el título
         const titleElement = document.createElement('div');
         titleElement.innerHTML = `<strong>${book.nameBook}</strong>`;
