@@ -49,14 +49,26 @@ export class bookModel {
         }
     }
 
-    static async getBookByAuthor(authbook){
+    static async getBookByAuthor(criterio,clave){
         try {
-            const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE authbook = ?', [authbook]);
+            console.log('entra aqui model: '+ criterio+clave)
+            const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE ?? = ?', [criterio,clave]);
+            console.log(book)
             return book;
         } catch(err) {
             console.log('Hubo un error en la búsqueda del libro');
             throw err;
         }
     }
+
+    // static async getBookByAuthor(authbook){
+    //     try {
+    //         const [book] = await connection.query('SELECT BIN_TO_UUID(idBook) as id, nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook FROM book WHERE genBook = ?', [authbook]);
+    //         return book;
+    //     } catch(err) {
+    //         console.log('Hubo un error en la búsqueda del libro');
+    //         throw err;
+    //     }
+    // }
     
 }

@@ -63,8 +63,26 @@ export class bookController {
 
     getBookByAuthor = async (req, res) => {
         try {
-            const name = req.params.authbook
-            const book = await this.bookModel.getBookByAuthor(name)
+            console.log('entra')
+            const clave= 'authbook'
+            const name = req.params.authbook;
+            console.log(name)
+            const book = await this.bookModel.getBookByAuthor(clave,name)
+            if(book){
+                res.status(200).json(book);
+            }
+            res.status(404).json("no se encontro el libro loco ");
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    getBookByGen = async (req, res) => {
+        try {
+            console.log('entra aqui ')
+            const clave= 'genBook';
+            const gen = req.params.genBook
+            const book = await this.bookModel.getBookByAuthor(clave,gen)
             if(book){
                 res.status(200).json(book);
             }

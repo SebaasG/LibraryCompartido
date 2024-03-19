@@ -26,12 +26,12 @@ GET http://localHost:3000/book/name/me
 
 
 ###
-GET http://localHost:3000/book/index/author/Tapa blanda
-# Content-Type: application/json
+GET http://localHost:3000/book/index/author/Ross
 
-# {
-#     "authbook": "Tapa blanda"
-# }
+
+###
+GET http://localHost:3000/book/index/gen/hola, si
+
 ###
 POST http://localHost:3000/book/save
 Content-Type: application/json

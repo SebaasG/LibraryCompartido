@@ -4,10 +4,42 @@ const searchButton = document.getElementById('btnSearchBook');
 document.addEventListener('DOMContentLoaded', function () {
 
     getBooks();
-    getAllAuthors();
+    getAllFilters();
 
 });
-async function getAllAuthors(){
+async function getAllFilters() {
+    const response = await fetch('http://localhost:3000/book/all');
+    const datos = await response.json();
+
+    const containers = {
+        'AgesFilter': 'yearbook',
+        'GenderFilter': 'genBook',
+        'AuthFilter': 'authbook'
+    };
+
+    for (const [containerId, key] of Object.entries(containers)) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+
+        datos.forEach((dato, index) => {
+            const column = document.createElement('div');
+            column.classList.add("justify-content-center");
+            column.innerHTML = `<button id="${key}Button${index + 1}"> ${dato[key]} </button>`;
+            container.appendChild(column);
+
+            document.querySelector(`#${key}Button${index + 1}`).addEventListener('click', function () {
+                localStorage.setItem(key, dato[key]);
+                alert('eligio: ' + dato[key]);
+                // getAuthor(dato[key]);
+            });
+        });
+    }
+}
+
+
+
+
+async function getAllAges(){
 
     const response = await fetch('http://localhost:3000/book/all');
     const datos = await response.json();
@@ -23,7 +55,6 @@ async function getAllAuthors(){
         container.appendChild(column);
         document.querySelector('#authorButton' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
-         
             localStorage.setItem('nameAuthor',dato.authbook)
             getAuthor(dato.authbook);
         });
