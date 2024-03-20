@@ -52,10 +52,10 @@ export class bookController {
             const book = await this.bookModel.getBookByName(name)
             if(book){
                 res.status(200).json(book);
+            }else{
+                res.status(404).json("no se encontro el libro loco ");
             }
-            res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
-
         }
     }
 
@@ -66,8 +66,9 @@ export class bookController {
             const book = await this.bookModel.getBookByAuthor(clave,name)
             if(book){
                 res.status(200).json(book);
+            }else{
+                res.status(404).json("no se encontro el libro loco ");
             }
-            res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
             console.log(error)
         }
@@ -79,8 +80,9 @@ export class bookController {
             const book = await this.bookModel.getBookByGender(name)
             if(book){
                 res.status(200).json(book);
+            }else{
+                res.status(404).json("no se encontro el libro loco ");
             }
-            res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
             console.log(error)
         }
@@ -89,7 +91,6 @@ export class bookController {
     getGender = async (req, res) => {
         try {
             const gender = await this.bookModel.getGender()
-            console.log(gender[0])
             if(gender){
                 res.status(200).json(gender);
             }
