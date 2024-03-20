@@ -229,6 +229,8 @@ if(currentPage === "adminBooks"){
   // Search in Books Active
   const inputSearchActive = document.getElementById("inputSearchBookActive");
   inputSearchActive.addEventListener("input", async () => {
+    
+
     await searchBooksActive(1);
   });
 }else{
@@ -248,35 +250,71 @@ async function searchBooksActive(n) {
   const searchBy = document.getElementById("searchBoook").value;
   const inputSearchActive = document.getElementById("inputSearchBookActive").value;
   const tableBodyActive = document.getElementById("body-table_active");
+  const notFound = document.getElementById('notFoundActive');
 
   tableBodyActive.innerHTML = "";
   if (inputSearchActive === "") {
     await getBooks(1);
+    window.location.reload();
+
   } else {
-    const response = await fetch(
-      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`
-    );
+
+    const response = await fetch(`http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`);
     const data = await response.json();
-    renderData(data, n);
+
+    if(inputSearchActive.length > 0 && data.length > 0){
+      console.log(true, data )
+      renderData(data, n);
+      notFound.innerHTML = '';
+
+      }else{
+        console.log(false, data);
+        const div = document.createElement('div');
+        notFound.innerHTML = '';
+        div.innerHTML = `   
+        <img class="d-flex justify-content-center " src="../images/404image.png" alt="Not Found">
+        <h2><b>Caracter Not Found 404</b></h2>
+        `;
+        notFound.appendChild(div)
+      }
+  
   }
 }
-
 //Function Search in Books Disable.
 
 async function searchBooksDisable(n) {
   const searchBy = document.getElementById("searchBoook").value;
   const inptSearchDisable = document.getElementById("inputSearchBookDisable").value;
   const tableBodyDisable = document.getElementById("body-table_disable");
+  const notFound = document.getElementById('notFoundDisable');
   
   tableBodyDisable.innerHTML = "";
-
+  
   if (inptSearchDisable === "") {
+    window.location.reload();
     await getBooks(2);
+    
   } else {
-    const response = await fetch(
-      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}`
-    );
+  
+    const response = await fetch(`http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}` );
     const data = await response.json();
-    renderData(data, n);
+    if(inptSearchDisable.length > 0 && data.length > 0){
+      console.log(true, data )
+      renderData(data, n);
+      notFound.innerHTML = '';
+
+      }else{
+        console.log(false, data);
+        const div = document.createElement('div');
+        notFound.innerHTML = '';
+        div.innerHTML = `   
+        <img class="d-flex justify-content-center " src="../images/404image.png" alt="Not Found">
+        <h2><b>Caracter Not Found 404</b></h2>
+        `;
+        notFound.appendChild(div)
+
+      }
+     
+    }
   }
-}
+
