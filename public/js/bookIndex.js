@@ -1,37 +1,36 @@
 let contador = 0;
 const searchButton = document.getElementById('btnSearchBook');
+const nameint = document.getElementById('searchNameBook');
+const cleanFilter = document.getElementById('cleanFiltrer');
 
-document.addEventListener('DOMContentLoaded', function () {
-
-    getBooks();
-    getAllFilters();
-    getGender();
-
-});
 async function getAllFilters() {
-    const response = await fetch('http://localhost:3000/book/all');
-    const datos = await response.json();
+    try {
+        const response = await fetch('http://localhost:3000/book/all');
+        const datos = await response.json();
+    
+        const containers = {
+            'AgesFilter': 'yearbook',
+            'AuthFilter': 'authbook'
+        };
+    
+        for (const [containerId, key] of Object.entries(containers)) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+    
+            datos.forEach((dato, index) => {
+                const column = document.createElement('div');
+                column.classList.add("justify-content-center");
+                column.innerHTML = `<button id="${key}Button${index + 1}"> ${dato[key]} </button>`;
+                container.appendChild(column);
+    
+                document.querySelector(`#${key}Button${index + 1}`).addEventListener('click', function () {
+                    localStorage.setItem(key, dato[key]);
 
-    const containers = {
-        'AgesFilter': 'yearbook',
-        'AuthFilter': 'authbook'
-    };
-
-    for (const [containerId, key] of Object.entries(containers)) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = '';
-
-        datos.forEach((dato, index) => {
-            const column = document.createElement('div');
-            column.classList.add("justify-content-center");
-            column.innerHTML = `<button id="${key}Button${index + 1}"> ${dato[key]} </button>`;
-            container.appendChild(column);
-
-            document.querySelector(`#${key}Button${index + 1}`).addEventListener('click', function () {
-                localStorage.setItem(key, dato[key]);
-                // getAuthor(dato[key]);
+                });
             });
-        });
+        }
+    } catch (error) {
+        console.log('Se ha producido un error:'+ error)
     }
 }
 
@@ -228,15 +227,22 @@ async function SearchBook() {
 
 }
 
-const nameint = document.getElementById('searchNameBook')
-const cleanFilter = document.getElementById('cleanFiltrer')
+
 cleanFilter.addEventListener('click', () => {
     location.reload();
-
 })
+
 nameint.addEventListener('input', () => {
     SearchBook();
 })
+
 searchButton.addEventListener('click    ', () => {
     SearchBook();
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+    getBooks();
+    getAllFilters();
+    getGender();
+
+});
