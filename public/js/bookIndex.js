@@ -41,20 +41,41 @@ async function getGender() {
     const container = document.getElementById('GenderFilter')
     container.innerHTML = '';
 
-    datos.forEach((dato, index) => {
-        contador = contador + 1
+    datos.forEach((dato) => {
+        contador = contador + 1;
         const column = document.createElement('div');
-        column.classList.add("justify-content-center");
-        column.innerHTML = `<button id="Button${contador}"> ${dato.nameGen} </button>`;
-        container.appendChild(column);
-
-        document.querySelector(`#Button${contador}`).addEventListener('click', function () {
+        column.classList.add("grid");
+        const button = document.createElement('button');
+        button.id = `Button${contador}`;
+        button.classList.add('buttonFilter');
+        button.textContent = dato.nameGen;
+        button.addEventListener('click', function () {
             localStorage.setItem('GenderBook', dato.nameGen);
             getGenderByName(dato.nameGen);
+            cambiarColor(button.id); // Pasar el ID del botón actual como parámetro
         });
+        column.appendChild(button);
+        container.appendChild(column);
     });
+    
+    
 }
 
+function cambiarColor(id) {
+    const botonActual = document.getElementById(id);
+    const botones = document.querySelectorAll('.buttonFilter');
+    
+    // Eliminar la clase 'presionado' de todos los botones
+    botones.forEach(boton => {
+        boton.classList.remove("presionado");
+    });
+
+    // Aplicar la clase 'presionado' solo al botón actual
+    botonActual.classList.add("presionado");
+
+
+   
+}
 
 
 
@@ -169,6 +190,10 @@ async function getBooks() {
     }
 
 }
+// function cambiarColor() {
+//     var boton = document.getElementById("boton");
+//     boton.classList.toggle("presionado");
+// }
 
 async function SearchBook() {
     const name = document.getElementById('searchNameBook').value
