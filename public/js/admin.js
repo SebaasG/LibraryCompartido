@@ -1,36 +1,36 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const currentPage = document.body.dataset.page;
-    if (currentPage === "adminBooks") {
-        await getBooks(1);
-    } else {
-        await getBooks(2);
-    }
+  const currentPage = document.body.dataset.page;
+  if (currentPage === "adminBooks") {
+    await getBooks(1);
+  } else {
+    await getBooks(2);
+  }
 });
 
 let count = 0;
 let idBook = localStorage.getItem("idBook");
 
 async function getBooks(n) {
-    try {
-        const response = await fetch("http://localHost:3000/admin/books");
-        const data = await response.json();
-        renderData(data, n);
-    } catch (err) {
-        console.log("Error al obtener los libros:", err);
-    }
+  try {
+    const response = await fetch("http://localHost:3000/admin/books");
+    const data = await response.json();
+    renderData(data, n);
+  } catch (err) {
+    console.log("Error al obtener los libros:", err);
+  }
 }
 
 //Contenido de la tabla y funcionalidades
 function renderData(data, n) {
-    const tableBodyActive = document.getElementById("body-table_active");
-    const tableBodyDisable = document.getElementById("body-table_disable");
+  const tableBodyActive = document.getElementById("body-table_active");
+  const tableBodyDisable = document.getElementById("body-table_disable");
 
-    data.forEach((dataItem) => {
-        const tr = document.createElement("tr");
-        count++;
-        if (n === 1) {
-            if (dataItem.disableBook === 1) {
-                tr.innerHTML = `
+  data.forEach((dataItem) => {
+    const tr = document.createElement("tr");
+    count++;
+    if (n === 1) {
+      if (dataItem.disableBook === 1) {
+        tr.innerHTML = `
                     <td>${dataItem.nameBook}</td>
                     <td>${dataItem.genBook}</td>
                     <td>${dataItem.yearbook}</td>
@@ -45,20 +45,24 @@ function renderData(data, n) {
                         </button>
                     </td>
                 `;
-                tableBodyActive.appendChild(tr);
-                document.querySelector("#idBook" + count).addEventListener("click", async () => {
-                    localStorage.setItem("idBook", dataItem.idBook);
-                    await getBooksById(dataItem.idBook);
-                });
-                document.getElementById("btn-update" + count).addEventListener("click", async () => {
-                    console.log("Si se está habilitando");
-                    dataItem.disableBook = 2;
-                    await updateBook(dataItem);
-                });
-            }
-        } else if(n ===2 ) {
-            if (dataItem.disableBook === 2) {
-                tr.innerHTML = `
+        tableBodyActive.appendChild(tr);
+        document
+          .querySelector("#idBook" + count)
+          .addEventListener("click", async () => {
+            localStorage.setItem("idBook", dataItem.idBook);
+            await getBooksById(dataItem.idBook);
+          });
+        document
+          .getElementById("btn-update" + count)
+          .addEventListener("click", async () => {
+            console.log("Si se está habilitando");
+            dataItem.disableBook = 2;
+            await updateBook(dataItem);
+          });
+      }
+    } else if (n === 2) {
+      if (dataItem.disableBook === 2) {
+        tr.innerHTML = `
                     <td>${dataItem.nameBook}</td>
                     <td>${dataItem.genBook}</td>
                     <td>${dataItem.yearbook}</td>
@@ -70,16 +74,17 @@ function renderData(data, n) {
                         </button>
                     </td>
                 `;
-                tableBodyDisable.appendChild(tr);
-                document.querySelector("#idBook" + count).addEventListener("click", async () => {
-                    localStorage.setItem("idBook", dataItem.idBook);
-                    await viewBook(dataItem);
-                });
-            }
-        }
-    });
+        tableBodyDisable.appendChild(tr);
+        document
+          .querySelector("#idBook" + count)
+          .addEventListener("click", async () => {
+            localStorage.setItem("idBook", dataItem.idBook);
+            await viewBook(dataItem);
+          });
+      }
+    }
+  });
 }
-
 
 // Funcion para traer los datos al modal
 async function getBooksById(idBook) {
@@ -219,51 +224,59 @@ async function viewBook(data) {
   }
 }
 
-//Buscador
-const inptSearch = document.getElementById("inputSearchBook");
+const currentPage = document.body.dataset.page;
+if(currentPage === "adminBooks"){
+  // Search in Books Active
+  const inputSearchActive = document.getElementById("inputSearchBookActive");
+  inputSearchActive.addEventListener("input", async () => {
+    await searchBooksActive(1);
+  });
+}else{
+    // Search in Books Disable
+  const inptSearchDisable = document.getElementById("inputSearchBookDisable");
+  inptSearchDisable.addEventListener("input", async () => {
+    await searchBooksDisable(2);
+  });
+}
 
-inptSearch.addEventListener("input", async () => {
-  const currentPage = document.body.dataset.page;
-  if (currentPage === "adminBooks") {
-    await searchBy(1);
-  } else {
-    await searchBy(2);
-  }
-});
 
-// Search / Buscador
-async function searchBy(n) {
-    
+
+
+// Function Search in Books Active.
+
+async function searchBooksActive(n) {
   const searchBy = document.getElementById("searchBoook").value;
-  const inptSearch = document.getElementById("inputSearchBook").value;
-  
-  if(inptSearch === ''){
-      await getBooks(n);
-    }else{
-    if(n==1){
-     const tableBodyActive = document.getElementById("body-table_active");
-     tableBodyActive.innerHTML ="";
-     const response = await fetch(`http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearch}`);
-     const data = await response.json();
-     renderData(data,n);
-     }else{
-     const tableBodyDisable = document.getElementById("body-table_disable");
-     tableBodyDisable.innerHTML = "";
-     const response = await fetch(`http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearch}`);
-     const data = await response.json();
-     renderData(data,n);
+  const inputSearchActive = document.getElementById("inputSearchBookActive").value;
+  const tableBodyActive = document.getElementById("body-table_active");
 
-     }
-        
-        
-      
-        console.log(inptSearch)
-
- }
-  
- 
-
-
-
+  tableBodyActive.innerHTML = "";
+  if (inputSearchActive === "") {
+    await getBooks(1);
+  } else {
+    const response = await fetch(
+      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`
+    );
+    const data = await response.json();
+    renderData(data, n);
   }
+}
 
+//Function Search in Books Disable.
+
+async function searchBooksDisable(n) {
+  const searchBy = document.getElementById("searchBoook").value;
+  const inptSearchDisable = document.getElementById("inputSearchBookDisable").value;
+  const tableBodyDisable = document.getElementById("body-table_disable");
+  
+  tableBodyDisable.innerHTML = "";
+
+  if (inptSearchDisable === "") {
+    await getBooks(2);
+  } else {
+    const response = await fetch(
+      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}`
+    );
+    const data = await response.json();
+    renderData(data, n);
+  }
+}
