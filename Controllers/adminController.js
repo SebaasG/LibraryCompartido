@@ -68,5 +68,18 @@ export class adminCtrl {
                 res.status(404).json({message:'Hubo un error en el controlador buscar.'})
             }
     }
+
+    // PAGINACION GET
+    getPagination = async (req, res)=>{
+        try{
+            const {page} = req.params;
+            // const result = await this.adminMdl.getPagination(page);
+            // console.log(result);
+            console.log(`page: ${page}`);
+            res.status(200).json('R en mi fai');
+        }catch(err){
+            res.status(404).json({message:'Hubo un error al traer los datos de la paginacion.'})
+        }
+    }
     
 }
