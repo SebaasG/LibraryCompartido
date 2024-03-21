@@ -74,7 +74,7 @@ export class bookModel {
 
     static async getGender() {
         try {
-            const [book] = await connection.query('select DISTINCT nameGen from gender');
+            const [book] = await connection.query('select DISTINCT nameGen from gender order by nameGen ASC ');
             return book;
         } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
@@ -84,7 +84,7 @@ export class bookModel {
 
     static async getAge() {
         try {
-            const [book] = await connection.query('select DISTINCT yearbook from book');
+            const [book] = await connection.query('select DISTINCT yearbook from book order by yearbook DESC');
             return book;
         } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
@@ -95,7 +95,7 @@ export class bookModel {
     
     static async getAuthor() {
         try {
-            const [book] = await connection.query('select DISTINCT authbook from book');
+            const [book] = await connection.query('select DISTINCT authbook from book order by authbook ASC ');
             return book;
         } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
