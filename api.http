@@ -30,7 +30,7 @@ GET http://localHost:3000/book/index/gen/Fantasia
 GET http://localHost:3000/book/author
 
 ###
-GET http://localHost:3000/book/index/author/Ross
+GET http://localHost:3000/book/index/author/Tapa blanda
 
 ###
 GET http://localHost:3000/book/index/year/2014
