@@ -28,7 +28,14 @@ async function fetchDataAndPopulateFilter(url, containerId, dataProperty, button
         button.classList.add('buttonFilter');
         button.textContent = dato[dataProperty];
         button.addEventListener('click', function () {
-            getGenderByName(dato[dataProperty]);
+        
+            if(containerId === 'GenderFilter'){
+                getGenderByName(dato[dataProperty]);
+            }else if(containerId === 'AuthFilter'){
+                alert('para autor')
+            }else{
+                alert('para año')
+            }
             localStorage.setItem(localStorageKey, dato[dataProperty]);
             cambiarColor(buttonId);
         });
