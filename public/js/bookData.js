@@ -29,8 +29,8 @@ async function llenarform() {
         const bodyElement2 = document.createElement('div');
         bodyElement2.classList.add('d-flex', 'justify-content-center', 'text-center')
         bodyElement2.innerHTML = `<div class='col-10 col-sm-6 fs-3 '>
-        <strong>Gender:</strong> ${book.genBook}<br>
         <strong>In library:</strong> ${book.amountBook} Books<br>
+        <strong>Gender:</strong> ${book.genBook}<br><br> 
                 ${book.sumBook}  <br>
             </div>`
         divContent.appendChild(bodyElement);

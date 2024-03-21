@@ -2,6 +2,7 @@ let contador = 0;
 const searchButton = document.getElementById('btnSearchBook');
 const nameint = document.getElementById('searchNameBook');
 const cleanFilter = document.getElementById('cleanFiltrer');
+const userBook = document.getElementById('btnUserBook');
 
 async function getGender() {
     await fetchFilter('http://localhost:3000/book/index', 'GenderFilter', 'nameGen', 'ButtonGen', 'GenderBook');
@@ -153,6 +154,13 @@ async function SearchBook() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    getBooks();
+    getGender();
+    getAge();
+    getAuthor();
+});
+
 cleanFilter.addEventListener('click', () => {
     location.reload();
 })
@@ -165,16 +173,6 @@ searchButton.addEventListener('click    ', () => {
     SearchBook();
 })
 
-document.addEventListener('DOMContentLoaded', function () {
-    getBooks();
-    getGender();
-    getAge();
-    getAuthor();
-});
-
-const userBook = document.getElementById('btnUserBook');
-
 userBook.addEventListener('click', ()=>{
-    alert('hola mi bro ')
     window.location.href = '../views/userData.html'
 })
