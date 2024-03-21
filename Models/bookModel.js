@@ -52,17 +52,19 @@ export class bookModel {
 
     static async getBookByAuthor(criterio, clave) {
         try {
-            const [book] = await connection.query('SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE ?? = ?', [criterio, clave]);
+            console.log(criterio + 'model');
+            const [book] = await connection.query('SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR \', \') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE ?? = ? GROUP BY b.idBook', [criterio, clave]);
             return book;
         } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
             throw err;
         }
     }
+    
 
     static async getBookByGender(nameGen) {
         try {
-            const [book] = await connection.query("SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE g.nameGen = ? GROUP BY b.idBook", [nameGen]);
+            const [book] = await connection.query("SELECT  BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE g.nameGen = ? GROUP BY b.idBook", [nameGen]);
             return book;
         } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');
@@ -73,6 +75,27 @@ export class bookModel {
     static async getGender() {
         try {
             const [book] = await connection.query('select DISTINCT nameGen from gender');
+            return book;
+        } catch (err) {
+            console.log('Hubo un error en la búsqueda del libro');
+            throw err;
+        }
+    }
+
+    static async getAge() {
+        try {
+            const [book] = await connection.query('select DISTINCT yearbook from book');
+            return book;
+        } catch (err) {
+            console.log('Hubo un error en la búsqueda del libro');
+            throw err;
+        }
+    }
+
+    
+    static async getAuthor() {
+        try {
+            const [book] = await connection.query('select DISTINCT authbook from book');
             return book;
         } catch (err) {
             console.log('Hubo un error en la búsqueda del libro');

@@ -74,6 +74,21 @@ export class bookController {
         }
     }
 
+    getBookByAge = async (req, res) => {
+        try {
+            const clave= 'yearBook'
+            const name = req.params.yearBook;
+            const book = await this.bookModel.getBookByAuthor(clave,name)
+            if(book){
+                res.status(200).json(book);
+            }else{
+                res.status(404).json("no se encontro el libro loco ");
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     getBookByGender = async (req, res) => {
         try {
             const name = req.params.genName;
@@ -100,5 +115,28 @@ export class bookController {
         }
     }
 
+    getAge = async (req, res) => {
+        try {
+            const Age = await this.bookModel.getAge()
+            if(Age){
+                res.status(200).json(Age);
+            }
+            res.status(404).json("no se encontro el libro loco ");
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    getAuthor = async (req, res) => {
+        try {
+            const author = await this.bookModel.getAuthor()
+            if(author){
+                res.status(200).json(author);
+            }
+            res.status(404).json("no se encontro el libro loco ");
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
