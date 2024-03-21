@@ -24,14 +24,16 @@ GET http://localHost:3000/book/index/b12fb946-e624-11ee-a7d6-ec8eb55104fd
 ###
 GET http://localHost:3000/book/name/m
 ###
-GET http://localHost:3000/book/index/gen/Aventura
+GET http://localHost:3000/book/index/gen/Fantasia
 
 ###
-GET http://localHost:3000/book/index
-
+GET http://localHost:3000/book/author
 
 ###
-GET http://localHost:3000/book/index/gen/hola, si
+GET http://localHost:3000/book/index/author/Tapa blanda
+
+###
+GET http://localHost:3000/book/index/year/2014
 
 ###
 POST http://localHost:3000/book/save

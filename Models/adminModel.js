@@ -29,17 +29,8 @@ export class adminMdl {
   // Actualizar libros
   static async updateBooks({ body }) {
     try {
-      const {
-        idBook,
-        nameBook,
-        yearbook,
-        amountBook,
-        postbook,
-        sumBook,
-        authbook,
-        genBook,
-        disableBook,
-      } = body;
+      const { idBook, nameBook, yearbook, amountBook, postbook,
+        sumBook, authbook, genBook, disableBook, } = body;
 
       const sql = await connection.query(
         "UPDATE book SET nameBook = ?, yearbook = ?,amountBook = ?,postbook=?, sumBook = ?, authbook = ?, genBook = ?, disableBook = ?   WHERE BIN_TO_UUID(idBook) = ?",

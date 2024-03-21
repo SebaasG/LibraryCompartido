@@ -12,110 +12,101 @@
 
 <body>
   <div class="root">
-      <header class="headerBook d-flex mb-3 ">
-        <div class="tittlebook me-auto mt-2 p-2 tittle fs-4">The best library</div>
-        <div class=" p-2 tittle fs-4"><button class="butonProfile"><img width="35" height="35"  src="../images/icons8-usuario-50.png" alt=""></button></div>
-      </header>
+    <header class="headerBook d-flex mb-3 ">
+      <div class="tittlebook me-auto mt-2 p-2 tittle fs-4">The best library</div>
+      <div class=" p-2 tittle fs-4"><button class="butonProfile" id="btnUserBook"><img width="35" height="35"
+            src="../images/icons8-usuario-50.png" alt=""></button></div>
+    </header>
 
     <div class="contentHeaderNav">
-      <div class=" tittleNav fs-2 d-flex justify-content-center"  >BOOKS <img class="imgBook img-fluid" src="../images/icons8-libro.gif" alt="gif"> </div>
+      <div class=" tittleNav fs-2 d-flex justify-content-center">BOOKS <img class="imgBook img-fluid"
+          src="../images/icons8-libro.gif" alt="gif"> </div>
 
-        <div class="navBook d-flex justify-content-center d-flex flex-sm-row flex-column">
-      
-          <nav class="navbarBook bg-body-tertiary">
-            <div class="container-fluid">
-              <!-- <form  class="d-flex" role="search"> -->
-                <input id = "searchNameBook" class="inputSearchBook " type="search" placeholder=" Search for name" aria-label="Search">
-                <button id ="btnSearchBook" class="btn btn-dark" >Search</button>
-              <!-- </form> -->
-            </div>
-          </nav>
-        </div>
+      <div class="navBook d-flex justify-content-center d-flex flex-sm-row flex-column">
 
-      </div>
-<div class="container">
-        <section class="contBookSection row ">
-          
-          <div class="filter col-lg-3 col-12 mb-5">
-            <div class="fs-5 d-flex justify-content-center" >Filters</div>
-            <div class="cleanFilter d-flex justify-content-center"><button id="cleanFiltrer" class="butonclean">Clear filters</button></div>
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header  d-flex justify-content-center">
-                  <button class="accordionButton accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Age
-                  </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <div id="AgesFilter" class="accordion-body"></div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header d-flex justify-content-center">
-                  <button class="accordionButton accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                      <!-- Texto del botón -->
-                      Gender
-                  </button>
-              </h2>
-              
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <div id="GenderFilter" class="accordion-body"></div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header d-flex justify-content-center">
-                  <button class="accordionButton accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                    Author
-                  </button>
-                </h2>
-                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <div id="AuthFilter" class="accordion-body"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <nav class="navbarBook bg-body-tertiary">
+          <div class="container-fluid d-flex">
 
-          <div class= "allBooksCont container-fluid col-lg-8 col-12 ">
-            <div id = "containerBook" class="containerCards row justify-content-start">
-            
+            <input id="searchNameBook" class="inputSearchBook" type="search" placeholder=" Search for name"
+              aria-label="Search">
+            <button id="btnSearchBook" class="btn btn-dark">Search</button>
 
           </div>
-        </div>
-        </section>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
         </nav>
-  </div>
-  <!-- <div class="modal" id="miModal">
-    <div class="miModalBook modal-dialog modal-dialog-scrollable container-fluid modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div id="modalContent"></div> </div>
-        <div class="modal-footer">
-
-          <button type="button" class="btn btn-outline-primary" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-          <button type="button" id = "deleteModal" class= "btn btn-outline-danger" >delete</button>
-        </div>
       </div>
+
     </div>
-    </div> -->
+    <div class="container">
+      <section class="contBookSection row ">
+
+        <div class="filter col-lg-3 col-12 mb-5">
+          <div class="fs-5 d-flex justify-content-center">Filters</div>
+          <div class="cleanFilter d-flex justify-content-center"><button id="cleanFiltrer" class="butonclean">Clear
+              filters</button></div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header  d-flex justify-content-center">
+                <button class="accordionButton accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Age
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div id="AgesFilter" class="accordion-body"></div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header d-flex justify-content-center">
+                <button class="accordionButton accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  <!-- Texto del botón -->
+                  Gender
+                </button>
+              </h2>
+
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div id="GenderFilter" class="accordion-body"></div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header d-flex justify-content-center">
+                <button class="accordionButton accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  Author
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div id="AuthFilter" class="accordion-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="allBooksCont container-fluid col-lg-8 col-12 ">
+          <div id="containerBook" class="containerCards row justify-content-start">
+
+
+          </div>
+        </div>
+      </section>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 </body>
 <script src="../js/bookIndex.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
