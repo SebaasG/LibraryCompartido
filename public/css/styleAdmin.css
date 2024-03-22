@@ -56,7 +56,7 @@
     justify-content: center;
     display: flex;
     margin: auto;
-   
+    height: 53px;
 }
 .btn-td1{
     background-color:transparent;
@@ -64,7 +64,9 @@
     padding:1px;
 
 }
-
+tr{
+    height: 53px;
+}
 .btn-td2{
     background-color:transparent;
     border-radius: 5px;

@@ -32,8 +32,8 @@ export const createBookRoutes = ({bookModel}) => {
 export const adminBookRoute = ({adminMdl})=>{
     const adminRouter = router();
     const adminController = new adminCtrl({adminMdl});
-    adminRouter.get('/books', adminController.getBooks);
-    adminRouter.get('/books/:idBook', adminController.getBookById);
+    adminRouter.get('/books/:page', adminController.getBooks);
+    adminRouter.get('/books/getById/:idBook', adminController.getBookById);
     adminRouter.put('/books/update', adminController.updateBooks);
     adminRouter.post('/books/create', adminController.createBooks);
     adminRouter.get('/books/shearchBook/:filter/:data', adminController.shearchBooks);
