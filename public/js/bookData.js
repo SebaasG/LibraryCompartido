@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const buton = document.getElementById('btnUserBookData');
+const backIndex= document.getElementById('BackIndexData');
+
+backIndex.addEventListener('click', ()=>{
+    window.location.href= '../views/booksIndex.html'
+})
+
 
 buton.addEventListener('click', ()=>{
     window.location.href= '../views/userData.html'
