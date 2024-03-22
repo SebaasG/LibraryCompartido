@@ -2,12 +2,19 @@ import { createConnection } from "../Databases/config.js";
 const connection = await createConnection();
 export class adminMdl {
   // Modelo para obtener todos los libros de la bd.
-  static async getBooks() {
+  static async getBooks(page) {
     try {
-      const [sql] = await connection.query(
-        " SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook, genBook,  yearbook, authbook, disableBook, postbook, sumBook FROM book"
-      );
-      return sql;
+       // Query para contar el numero de registros de la tabla.
+       const [sqlCount] = await connection.query('SELECT COUNT(*) AS recordCounter FROM book;');
+       const recordCounter =  sqlCount[0].recordCounter // Cantidad de registros en total de la tabal.
+       const tabsNumber = recordCounter / 10; // Cantidad de pestañas para la paginacion.
+       const offSetValue = ( page - 1) * 10; // Mostrasra desde que registro tiene que empezar a traerse dependiendo de la pagina. 
+      // Query donde se van a traer los registros
+       const [sql] = await connection.query(
+        `SELECT BIN_TO_UUID(b.idBook) AS idBook, b.nameBook,b.amountBook,GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook,b.sumBook,b.yearbook,b.authbook,
+        b.postbook,b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen where b.disableBook=1 GROUP BY b.idBook LIMIT 10 OFFSET ? `,[offSetValue])
+        const response = {tabs: tabsNumber, query: sql}  
+        return  response;
     } catch (err) {
       console.log("Hubo un error en el modelo.", err);
       throw err;
@@ -17,7 +24,8 @@ export class adminMdl {
   static async getBookById(idBook) {
     try {
       const [sql] = await connection.query(
-        "SELECT BIN_TO_UUID(idBook) as id,nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook FROM book WHERE BIN_TO_UUID(idBook) = ?",
+        `SELECT BIN_TO_UUID(b.idBook) AS idBook, b.nameBook,b.amountBook,GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook,b.sumBook,b.yearbook,b.authbook,
+        b.postbook,b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen where BIN_TO_UUID(b.idBook) = ? GROUP BY b.idBook`,
         [idBook]
       );
       return sql;

@@ -5,8 +5,10 @@ export class adminCtrl {
     // Obtener todos los libros
     getBooks = async (req,res)=>{
     try{
-        const result = await this.adminMdl.getBooks();
-        
+        const {page}= req.params
+        // console.log(page)
+        const result = await this.adminMdl.getBooks(parseInt(page));
+            // console.log(result
         res.status(200).json(result);
 
         }catch(err){

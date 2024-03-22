@@ -1,22 +1,53 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const currentPage = document.body.dataset.page;
   if (currentPage === "adminBooks") {
-    await getBooks(1);
+    await getBooks(1, 1);
   } else {
-    await getBooks(2);
+    await getBooks(1, 2);
   }
 });
 
 let count = 0;
+
 let idBook = localStorage.getItem("idBook");
 
-async function getBooks(n) {
-  try {
-    const response = await fetch("http://localHost:3000/admin/books");
-    const data = await response.json();
-    renderData(data, n);
-  } catch (err) {
-    console.log("Error al obtener los libros:", err);
+// Traer Libros
+async function getBooks( page,n){
+  const response = await fetch("http://localHost:3000/admin/books/"+ page);
+  const data = await response.json();
+    //Desctructurar respuesta
+    const {tabs, query} = data;
+    renderData( query, n);
+    await pagination(tabs);
+}
+
+// Funcion donde se va crear la paginacion
+async function pagination(tabs){
+  if(!Number.isInteger(tabs)){
+    tabs = Math.ceil(tabs);
+  }
+  const container = document.getElementById('pagination')
+  
+  container.innerHTML = '';
+
+  // Cracion de pestañas con su valor
+  for(let i= 1; i <= tabs; i++){
+    const li = document.createElement('li');
+    li.classList.add( 'page-item');
+    li.innerHTML = ` <a  id ="page${i}"  class="page-link" >${i}</a> `;
+
+    container.appendChild(li)
+    const page = document.getElementById('page'+ i)
+    page.addEventListener ('click',async()=>{
+      const tableBodyActive =  document.getElementById('body-table_active');
+      tableBodyActive.innerHTML = '';
+      const currentPage = document.body.dataset.page;
+      if (currentPage === "adminBooks") {
+      await getBooks(i, 1);
+     } else {
+      await getBooks(i, 2);
+  }
+    })
   }
 }
 
@@ -32,7 +63,6 @@ function renderData(data, n) {
       if (dataItem.disableBook === 1) {
         tr.innerHTML = `
                     <td>${dataItem.nameBook}</td>
-                    <td>${dataItem.genBook}</td>
                     <td>${dataItem.yearbook}</td>
                     <td>${dataItem.authbook}</td>
                     <td>${dataItem.amountBook}</td>
@@ -64,7 +94,6 @@ function renderData(data, n) {
       if (dataItem.disableBook === 2) {
         tr.innerHTML = `
                     <td>${dataItem.nameBook}</td>
-                    <td>${dataItem.genBook}</td>
                     <td>${dataItem.yearbook}</td>
                     <td>${dataItem.authbook}</td>
                     <td>${dataItem.amountBook}</td>
@@ -88,9 +117,7 @@ function renderData(data, n) {
 
 // Funcion para traer los datos al modal
 async function getBooksById(idBook) {
-  console.log(`Este es el id:${idBook}`);
-
-  const response = await fetch(`http://localHost:3000/admin/books/${idBook}`);
+  const response = await fetch(`http://localHost:3000/admin/books/getById/${idBook}`);
   const book = await response.json();
   try {
     const {
