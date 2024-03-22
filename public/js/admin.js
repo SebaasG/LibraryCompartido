@@ -1,123 +1,128 @@
+let count = 0;
+const currentPage = document.body.dataset.page;
+let idBook = localStorage.getItem("idBook");
 document.addEventListener("DOMContentLoaded", async () => {
-  const currentPage = document.body.dataset.page;
-  if (currentPage === "adminBooks") {
-    await getBooks(1, 1);
-  } else {
-    await getBooks(1, 2);
-  }
+  await getBooks(1);
 });
 
-let count = 0;
-
-let idBook = localStorage.getItem("idBook");
-
 // Traer Libros
-async function getBooks( page,n){
-  const response = await fetch("http://localHost:3000/admin/books/"+ page);
+async function getBooks(page) {
+  const response = await fetch("http://localHost:3000/admin/books/" + page);
   const data = await response.json();
-    //Desctructurar respuesta
-    const {tabs, query} = data;
-    renderData( query, n);
-    await pagination(tabs);
+  //Desctructurar respuesta
+  const { tabsActive, tabsDisable } = data;
+  renderData(data);
+
+  if (currentPage === 'adminBooks') {
+    await pagination(tabsActive);
+  } else {
+    await pagination(tabsDisable);
+  }
 }
 
 // Funcion donde se va crear la paginacion
-async function pagination(tabs){
-  if(!Number.isInteger(tabs)){
+async function pagination(tabs) {
+  if (!Number.isInteger(tabs)) {
     tabs = Math.ceil(tabs);
   }
-  const container = document.getElementById('pagination')
-  
-  container.innerHTML = '';
+  const container = document.getElementById("pagination");
+
+  container.innerHTML = "";
 
   // Cracion de pestañas con su valor
-  for(let i= 1; i <= tabs; i++){
-    const li = document.createElement('li');
-    li.classList.add( 'page-item');
+  for (let i = 1; i <= tabs; i++) {
+    const li = document.createElement("li");
+    li.classList.add("page-item");
     li.innerHTML = ` <a  id ="page${i}"  class="page-link" >${i}</a> `;
 
-    container.appendChild(li)
-    const page = document.getElementById('page'+ i)
-    page.addEventListener ('click',async()=>{
-      const tableBodyActive =  document.getElementById('body-table_active');
-      tableBodyActive.innerHTML = '';
-      const currentPage = document.body.dataset.page;
+    container.appendChild(li);
+    const page = document.getElementById("page" + i);
+    page.addEventListener("click", async () => {
       if (currentPage === "adminBooks") {
-      await getBooks(i, 1);
-     } else {
-      await getBooks(i, 2);
-  }
-    })
+        const tableBodyActive = document.getElementById("body-table_active");
+        tableBodyActive.innerHTML = "";
+        await getBooks(i);
+      } else {
+        const table_disable = document.getElementById("body-table_disable");
+        table_disable.innerHTML = "";
+        await getBooks(i);
+      }
+    });
   }
 }
 
 //Contenido de la tabla y funcionalidades
-function renderData(data, n) {
+function renderData(data) {
   const tableBodyActive = document.getElementById("body-table_active");
   const tableBodyDisable = document.getElementById("body-table_disable");
+  const { queryActive, queryDisable } = data;
 
-  data.forEach((dataItem) => {
-    const tr = document.createElement("tr");
-    count++;
-    if (n === 1) {
-      if (dataItem.disableBook === 1) {
-        tr.innerHTML = `
-                    <td>${dataItem.nameBook}</td>
-                    <td>${dataItem.yearbook}</td>
-                    <td>${dataItem.authbook}</td>
-                    <td>${dataItem.amountBook}</td>
-                    <td class="container-td_buttons">
-                        <button title="View" id="idBook${count}" data-bs-toggle="modal" class="btn-td1"  data-bs-target="#modal-table">
-                            <img src="../images/icons8-visible-30.png" alt="View">
-                        </button>
-                        <button title="Disabled" id="btn-update${count}" class="btn-td2">
-                            <img src="../images/icons8-x-30.png" alt="Disabled">
-                        </button>
-                    </td>
-                `;
-        tableBodyActive.appendChild(tr);
-        document
-          .querySelector("#idBook" + count)
-          .addEventListener("click", async () => {
-            localStorage.setItem("idBook", dataItem.idBook);
-            await getBooksById(dataItem.idBook);
-          });
-        document
-          .getElementById("btn-update" + count)
-          .addEventListener("click", async () => {
-            console.log("Si se está habilitando");
-            dataItem.disableBook = 2;
-            await updateBook(dataItem);
-          });
-      }
-    } else if (n === 2) {
-      if (dataItem.disableBook === 2) {
-        tr.innerHTML = `
-                    <td>${dataItem.nameBook}</td>
-                    <td>${dataItem.yearbook}</td>
-                    <td>${dataItem.authbook}</td>
-                    <td>${dataItem.amountBook}</td>
-                    <td class="container-td_buttons">
-                        <button title="Edit/Update" id="idBook${count}" class="btn-td1"  data-bs-toggle="modal"  data-bs-target="#modal-update_book">
-                            <img src="../images/icons8-pluma-30.png" alt="View">
-                        </button>
-                    </td>
-                `;
-        tableBodyDisable.appendChild(tr);
-        document
-          .querySelector("#idBook" + count)
-          .addEventListener("click", async () => {
-            localStorage.setItem("idBook", dataItem.idBook);
-            await viewBook(dataItem);
-          });
-      }
-    }
-  });
+  if (currentPage === "adminBooks") {
+    queryActive.forEach(data => {
+      const tr = document.createElement("tr");
+      count++;
+
+      tr.innerHTML = `
+      <td>${data.nameBook}</td>
+      <td>${data.yearbook}</td>
+      <td>${data.authbook}</td>
+      <td>${data.amountBook}</td>
+      <td class="container-td_buttons">
+      
+      <button title="View" id="idBook${count}" data-bs-toggle="modal" class="btn-td1"  data-bs-target="#modal-table">
+      <img src="../images/icons8-visible-30.png" alt="View">
+      </button>
+      <button title="Disabled" id="btn-update${count}" class="btn-td2">
+      <img src="../images/icons8-x-30.png" alt="Disabled">
+      </button>
+      </td>
+      `;
+      tableBodyActive.appendChild(tr);
+      document
+        .querySelector("#idBook" + count)
+        .addEventListener("click", async () => {
+          localStorage.setItem("idBook", data.idBook);
+          await getBooksById(data.idBook);
+        });
+      document
+        .getElementById("btn-update" + count)
+        .addEventListener("click", async () => {
+          console.log("Si se está habilitando");
+          data.disableBook = 2;
+          await updateBook(data);
+        });
+    });
+  } else {
+    queryDisable.forEach((data) => {
+      const tr = document.createElement("tr");
+      count++;
+      tr.innerHTML = `
+        <td>${data.nameBook}</td>
+        <td>${data.yearbook}</td>
+        <td>${data.authbook}</td>
+        <td>${data.amountBook}</td>
+        <td class="container-td_buttons">
+            <button title="Edit/Update" id="idBook${count}" class="btn-td1"  data-bs-toggle="modal"  data-bs-target="#modal-update_book">
+                <img src="../images/icons8-pluma-30.png" alt="View">
+            </button>
+        </td>
+    `;
+      tableBodyDisable.appendChild(tr);
+      document
+        .querySelector("#idBook" + count)
+        .addEventListener("click", async () => {
+          localStorage.setItem("idBook", data.idBook);
+          await viewBook(data);
+        });
+    });
+  }
 }
 
 // Funcion para traer los datos al modal
 async function getBooksById(idBook) {
-  const response = await fetch(`http://localHost:3000/admin/books/getById/${idBook}`);
+  const response = await fetch(
+    `http://localHost:3000/admin/books/getById/${idBook}`
+  );
   const book = await response.json();
   try {
     const {
@@ -251,97 +256,89 @@ async function viewBook(data) {
   }
 }
 
-const currentPage = document.body.dataset.page;
-if(currentPage === "adminBooks"){
+if (currentPage === "adminBooks") {
   // Search in Books Active
   const inputSearchActive = document.getElementById("inputSearchBookActive");
   inputSearchActive.addEventListener("input", async () => {
-    
-
     await searchBooksActive(1);
   });
-}else{
-    // Search in Books Disable
+} else {
+  // Search in Books Disable
   const inptSearchDisable = document.getElementById("inputSearchBookDisable");
   inptSearchDisable.addEventListener("input", async () => {
     await searchBooksDisable(2);
   });
 }
 
-
-
-
 // Function Search in Books Active.
 
 async function searchBooksActive(n) {
   const searchBy = document.getElementById("searchBoook").value;
-  const inputSearchActive = document.getElementById("inputSearchBookActive").value;
+  const inputSearchActive = document.getElementById(
+    "inputSearchBookActive"
+  ).value;
   const tableBodyActive = document.getElementById("body-table_active");
-  const notFound = document.getElementById('notFoundActive');
+  const notFound = document.getElementById("notFoundActive");
 
   tableBodyActive.innerHTML = "";
   if (inputSearchActive === "") {
     await getBooks(1);
     window.location.reload();
-
   } else {
-
-    const response = await fetch(`http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`);
+    const response = await fetch(
+      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`
+    );
     const data = await response.json();
 
-    if(inputSearchActive.length > 0 && data.length > 0){
-      console.log(true, data )
+    if (inputSearchActive.length > 0 && data.length > 0) {
+      console.log(true, data);
       renderData(data, n);
-      notFound.innerHTML = '';
-
-      }else{
-        console.log(false, data);
-        const div = document.createElement('div');
-        notFound.innerHTML = '';
-        div.innerHTML = `   
+      notFound.innerHTML = "";
+    } else {
+      console.log(false, data);
+      const div = document.createElement("div");
+      notFound.innerHTML = "";
+      div.innerHTML = `   
         <img class="d-flex justify-content-center " src="../images/404image.png" alt="Not Found">
         <h2><b>Caracter Not Found 404</b></h2>
         `;
-        notFound.appendChild(div)
-      }
-  
+      notFound.appendChild(div);
+    }
   }
 }
 //Function Search in Books Disable.
 
 async function searchBooksDisable(n) {
   const searchBy = document.getElementById("searchBoook").value;
-  const inptSearchDisable = document.getElementById("inputSearchBookDisable").value;
+  const inptSearchDisable = document.getElementById(
+    "inputSearchBookDisable"
+  ).value;
   const tableBodyDisable = document.getElementById("body-table_disable");
-  const notFound = document.getElementById('notFoundDisable');
-  
+  const notFound = document.getElementById("notFoundDisable");
+
   tableBodyDisable.innerHTML = "";
-  
+
   if (inptSearchDisable === "") {
     window.location.reload();
     await getBooks(2);
-    
   } else {
-  
-    const response = await fetch(`http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}` );
+    const response = await fetch(
+      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}`
+    );
     const data = await response.json();
-    if(inptSearchDisable.length > 0 && data.length > 0){
-      console.log(true, data )
+    if (inptSearchDisable.length > 0 && data.length > 0) {
+      console.log(true, data);
       renderData(data, n);
-      notFound.innerHTML = '';
-
-      }else{
-        console.log(false, data);
-        const div = document.createElement('div');
-        notFound.innerHTML = '';
-        div.innerHTML = `   
+      notFound.innerHTML = "";
+    } else {
+      console.log(false, data);
+      const div = document.createElement("div");
+      notFound.innerHTML = "";
+      div.innerHTML = `   
         <img class="d-flex justify-content-center " src="../images/404image.png" alt="Not Found">
         <h2><b>Caracter Not Found 404</b></h2>
         `;
-        notFound.appendChild(div)
-
-      }
-     
+      notFound.appendChild(div);
     }
   }
-
+}
