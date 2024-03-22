@@ -4,17 +4,31 @@ export class adminMdl {
   // Modelo para obtener todos los libros de la bd.
   static async getBooks(page) {
     try {
+
        // Query para contar el numero de registros de la tabla.
-       const [sqlCount] = await connection.query('SELECT COUNT(*) AS recordCounter FROM book;');
-       const recordCounter =  sqlCount[0].recordCounter // Cantidad de registros en total de la tabal.
-       const tabsNumber = recordCounter / 10; // Cantidad de pestañas para la paginacion.
-       const offSetValue = ( page - 1) * 10; // Mostrasra desde que registro tiene que empezar a traerse dependiendo de la pagina. 
+       const [sqlCountActive] = await connection.query('SELECT COUNT(*) AS recordCounter FROM book WHERE disableBook = 1;');
+       const [sqlCountDisable] = await connection.query('SELECT COUNT(*) AS recordCounter FROM book WHERE disableBook = 2;');
+
+       // Calcular la cantidad de pestañas activas
+       const tabsNumberActive = sqlCountActive[0].recordCounter  / 10; 
+       const tabsNumberDisable = sqlCountDisable[0].recordCounter / 10; 
+
+       const offSetValue = ( page - 1) * 10;  // Mostrasra desde que registro tiene que empezar a traerse dependiendo de la pagina. 
+
       // Query donde se van a traer los registros
-       const [sql] = await connection.query(
+       const [sqlActive] = await connection.query(
         `SELECT BIN_TO_UUID(b.idBook) AS idBook, b.nameBook,b.amountBook,GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook,b.sumBook,b.yearbook,b.authbook,
         b.postbook,b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen where b.disableBook=1 GROUP BY b.idBook LIMIT 10 OFFSET ? `,[offSetValue])
-        const response = {tabs: tabsNumber, query: sql}  
+        
+        const [sqlDisable] = await connection.query(
+          `SELECT BIN_TO_UUID(b.idBook) AS idBook, b.nameBook,b.amountBook,GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook,b.sumBook,b.yearbook,b.authbook,
+          b.postbook,b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen where b.disableBook=2 GROUP BY b.idBook LIMIT 10 OFFSET ? `,[offSetValue])
+          
+
+        const response = {tabsActive: tabsNumberActive, tabsDisable: tabsNumberDisable, queryActive: sqlActive, queryDisable: sqlDisable}  
+        
         return  response;
+
     } catch (err) {
       console.log("Hubo un error en el modelo.", err);
       throw err;
@@ -71,9 +85,9 @@ export class adminMdl {
       authbook,
       genBook,
     } = body;
-    const sql = await connection.query(
-      "INSERT INTO book (nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook, disableBook) VALUES (?,?,?,?,?,?,?,1)",
-      [nameBook, amountBook, genBook, sumBook, yearbook, authbook, postbook]
+    const sql = await connection.execute(
+      "CALL createBook(?,?,?,?,?,?,?,?)",
+      [nameBook, amountBook,sumBook, yearbook, authbook, postbook, 1,genBook]
     );
     return sql;
   }
