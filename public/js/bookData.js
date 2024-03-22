@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
     llenarform();
 });
 
+const buton = document.getElementById('btnUserBookData');
+
+buton.addEventListener('click', ()=>{
+    window.location.href= '../views/userData.html'
+})
+
 async function llenarform() {
     const divTittle = document.getElementById('tittle');
     const divContent = document.getElementById('container');
