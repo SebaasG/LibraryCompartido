@@ -105,15 +105,5 @@ export class adminMdl {
     }
   }
 
-  // PAGINACION GET  
-  static async getPagination(page) {
-    try{
-        // const [sql]= await connection.query ();
-        // return sql
-    }catch{
-     console.log('Hubo un error en el modal, en la paginacion');
-     throw err;
-    }
-  }
 
 }
