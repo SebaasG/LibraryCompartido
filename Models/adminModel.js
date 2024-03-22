@@ -53,27 +53,28 @@ export class adminMdl {
     try {
       const { idBook, nameBook, yearbook, amountBook, postbook,
         sumBook, authbook, genBook, disableBook, } = body;
-
-      const sql = await connection.query(
-        "UPDATE book SET nameBook = ?, yearbook = ?,amountBook = ?,postbook=?, sumBook = ?, authbook = ?, genBook = ?, disableBook = ?   WHERE BIN_TO_UUID(idBook) = ?",
+  
+      const sql = await connection.execute(
+        `CALL updateBook(UUID_TO_BIN(?),?,?,?,?,?,?,?,?)`,
         [
-          nameBook,
-          yearbook,
-          amountBook,
-          postbook,
-          sumBook,
-          authbook,
-          genBook,
-          disableBook,
           idBook,
+          nameBook,
+          amountBook,
+          sumBook,
+          yearbook,
+          authbook,
+          postbook,
+          disableBook,
+          genBook
         ]
       );
       return sql;
     } catch (err) {
-      console.log("Hubo un error al actualizar los libros.");
+      console.log("Hubo un error al actualizar los libros:", err); // Imprime el error completo para identificar el problema
       throw err;
     }
   }
+  
   // Crear Libros
   static async createBooks({ body }) {
     const {

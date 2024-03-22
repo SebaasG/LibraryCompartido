@@ -7,27 +7,33 @@
 </head>
 <body>
 
-<h2>Selecciona Múltiples Valores</h2>
 
-<select id="mySelect" multiple>
-  <option value="valor1">Opción 1</option>
-  <option value="valor2">Opción 2</option>
-  <option value="valor3">Opción 3</option>
-  <option value="valor4">Opción 4</option>
-</select>
+<h2>Selecciona Múltiples Opciones</h2>
 
-<button onclick="guardarSeleccion()">Guardar Selección</button>
+<input type="text" id="inputSeleccion">
+<button id="btnAgregar">Agregar</button>
 
 <script>
-function guardarSeleccion() {
-  var select = document.getElementById("mySelect");
-  var selectedValues = [];
-  for (var i = 0; i < select.selectedOptions.length; i++) {
-    selectedValues.push(select.selectedOptions[i].value);
+const inputSeleccion = document.getElementById('inputSeleccion');
+const btnAgregar = document.getElementById('btnAgregar');
+
+btnAgregar.addEventListener('click', function() {
+  const valorInput = inputSeleccion.value.trim(); // Obtener el valor del input y eliminar espacios en blanco al inicio y al final
+
+  if (valorInput !== '') {
+    const seleccionActual = inputSeleccion.dataset.seleccion ? inputSeleccion.dataset.seleccion.split(',') : []; // Obtener las selecciones actuales y dividirlas por comas en un array
+    seleccionActual.push(valorInput); // Agregar el nuevo valor al array de selecciones
+    inputSeleccion.dataset.seleccion = seleccionActual.join(','); // Unir las selecciones en una sola cadena separada por comas
+    inputSeleccion.value = ''; // Limpiar el input
+    actualizarTextoSeleccion(); // Actualizar el texto visible en el input
   }
-  console.log("Valores seleccionados:", selectedValues);
-  // Aquí puedes enviar los valores seleccionados a tu backend o hacer cualquier otra cosa con ellos
+});
+
+function actualizarTextoSeleccion() {
+  const seleccionActual = inputSeleccion.dataset.seleccion ? inputSeleccion.dataset.seleccion.split(',') : []; // Obtener las selecciones actuales y dividirlas por comas en un array
+  inputSeleccion.value = seleccionActual.join(', '); // Unir las selecciones en una sola cadena separada por comas y espacio
 }
+
 </script>
 
 </body>
