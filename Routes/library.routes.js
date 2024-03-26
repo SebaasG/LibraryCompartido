@@ -22,6 +22,7 @@ export const createBookRoutes = ({bookModel}) => {
     bookRouter.get('/index', BookController.getGender);
     bookRouter.get('/age', BookController.getAge);
     bookRouter.get('/author', BookController.getAuthor);
+    bookRouter.get('/user/:nameUser', BookController.getNameUser);
     bookRouter.get('/index/gen/:genName', BookController.getBookByGender);
     bookRouter.get('/name/:nameBook', BookController.getBookByName);
     bookRouter.get('/all', BookController.getBooks);

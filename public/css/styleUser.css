@@ -16,6 +16,34 @@
     ;
   
 }
+.optionTittleNav{
+    padding-bottom: 0% !important;
+    height: 100%;    
+} 
+
+.selectElement {
+    text-decoration: none; /* Eliminar subrayado por defecto */
+}
+
+.selectElement:after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 3px solid white; /* Color del subrayado */
+    margin-top: 10px; /* Ajusta la distancia entre el texto y el subrayado */
+    margin-bottom: 0%;
+}
+
+.optionTittleNav{
+    color: white !important;
+    padding-right:20px !important ;
+    ;
+}
+
+.optionTittleNav:hover{
+    color: #656565 !important;
+
+}
 
 .containernavUser{
     margin-left: 30px;
