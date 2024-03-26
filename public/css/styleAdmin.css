@@ -89,6 +89,19 @@ tr{
     display: flex;
     justify-content: center;
 }
+#select-gender{
+    background-color:transparent;
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    height: 70px;
+    width:  100%;
+}
+#select-gender > option{
+    background-color:transparent;
+    color: #fff;
+    font-size: 15px;
+}
 .modal-content{
     background-color: rgba(0,0,0,0.7);
     color: #fff;

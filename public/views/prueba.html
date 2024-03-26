@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selección Múltiple</title>
+  <meta charset="UTF-8">
+  <title>Selección de Géneros</title>
 </head>
 <body>
+  <select class="seleccion" id="seleccion" multiple>
+    <option value="1">Romance</option>
+    <option value="2">Misterio</option>
+    <option value="3">Suspenso</option>
+  </select>
+  
+  <input type="text" id="resultado">
+  <button type="button" id="btn">Enviar</button>
 
+  <script>
+    const select = document.getElementById("select-gender");
+    const input = document.getElementById("genderview");
+  
+    function actualizarInput() {
+      const optionSelect = Array.from(select.selectedOptions).map(option => option.value).join(", ");
+      input.value = optionSelect
+      console.log(optionSelect)
+      
+    }
 
-<h2>Selecciona Múltiples Opciones</h2>
-
-<input type="text" id="inputSeleccion">
-<button id="btnAgregar">Agregar</button>
-
-<script>
-const inputSeleccion = document.getElementById('inputSeleccion');
-const btnAgregar = document.getElementById('btnAgregar');
-
-btnAgregar.addEventListener('click', function() {
-  const valorInput = inputSeleccion.value.trim(); // Obtener el valor del input y eliminar espacios en blanco al inicio y al final
-
-  if (valorInput !== '') {
-    const seleccionActual = inputSeleccion.dataset.seleccion ? inputSeleccion.dataset.seleccion.split(',') : []; // Obtener las selecciones actuales y dividirlas por comas en un array
-    seleccionActual.push(valorInput); // Agregar el nuevo valor al array de selecciones
-    inputSeleccion.dataset.seleccion = seleccionActual.join(','); // Unir las selecciones en una sola cadena separada por comas
-    inputSeleccion.value = ''; // Limpiar el input
-    actualizarTextoSeleccion(); // Actualizar el texto visible en el input
-  }
-});
-
-function actualizarTextoSeleccion() {
-  const seleccionActual = inputSeleccion.dataset.seleccion ? inputSeleccion.dataset.seleccion.split(',') : []; // Obtener las selecciones actuales y dividirlas por comas en un array
-  inputSeleccion.value = seleccionActual.join(', '); // Unir las selecciones en una sola cadena separada por comas y espacio
-}
-
-</script>
-
+    // select.addEventListener("change", actualizarInput);
+    document.getElementById('btn').addEventListener('click', actualizarInput);
+  </script>
 </body>
 </html>
