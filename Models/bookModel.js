@@ -103,4 +103,14 @@ export class bookModel {
         }
     }
 
+    static async getNameUser(name){
+        try {
+            const [nameUser] = await connection.query('select nameUser from user where emailUser = ?',[name])
+            console.log(name)
+            return nameUser;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }

@@ -138,5 +138,20 @@ export class bookController {
             console.log(error)
         }
     }
+
+    getNameUser = async (req,res)=>{
+        try {
+            const name = req.params.nameUser;
+            console.log(name+'este es el name ')
+            const user  = await this.bookModel.getNameUser(name);
+            console.log(user)
+            if(name){
+                res.status(200).json(user)
+            }
+            res.status(404).json('no se encontró hubo un error ')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 

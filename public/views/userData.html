@@ -21,16 +21,16 @@
             <div class="containernavUser collapse navbar-collapse" style="margin-left: 18px" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="tittleNavUser nav-link" href="#">Reserve</a>
+                        <a class="optionTittleNav container nav-link selectElement" id="option1" onclick="selectUnderline(this) " href="#">History</a>
                     </li>
                     <li class="nav-item">
-                        <a class="tittleNavUser nav-link" href="#">History</a>
+                        <a class="optionTittleNav nav-link" id="option2" onclick="selectUnderline(this) "href="#">Reserve</a>
                     </li>
                     <li class="nav-item">
-                        <a class="tittleNavUser nav-link" href="#">Loans</a>
-                    </li>
+                        <a class="optionTittleNav nav-link" id="option3" onclick="selectUnderline(this)" href="#">Loans</a>
+                    </li>   
                     <li class="nav-item">
-                        <a class="tittleNavUser nav-link"  style="margin-right: 30px; " href="../views/booksIndex.html">Home</a>
+                        <a class="optionTittleNav nav-link"  id="btnbackData" style="margin-right: 30px; " href="../views/booksIndex.html">Home</a>
                     </li>
                 </ul>
             </div>
@@ -38,9 +38,8 @@
     </nav>
 
     </div>
-<divclass="d-flex"justify-content-center>
-<h1 >hola info que necesito </h1>
-</divclass=>
+<div class="d-flex justify-content-start"id= 'nameUser'>
+</div>
 </body>
 <script src="../js/userData.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
