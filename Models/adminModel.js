@@ -53,27 +53,40 @@ export class adminMdl {
     try {
       const { idBook, nameBook, yearbook, amountBook, postbook,
         sumBook, authbook, genBook, disableBook, } = body;
-
-      const sql = await connection.query(
-        "UPDATE book SET nameBook = ?, yearbook = ?,amountBook = ?,postbook=?, sumBook = ?, authbook = ?, genBook = ?, disableBook = ?   WHERE BIN_TO_UUID(idBook) = ?",
+  
+      const sql = await connection.execute(
+        `CALL updateBook(UUID_TO_BIN(?),?,?,?,?,?,?,?,?)`,
         [
-          nameBook,
-          yearbook,
-          amountBook,
-          postbook,
-          sumBook,
-          authbook,
-          genBook,
-          disableBook,
           idBook,
+          nameBook,
+          amountBook,
+          sumBook,
+          yearbook,
+          authbook,
+          postbook,
+          disableBook,
+          genBook
         ]
       );
       return sql;
     } catch (err) {
-      console.log("Hubo un error al actualizar los libros.");
+      console.log("Hubo un error al actualizar los libros:", err); // Imprime el error completo para identificar el problema
       throw err;
     }
   }
+  // Desactivar libros
+
+  static async disableBooks ({body}){
+    try{
+      const {idBook, disableBook} = body;
+      const sql = await connection.query('UPDATE book SET disableBook = ? WHERE BIN_TO_UUID(idBook) = ?', [ disableBook, idBook])
+      return sql;
+    }catch(err){
+      console.log('Hubo un error al desactivar el libro.');
+      throw err;    
+    }
+  }
+
   // Crear Libros
   static async createBooks({ body }) {
     const {
@@ -92,11 +105,11 @@ export class adminMdl {
     return sql;
   }
   //Buscar Libros
-  static async shearchBooks(filter, data) {
+  static async searchBooks(filter, data) {
     try {
       console.log("Si se esta mandando algo al modelo", filter, data);
       const [sql] = await connection.query(
-        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook, genBook,  yearbook, authbook, disableBook, postbook, disableBook sumBook FROM book WHERE " + filter + " LIKE ?", [`%${data}%`]
+        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook,  yearbook, authbook, disableBook, postbook, disableBook, sumBook FROM book WHERE " + filter + " LIKE ?", [`%${data}%`]
       );
       return sql;
     } catch (err) {

@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selección Múltiple</title>
+  <meta charset="UTF-8">
+  <title>Selección de Géneros</title>
 </head>
 <body>
+  <select class="seleccion" id="seleccion" multiple>
+    <option value="1">Romance</option>
+    <option value="2">Misterio</option>
+    <option value="3">Suspenso</option>
+  </select>
+  
+  <input type="text" id="resultado">
+  <button type="button" id="btn">Enviar</button>
 
-<h2>Selecciona Múltiples Valores</h2>
+  <script>
+    const select = document.getElementById("select-gender");
+    const input = document.getElementById("genderview");
+  
+    function actualizarInput() {
+      const optionSelect = Array.from(select.selectedOptions).map(option => option.value).join(", ");
+      input.value = optionSelect
+      console.log(optionSelect)
+      
+    }
 
-<select id="mySelect" multiple>
-  <option value="valor1">Opción 1</option>
-  <option value="valor2">Opción 2</option>
-  <option value="valor3">Opción 3</option>
-  <option value="valor4">Opción 4</option>
-</select>
-
-<button onclick="guardarSeleccion()">Guardar Selección</button>
-
-<script>
-function guardarSeleccion() {
-  var select = document.getElementById("mySelect");
-  var selectedValues = [];
-  for (var i = 0; i < select.selectedOptions.length; i++) {
-    selectedValues.push(select.selectedOptions[i].value);
-  }
-  console.log("Valores seleccionados:", selectedValues);
-  // Aquí puedes enviar los valores seleccionados a tu backend o hacer cualquier otra cosa con ellos
-}
-</script>
-
+    // select.addEventListener("change", actualizarInput);
+    document.getElementById('btn').addEventListener('click', actualizarInput);
+  </script>
 </body>
 </html>

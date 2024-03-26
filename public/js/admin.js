@@ -117,54 +117,38 @@ function renderData(data) {
     });
   }
 }
-
 // Funcion para traer los datos al modal
 async function getBooksById(idBook) {
   const response = await fetch(
     `http://localHost:3000/admin/books/getById/${idBook}`
   );
-  const book = await response.json();
+  const data = await response.json();
   try {
-    const {
-      nameBook,
-      amountBook,
-      yearbook,
-      authbook,
-      postbook,
-      genBook,
-      sumBook,
-    } = book[0]; // Destructurar la query.
+    const {nameBook,amountBook,yearbook,authbook,postbook,genBook,sumBook,} = data[0]; // Destructurar la query.
 
     //Elementos del html
     const modalTitle = document.getElementById("modal-title"); // llamar modelo.
     const modalBody = document.getElementById("modal-body");
 
     modalBody.innerHTML = "";
-
     //Creacion de elemenetos para agregar en el modal
-    const poster = document.createElement("div");
-    const year = document.createElement("div");
-    const amount = document.createElement("div");
-    const auth = document.createElement("div");
-    const gen = document.createElement("div");
-    const sumary = document.createElement("div");
-
+    const createDivText = (text)=>{
+      const div = document.createElement('div');
+      div.innerHTML = text;
+      return div;
+    }
     //Agregar el contenido a html
-    poster.innerHTML = `<img class="post-book" src="${postbook}" alt="${nameBook}" onerror="this.onerror=null; this.src=' https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">`;
-    year.innerHTML = `<p class="fs-4 m-0"><b>Age:</b> ${yearbook}</p>`;
-    amount.innerHTML = `<p class="fs-4 m-0"> <b>Amount:</b>${amountBook}</p>`;
-    auth.innerHTML = `<p class="fs-4 mt-4 m-0"> <b>Auth:</b>${authbook}</p>`;
-    gen.innerHTML = `<p class="fs-4 m-0"> <b>Gendre:</b>${genBook}</p>`;
-    sumary.innerHTML = `<p class="fs-4 m-0"> <b>Sumary:</b>${sumBook}</p>`;
+    const poster = createDivText(`<img class="post-book" src="${postbook}" alt="${nameBook}" onerror="this.onerror=null; this.src=' https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">`);
+    const year = createDivText(`<p class="fs-4 m-0"><b>Age:</b> ${yearbook}</p>`);
+    const amount = createDivText(`<p class="fs-4 m-0"> <b>Amount:</b>${amountBook}</p>`);
+    const auth = createDivText(`<p class="fs-4 mt-4 m-0"> <b>Auth:</b>${authbook}</p>`);
+    const gender = createDivText(`<p class="fs-4 m-0"> <b>Gender:</b>${genBook}</p>`);
+    const sumary = createDivText(`<p class="fs-4 m-0"> <b>Sumary:</b>${sumBook}</p>`);
 
     // Agregar al modal
     modalTitle.innerHTML = nameBook;
-    modalBody.appendChild(poster);
-    modalBody.appendChild(auth);
-    modalBody.appendChild(gen);
-    modalBody.appendChild(year);
-    modalBody.appendChild(amount);
-    modalBody.appendChild(sumary);
+    modalBody.append(poster,auth,gender, year, amount, sumary);
+
   } catch (err) {
     console.log("hubo un error a mostrar el libro por el id ", err);
   }
@@ -174,22 +158,12 @@ async function getBooksById(idBook) {
 
 async function updateBook(data) {
   try {
-    await fetch("http://localHost:3000/admin/books/update", {
+    await fetch("http://localHost:3000/admin/books/disableBook", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        idBook: data.idBook,
-        nameBook: data.nameBook,
-        yearbook: data.yearbook,
-        genBook: data.genBook,
-        amountBook: data.amountBook,
-        postbook: data.postbook,
-        authbook: data.authbook,
-        sumBook: data.sumBook,
-        disableBook: data.disableBook,
-      }),
+      body: JSON.stringify(data),
     }).then((res) => {
       console.log(res.status);
       window.location.reload();
@@ -199,15 +173,21 @@ async function updateBook(data) {
   }
 }
 async function updateBookDisable(data) {
+  const input = document.getElementById("genderview");
+  const select = document.getElementById("select-gender");
+  let genBook;
+  await actualizarInput();
   const nameBook = document.getElementById("inpt-nameBook").value;
   const authbook = document.getElementById("inpt-authBook").value;
   const yearbook = document.getElementById("inpt-yearBook").value;
-  const genBook = document.getElementById("inpt-genBook").value;
   const amountBook = document.getElementById("inpt-amountBook").value;
   const sumBook = document.getElementById("inpt-sumBook").value;
   const postbook = document.getElementById("inpt-postBook").value;
   const disableBook = document.getElementById("inpt-stateBook").value;
-
+  async function actualizarInput() {
+    genBook = Array.from(select.selectedOptions).map((option) => option.value).join(",").replace(/\s/g, "");
+    input.value = genBook;
+  }
   try {
     await fetch("http://localHost:3000/admin/books/update", {
       method: "PUT",
@@ -239,7 +219,6 @@ async function viewBook(data) {
     document.getElementById("inpt-nameBook").value = data.nameBook;
     document.getElementById("inpt-authBook").value = data.authbook;
     document.getElementById("inpt-yearBook").value = data.yearbook;
-    document.getElementById("inpt-genBook").value = data.genBook;
     document.getElementById("inpt-amountBook").value = data.amountBook;
     document.getElementById("inpt-sumBook").value = data.sumBook;
     document.getElementById("inpt-postBook").value = data.postbook;
@@ -248,7 +227,6 @@ async function viewBook(data) {
     //Mostrar en el Html
 
     btnSaveUpdate.addEventListener("click", async () => {
-      console.log("R PAPA");
       await updateBookDisable(data);
     });
   } catch (err) {
@@ -260,30 +238,28 @@ if (currentPage === "adminBooks") {
   // Search in Books Active
   const inputSearchActive = document.getElementById("inputSearchBookActive");
   inputSearchActive.addEventListener("input", async () => {
-    await searchBooksActive(1);
+    await searchBooksActive();
   });
 } else {
   // Search in Books Disable
   const inptSearchDisable = document.getElementById("inputSearchBookDisable");
   inptSearchDisable.addEventListener("input", async () => {
-    await searchBooksDisable(2);
+    await searchBooksDisable();
   });
 }
 
 // Function Search in Books Active.
 
-async function searchBooksActive(n) {
+async function searchBooksActive() {
   const searchBy = document.getElementById("searchBoook").value;
-  const inputSearchActive = document.getElementById(
-    "inputSearchBookActive"
-  ).value;
+  const inputSearchActive = document.getElementById("inputSearchBookActive").value;
   const tableBodyActive = document.getElementById("body-table_active");
   const notFound = document.getElementById("notFoundActive");
 
   tableBodyActive.innerHTML = "";
   if (inputSearchActive === "") {
-    await getBooks(1);
     window.location.reload();
+    await getBooks();
   } else {
     const response = await fetch(
       `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`
@@ -292,10 +268,10 @@ async function searchBooksActive(n) {
 
     if (inputSearchActive.length > 0 && data.length > 0) {
       console.log(true, data);
-      renderData(data, n);
+      const newData = {queryActive: data};
+      renderData(newData);
       notFound.innerHTML = "";
     } else {
-      console.log(false, data);
       const div = document.createElement("div");
       notFound.innerHTML = "";
       div.innerHTML = `   
@@ -308,7 +284,7 @@ async function searchBooksActive(n) {
 }
 //Function Search in Books Disable.
 
-async function searchBooksDisable(n) {
+async function searchBooksDisable() {
   const searchBy = document.getElementById("searchBoook").value;
   const inptSearchDisable = document.getElementById(
     "inputSearchBookDisable"
@@ -320,15 +296,15 @@ async function searchBooksDisable(n) {
 
   if (inptSearchDisable === "") {
     window.location.reload();
-    await getBooks(2);
+    await getBooks();
   } else {
     const response = await fetch(
       `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}`
     );
     const data = await response.json();
     if (inptSearchDisable.length > 0 && data.length > 0) {
-      console.log(true, data);
-      renderData(data, n);
+      const newData = {queryDisable: data};
+      renderData(newData);
       notFound.innerHTML = "";
     } else {
       console.log(false, data);

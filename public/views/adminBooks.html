@@ -122,14 +122,35 @@
                 <input type="text" name="inpt-authBook" id="inpt-authBook" placeholder="Author Book"><br>
                 <label for="inpt-yearBook" > Year:</label>
                 <input type="text" name="inpt-yearBook" id="inpt-yearBook" placeholder="Year Book"><br>
-                <label for="inpt-genBook" > Gender:</label>
-                <input type="text" name="inpt-genBook" id="inpt-genBook" placeholder="Gender Book"><br>
                 <label for="inpt-amountBook" > Amount:</label>
                 <input type="text" name="inpt-amountBook" id="inpt-amountBook" placeholder="Amount Book"><br>
                 <label for="inpt-sumBook" > Sumary:</label>
                 <textarea minlength="100" maxlength="800" name="inpt-sumBook" id="inpt-sumBook" placeholder="Sumary Book"></textarea><br> 
                 <label for="inpt-postBook">Poster:</label> 
                 <input type="text" name="inpt-postBook" id="inpt-postBook" placeholder="Direccion Poster">
+                <!--Select de gender-->
+                
+                <label for="inpt-genBook" > Gender: <br><b class="mt-4">(Utiliza ctrl + click para elegir varios generos)</b> </label>
+                <select name="inpt-genBook"  id="select-gender" multiple>
+                  <option value="1">Fantasía</option>
+                  <option value="2">Aventura</option>
+                  <option value="3">Ciencia ficción</option>
+                  <option value="4">Romance</option>
+                  <option value="5">Drama</option>
+                  <option value="6">Misterio</option>
+                  <option value="7">Suspenso</option>
+                  <option value="8">Thriller</option>
+                  <option value="9">Histórica</option>
+                  <option value="10">Biografía</option>
+                  <option value="11">Humor</option>
+                  <option value="12">Sátira</option>
+                  <option value="13">Infantil</option>
+                  <option value="14">Juvenil</option>
+                  <option value="15">Poesía</option>
+                  <option value="16">Ensayo</option>
+                </select>
+                <input type="hidden" placeholder="Genders:" id="genderview">
+
             </div>
             </div>
             <div class="modal-footer"></div>
