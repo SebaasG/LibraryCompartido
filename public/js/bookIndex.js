@@ -41,12 +41,12 @@ async function fetchFilter(url, containerId, dataProperty, buttonIdPrefix, local
         button.classList.add('buttonFilter');
         button.textContent = dato[dataProperty];
         button.addEventListener('click', function () {
-        
-            if(containerId === 'GenderFilter'){
+
+            if (containerId === 'GenderFilter') {
                 getByGender(dato[dataProperty]);
-            }else if(containerId === 'AuthFilter'){
+            } else if (containerId === 'AuthFilter') {
                 getByAuthor(dato[dataProperty]);
-            }else{
+            } else {
                 getByAge(dato[dataProperty]);
             }
             localStorage.setItem(localStorageKey, dato[dataProperty]);
@@ -173,6 +173,6 @@ searchButton.addEventListener('click    ', () => {
     SearchBook();
 })
 
-userBook.addEventListener('click', ()=>{
+userBook.addEventListener('click', () => {
     window.location.href = '../views/userData.html'
 })
