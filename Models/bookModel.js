@@ -52,7 +52,6 @@ export class bookModel {
 
     static async getBookByAuthor(criterio, clave) {
         try {
-            console.log(criterio + 'model');
             const [book] = await connection.query('SELECT BIN_TO_UUID(b.idBook) AS id, b.nameBook, b.amountBook, GROUP_CONCAT(g.nameGen SEPARATOR \', \') AS genBook, b.sumBook, b.yearbook, b.authbook, b.postbook, b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen WHERE ?? = ? GROUP BY b.idBook', [criterio, clave]);
             return book;
         } catch (err) {
@@ -60,7 +59,7 @@ export class bookModel {
             throw err;
         }
     }
-    
+
 
     static async getBookByGender(nameGen) {
         try {
@@ -92,7 +91,7 @@ export class bookModel {
         }
     }
 
-    
+
     static async getAuthor() {
         try {
             const [book] = await connection.query('select DISTINCT authbook from book order by authbook ASC ');
@@ -103,10 +102,9 @@ export class bookModel {
         }
     }
 
-    static async getNameUser(name){
+    static async getNameUser(name) {
         try {
-            const [nameUser] = await connection.query('select nameUser from user where emailUser = ?',[name])
-            console.log(name)
+            const [nameUser] = await connection.query('select nameUser from user where emailUser = ?', [name])
             return nameUser;
         } catch (error) {
             console.log(error)

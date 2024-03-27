@@ -59,7 +59,7 @@ async function login() {
                 }
             });
         } else {
-            localStorage.setItem('correo',emailUser);
+            localStorage.setItem('correo', emailUser);
             Swal.fire({
                 icon: 'success',
                 title: 'Inicio de Sesion con Exito.',

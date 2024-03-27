@@ -87,7 +87,6 @@ function renderData(data) {
       document
         .getElementById("btn-update" + count)
         .addEventListener("click", async () => {
-          console.log("Si se está habilitando");
           data.disableBook = 2;
           await updateBook(data);
         });
@@ -124,7 +123,7 @@ async function getBooksById(idBook) {
   );
   const data = await response.json();
   try {
-    const {nameBook,amountBook,yearbook,authbook,postbook,genBook,sumBook,} = data[0]; // Destructurar la query.
+    const { nameBook, amountBook, yearbook, authbook, postbook, genBook, sumBook, } = data[0]; // Destructurar la query.
 
     //Elementos del html
     const modalTitle = document.getElementById("modal-title"); // llamar modelo.
@@ -132,7 +131,7 @@ async function getBooksById(idBook) {
 
     modalBody.innerHTML = "";
     //Creacion de elemenetos para agregar en el modal
-    const createDivText = (text)=>{
+    const createDivText = (text) => {
       const div = document.createElement('div');
       div.innerHTML = text;
       return div;
@@ -147,7 +146,7 @@ async function getBooksById(idBook) {
 
     // Agregar al modal
     modalTitle.innerHTML = nameBook;
-    modalBody.append(poster,auth,gender, year, amount, sumary);
+    modalBody.append(poster, auth, gender, year, amount, sumary);
 
   } catch (err) {
     console.log("hubo un error a mostrar el libro por el id ", err);
@@ -165,7 +164,6 @@ async function updateBook(data) {
       },
       body: JSON.stringify(data),
     }).then((res) => {
-      console.log(res.status);
       window.location.reload();
     });
   } catch (err) {
@@ -267,8 +265,7 @@ async function searchBooksActive() {
     const data = await response.json();
 
     if (inputSearchActive.length > 0 && data.length > 0) {
-      console.log(true, data);
-      const newData = {queryActive: data};
+      const newData = { queryActive: data };
       renderData(newData);
       notFound.innerHTML = "";
     } else {
@@ -303,11 +300,10 @@ async function searchBooksDisable() {
     );
     const data = await response.json();
     if (inptSearchDisable.length > 0 && data.length > 0) {
-      const newData = {queryDisable: data};
+      const newData = { queryDisable: data };
       renderData(newData);
       notFound.innerHTML = "";
     } else {
-      console.log(false, data);
       const div = document.createElement("div");
       notFound.innerHTML = "";
       div.innerHTML = `   

@@ -7,15 +7,15 @@ import { adminCtrl } from '../Controllers/adminController.js';
 
 export const routerLibrary = () => {
     const libraryRouter = router();
-    const UserCtrl = new userCtrl({userMdl});
+    const UserCtrl = new userCtrl({ userMdl });
     libraryRouter.post('/register', UserCtrl.createUser);
     libraryRouter.post('/login', UserCtrl.verifyUser);
     return libraryRouter;
 }
 
-export const createBookRoutes = ({bookModel}) => {
+export const createBookRoutes = ({ bookModel }) => {
     const bookRouter = router();
-    const BookController = new bookController({bookModel});
+    const BookController = new bookController({ bookModel });
     bookRouter.get('/index/:id', BookController.getBooksById);
     bookRouter.get('/index/author/:authbook', BookController.getBookByAuthor);
     bookRouter.get('/index/year/:yearBook', BookController.getBookByAge);
@@ -30,9 +30,9 @@ export const createBookRoutes = ({bookModel}) => {
     return bookRouter;
 }
 
-export const adminBookRoute = ({adminMdl})=>{
+export const adminBookRoute = ({ adminMdl }) => {
     const adminRouter = router();
-    const adminController = new adminCtrl({adminMdl});
+    const adminController = new adminCtrl({ adminMdl });
     adminRouter.get('/books/:page', adminController.getBooks);
     adminRouter.get('/books/getById/:idBook', adminController.getBookById);
     adminRouter.put('/books/update', adminController.updateBooks);

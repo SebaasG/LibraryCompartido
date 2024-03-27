@@ -23,7 +23,7 @@ function selectUnderline(elemento) {
 
 async function getUser() {
     const emailUser = localStorage.getItem('correo');
-    const response = await fetch('http://localhost:3000/book/user/'+emailUser);
+    const response = await fetch('http://localhost:3000/book/user/' + emailUser);
     const datos = await response.json();
 
     const nameUser = document.getElementById('nameUser');

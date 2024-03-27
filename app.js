@@ -1,10 +1,10 @@
 import express, { json } from 'express';
-import {routerLibrary} from './Routes/library.routes.js';
+import { routerLibrary } from './Routes/library.routes.js';
 import { createBookRoutes } from './Routes/library.routes.js'
 import { bookModel } from './Models/bookModel.js'
 import { userMdl } from './Models/userModel.js';
 import bodyParser from 'body-parser';
-import path,{dirname} from 'path';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { adminBookRoute } from './Routes/library.routes.js';
 import { adminMdl } from './Models/adminModel.js';
@@ -21,12 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //ROUTES
-app.use('/library', routerLibrary({userMdl: userMdl}));
+app.use('/library', routerLibrary({ userMdl: userMdl }));
 app.use('/book', createBookRoutes({ bookModel: bookModel })); // Pasa el controlador en lugar del modelo
-app.use('/admin', adminBookRoute({adminMdl: adminMdl}))
+app.use('/admin', adminBookRoute({ adminMdl: adminMdl }))
 // Cargar la pagina en la ruta principal
 app.use('/library', express.static(path.join(__dirname, 'public')));
-app.get('/library',(req,res)=>{
+app.get('/library', (req, res) => {
     console.log(__dirname)
     const ruta = path.join(__dirname, 'public', 'index.html');
     console.log(ruta);

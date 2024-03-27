@@ -30,6 +30,9 @@ GET http://localHost:3000/book/index/gen/Fantasia
 GET http://localHost:3000/book/author
 
 ###
+GET http://localHost:3000/book/user/miguel.poveda1220@gmail.com
+
+###
 GET http://localHost:3000/book/index/author/Tapa blanda
 
 ###

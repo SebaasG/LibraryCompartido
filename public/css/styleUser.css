@@ -3,56 +3,63 @@
     margin: 0%;
 }
 
-.navBarUserData{
+.navBarUserData {
     font-family: cursive;
     background-color: black;
     width: 100%;
-    
+
 }
 
-.tittleNavUser{
+.tittleNavUser {
     color: white !important;
-    padding-right:20px !important ;
+    padding-right: 20px !important;
     ;
-  
+
 }
-.optionTittleNav{
+
+.optionTittleNav {
     padding-bottom: 0% !important;
-    height: 100%;    
-} 
+    height: 100%;
+}
 
 .selectElement {
-    text-decoration: none; /* Eliminar subrayado por defecto */
+    text-decoration: none;
+    /* Eliminar subrayado por defecto */
 }
 
 .selectElement:after {
     content: "";
     display: block;
     width: 100%;
-    border-bottom: 3px solid white; /* Color del subrayado */
-    margin-top: 10px; /* Ajusta la distancia entre el texto y el subrayado */
+    border-bottom: 3px solid white;
+    /* Color del subrayado */
+    margin-top: 10px;
+    /* Ajusta la distancia entre el texto y el subrayado */
     margin-bottom: 0%;
 }
 
-.optionTittleNav{
+.optionTittleNav {
     color: white !important;
-    padding-right:20px !important ;
+    padding-right: 20px !important;
     ;
 }
 
-.optionTittleNav:hover{
+.optionTittleNav:hover {
     color: #656565 !important;
 
 }
 
-.containernavUser{
+.containernavUser {
     margin-left: 30px;
 }
 
 
 .navbar-toggler-icon-custom {
-    background-image: url('../images/icons8-menú-48\ \(1\).png') !important; /* Cambia la ruta a la ubicación de tu icono personalizado */
+    background-image: url('../images/icons8-menú-48\ \(1\).png') !important;
+    /* Cambia la ruta a la ubicación de tu icono personalizado */
     background-size: cover;
-    width: 24px; /* Ajusta el ancho según tus necesidades */
-    height: 24px; /* Ajusta la altura según tus necesidades */
+    width: 24px;
+    /* Ajusta el ancho según tus necesidades */
+    height: 24px;
+    /* Ajusta la altura según tus necesidades */
 }

@@ -33,9 +33,9 @@ export class bookController {
         try {
             const id = req.params.id
             const book = await this.bookModel.getBookById(id);
-            if(book){
+            if (book) {
                 res.status(200).json(book);
-            }else{
+            } else {
                 res.status(404).json('hola')
             }
 
@@ -48,11 +48,11 @@ export class bookController {
     getBookByName = async (req, res) => {
         try {
             const name = req.params.nameBook
-    
+
             const book = await this.bookModel.getBookByName(name)
-            if(book){
+            if (book) {
                 res.status(200).json(book);
-            }else{
+            } else {
                 res.status(404).json("no se encontro el libro loco ");
             }
         } catch (error) {
@@ -61,12 +61,12 @@ export class bookController {
 
     getBookByAuthor = async (req, res) => {
         try {
-            const clave= 'authbook'
+            const clave = 'authbook'
             const name = req.params.authbook;
-            const book = await this.bookModel.getBookByAuthor(clave,name)
-            if(book){
+            const book = await this.bookModel.getBookByAuthor(clave, name)
+            if (book) {
                 res.status(200).json(book);
-            }else{
+            } else {
                 res.status(404).json("no se encontro el libro loco ");
             }
         } catch (error) {
@@ -76,12 +76,12 @@ export class bookController {
 
     getBookByAge = async (req, res) => {
         try {
-            const clave= 'yearBook'
+            const clave = 'yearBook'
             const name = req.params.yearBook;
-            const book = await this.bookModel.getBookByAuthor(clave,name)
-            if(book){
+            const book = await this.bookModel.getBookByAuthor(clave, name)
+            if (book) {
                 res.status(200).json(book);
-            }else{
+            } else {
                 res.status(404).json("no se encontro el libro loco ");
             }
         } catch (error) {
@@ -93,9 +93,9 @@ export class bookController {
         try {
             const name = req.params.genName;
             const book = await this.bookModel.getBookByGender(name)
-            if(book){
+            if (book) {
                 res.status(200).json(book);
-            }else{
+            } else {
                 res.status(404).json("no se encontro el libro loco ");
             }
         } catch (error) {
@@ -106,10 +106,11 @@ export class bookController {
     getGender = async (req, res) => {
         try {
             const gender = await this.bookModel.getGender()
-            if(gender){
+            if (gender) {
                 res.status(200).json(gender);
+            } else {
+                res.status(404).json("no se encontro el libro loco ");
             }
-            res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
             console.log(error)
         }
@@ -118,10 +119,11 @@ export class bookController {
     getAge = async (req, res) => {
         try {
             const Age = await this.bookModel.getAge()
-            if(Age){
+            if (Age) {
                 res.status(200).json(Age);
+            } else {
+                res.status(404).json("no se encontro el libro loco ");
             }
-            res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
             console.log(error)
         }
@@ -130,22 +132,21 @@ export class bookController {
     getAuthor = async (req, res) => {
         try {
             const author = await this.bookModel.getAuthor()
-            if(author){
+            if (author) {
                 res.status(200).json(author);
+            } else {
+                res.status(404).json("no se encontro el libro loco ");
             }
-            res.status(404).json("no se encontro el libro loco ");
         } catch (error) {
             console.log(error)
         }
     }
 
-    getNameUser = async (req,res)=>{
+    getNameUser = async (req, res) => {
         try {
             const name = req.params.nameUser;
-            console.log(name+'este es el name ')
-            const user  = await this.bookModel.getNameUser(name);
-            console.log(user)
-            if(name){
+            const user = await this.bookModel.getNameUser(name);
+            if (name) {
                 res.status(200).json(user)
             }
             res.status(404).json('no se encontró hubo un error ')

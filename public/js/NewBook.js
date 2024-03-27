@@ -1,12 +1,10 @@
 const newBookBtn = document.getElementById("btn-newBook");
 
 newBookBtn.addEventListener("click", async () => {
-  console.log("R");
   await createBook();
 });
 
 async function createBook() {
-  console.log("AÑAÑAi");
   try {
     const input = document.getElementById("genderview");
     const select = document.getElementById("select-gender");
@@ -24,24 +22,24 @@ async function createBook() {
       input.value = genBook;
     }
 
-    await fetch('http://localhost:3000/admin/books/create',{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-       body: JSON.stringify({
-       nameBook: nameBook,
-       authbook:authbook,
-       yearbook:yearbook,
-       genBook:genBook,
-       amountBook:amountBook,
-       sumBook:sumBook,
-       postbook:postbook
-       })
+    await fetch('http://localhost:3000/admin/books/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nameBook: nameBook,
+        authbook: authbook,
+        yearbook: yearbook,
+        genBook: genBook,
+        amountBook: amountBook,
+        sumBook: sumBook,
+        postbook: postbook
+      })
     }).then(res => {
-        document.location.reload()
-    }).catch(err =>{
-        console.log(`Hubo un error ${err}`)
+      document.location.reload()
+    }).catch(err => {
+      console.log(`Hubo un error ${err}`)
     })
   } catch (err) {
     console.log(err);
