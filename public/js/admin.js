@@ -223,6 +223,7 @@ async function viewBook(data) {
     document.getElementById("inpt-sumBook").value = data.sumBook;
     document.getElementById("inpt-postBook").value = data.postbook;
     document.getElementById("inpt-stateBook").value = data.disableBook;
+    
     const btnSaveUpdate = document.getElementById("btn-save_update");
     //Mostrar en el Html
 
@@ -262,7 +263,7 @@ async function searchBooksActive() {
     await getBooks();
   } else {
     const response = await fetch(
-      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}`
+      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}/1`
     );
     const data = await response.json();
 
@@ -299,7 +300,7 @@ async function searchBooksDisable() {
     await getBooks();
   } else {
     const response = await fetch(
-      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}`
+      `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inptSearchDisable}/2`
     );
     const data = await response.json();
     if (inptSearchDisable.length > 0 && data.length > 0) {

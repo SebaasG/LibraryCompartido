@@ -6,7 +6,6 @@ newBookBtn.addEventListener("click", async () => {
 });
 
 async function createBook() {
-  console.log("AÑAÑAi");
   try {
     const input = document.getElementById("genderview");
     const select = document.getElementById("select-gender");

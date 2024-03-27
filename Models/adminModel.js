@@ -21,7 +21,7 @@ export class adminMdl {
         b.postbook,b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen where b.disableBook=1 GROUP BY b.idBook LIMIT 10 OFFSET ? `,[offSetValue])
         
         const [sqlDisable] = await connection.query(
-          `SELECT BIN_TO_UUID(b.idBook) AS idBook, b.nameBook,b.amountBook,GROUP_CONCAT(g.nameGen SEPARATOR ', ') AS genBook,b.sumBook,b.yearbook,b.authbook,
+          `SELECT BIN_TO_UUID(b.idBook) AS idBook, b.nameBook,b.amountBook,GROUP_CONCAT(g.nameGen SEPARATOR ',') AS genBook,b.sumBook,b.yearbook,b.authbook,
           b.postbook,b.disableBook FROM book b JOIN genderBook gb ON b.idBook = gb.idBook JOIN gender g ON gb.idGen = g.idGen where b.disableBook=2 GROUP BY b.idBook LIMIT 10 OFFSET ? `,[offSetValue])
           
 
@@ -105,11 +105,10 @@ export class adminMdl {
     return sql;
   }
   //Buscar Libros
-  static async searchBooks(filter, data) {
+  static async searchBooks(filter, data, state) {
     try {
-      console.log("Si se esta mandando algo al modelo", filter, data);
       const [sql] = await connection.query(
-        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook,  yearbook, authbook, disableBook, postbook, disableBook, sumBook FROM book WHERE " + filter + " LIKE ?", [`%${data}%`]
+        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook,  yearbook, authbook, disableBook, postbook, sumBook FROM book WHERE " + filter + " LIKE ? AND disableBook = ? LIMIT 10 OFFSET 0", [`%${data}%`,state]
       );
       return sql;
     } catch (err) {

@@ -37,6 +37,6 @@ export const adminBookRoute = ({adminMdl})=>{
     adminRouter.put('/books/update', adminController.updateBooks);
     adminRouter.put('/books/disableBook', adminController.disableBook);
     adminRouter.post('/books/create', adminController.createBooks);
-    adminRouter.get('/books/shearchBook/:filter/:data', adminController.shearchBooks);
+    adminRouter.get('/books/shearchBook/:filter/:data/:state', adminController.shearchBooks);
     return adminRouter;
 }
