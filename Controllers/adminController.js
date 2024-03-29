@@ -64,9 +64,10 @@ export class adminCtrl {
     //Shearch
     shearchBooks = async (req,res)=>{
             try{
-                const {filter, data} = req.params;
+                const {filter, data, state} = req.params;
+                console.log(req.params);
                 // console.log(`El filtro es: ${filter}, los datos son: ${data}`);
-                const result = await this.adminMdl.searchBooks(filter, data);
+                const result = await this.adminMdl.searchBooks(filter, data,state);
                 console.log(result)
                 res.status(200).json(result);
             }catch(err){

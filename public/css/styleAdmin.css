@@ -3,6 +3,7 @@
     margin: 0px;
 
 }
+
 .header{
     
     background-color: #000;
@@ -196,4 +197,24 @@ tr{
 #notFoundActive>div > h2, #notFoundDisable > div>h2{
     margin: 9px auto;
     text-align: center;
+}
+.container-paginacion{
+    position: fixed;
+        bottom: -7%; 
+        padding: 10px 20px;
+        left: 0;
+        right: 0;
+      
+}
+
+.container-paginacion > ul > li > a{
+    background-color: #000;
+    color:#fff;
+    font-family: cursive;
+    font-size: 16px;
+    text-align: center;
+}
+
+.container-paginacion > ul > li > a:hover{
+    color: #000;
 }

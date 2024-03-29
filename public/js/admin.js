@@ -264,7 +264,7 @@ async function searchBooksActive() {
       `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}/1`
     );
     const data = await response.json();
-
+      console.log(data);
     if (inputSearchActive.length > 0 && data.length > 0) {
       const newData = { queryActive: data };
       renderData(newData);
