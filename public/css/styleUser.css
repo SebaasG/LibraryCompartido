@@ -65,5 +65,10 @@
 }
 
 .holaTablaUser{
-    margin: 100px;
+    margin: 0% !important;
+    padding: 0% !important;
+}
+
+.nameUserindex{
+    margin: 25px;
 }

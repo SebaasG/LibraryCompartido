@@ -30,7 +30,7 @@ async function getUser() {
 
     nameUser.innerHTML = '';
 
-    const nameContainer = document.createElement('h3');
+    const nameContainer = document.createElement('h5');
     nameContainer.innerHTML = `Bienvenid@ ${datos[0].nameUser}`;
 
     nameUser.appendChild(nameContainer);
