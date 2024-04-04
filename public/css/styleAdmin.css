@@ -198,14 +198,12 @@ tr{
     margin: 9px auto;
     text-align: center;
 }
-.container-paginacion{
-    position: fixed;
-        bottom: -7%; 
-        padding: 10px 20px;
+/* .container-paginacion{
+    position: relative;
+        bottom: 0; 
         left: 0;
         right: 0;
-      
-}
+} */
 
 .container-paginacion > ul > li > a{
     background-color: #000;

@@ -10,12 +10,13 @@ async function getBooks(page) {
   const response = await fetch("http://localHost:3000/admin/books/" + page);
   const data = await response.json();
   //Desctructurar respuesta
-  const { tabsActive, tabsDisable } = data;
-  renderData(data);
+  const { tabsActive, tabsDisable, queryActive, queryDisable } = data;
 
-  if (currentPage === 'adminBooks') {
+  if (currentPage === "adminBooks") {
+    renderData(queryActive);
     await pagination(tabsActive);
   } else {
+    renderData(queryDisable);
     await pagination(tabsDisable);
   }
 }
@@ -53,69 +54,67 @@ async function pagination(tabs) {
 
 //Contenido de la tabla y funcionalidades
 function renderData(data) {
-  const tableBodyActive = document.getElementById("body-table_active");
-  const tableBodyDisable = document.getElementById("body-table_disable");
-  const { queryActive, queryDisable } = data;
+  let tdButtons, tableBody;
 
-  if (currentPage === "adminBooks") {
-    queryActive.forEach(data => {
-      const tr = document.createElement("tr");
-      count++;
+  data.forEach((d) => {
+    const tr = document.createElement("tr");
+    count++;
 
-      tr.innerHTML = `
-      <td>${data.nameBook}</td>
-      <td>${data.yearbook}</td>
-      <td>${data.authbook}</td>
-      <td>${data.amountBook}</td>
-      <td class="container-td_buttons">
-      
+    if (currentPage === "adminBooks") {
+      tableBody = document.getElementById("body-table_active");
+
+      tdButtons = ` <td class="container-td_buttons">
       <button title="View" id="idBook${count}" data-bs-toggle="modal" class="btn-td1"  data-bs-target="#modal-table">
       <img src="../images/icons8-visible-30.png" alt="View">
       </button>
       <button title="Disabled" id="btn-update${count}" class="btn-td2">
       <img src="../images/icons8-x-30.png" alt="Disabled">
       </button>
-      </td>
-      `;
-      tableBodyActive.appendChild(tr);
-      document
-        .querySelector("#idBook" + count)
-        .addEventListener("click", async () => {
-          localStorage.setItem("idBook", data.idBook);
-          await getBooksById(data.idBook);
-        });
-      document
-        .getElementById("btn-update" + count)
-        .addEventListener("click", async () => {
-          data.disableBook = 2;
-          await updateBook(data);
-        });
-    });
-  } else {
-    queryDisable.forEach((data) => {
-      const tr = document.createElement("tr");
-      count++;
-      tr.innerHTML = `
-        <td>${data.nameBook}</td>
-        <td>${data.yearbook}</td>
-        <td>${data.authbook}</td>
-        <td>${data.amountBook}</td>
-        <td class="container-td_buttons">
+      </td>`;
+    } else {
+      tableBody = document.getElementById("body-table_disable");
+
+      tdButtons = `
+      <td class="container-td_buttons">
             <button title="Edit/Update" id="idBook${count}" class="btn-td1"  data-bs-toggle="modal"  data-bs-target="#modal-update_book">
                 <img src="../images/icons8-pluma-30.png" alt="View">
             </button>
-        </td>
-    `;
-      tableBodyDisable.appendChild(tr);
-      document
-        .querySelector("#idBook" + count)
-        .addEventListener("click", async () => {
-          localStorage.setItem("idBook", data.idBook);
-          await viewBook(data);
-        });
-    });
-  }
+        </td>`;
+    }
+
+    tr.innerHTML = `
+      <td>${d.nameBook}</td>
+      <td>${d.yearbook}</td>
+      <td>${d.authbook}</td>
+      <td>${d.amountBook}</td>
+     ${tdButtons}
+      `;
+    tableBody.appendChild(tr);
+
+    // if (currentPage === "adminActive") {
+    //   document
+    //     .querySelector("#idBook" + count)
+    //     .addEventListener("click", async () => {
+    //       localStorage.setItem("idBook", d.idBook);
+    //       await getBooksById(d.idBook);
+    //     });
+    //   document
+    //     .getElementById("btn-update" + count)
+    //     .addEventListener("click", async () => {
+    //       d.disableBook = 2;
+    //       await updateBook(d);
+    //     });
+    // } else {
+    //   document
+    //     .querySelector("#idBook" + count)
+    //     .addEventListener("click", async () => {
+    //       localStorage.setItem("idBook", d.idBook);
+    //       await viewBook(d);
+    //     });
+    // }
+  });
 }
+
 // Funcion para traer los datos al modal
 async function getBooksById(idBook) {
   const response = await fetch(
@@ -123,7 +122,15 @@ async function getBooksById(idBook) {
   );
   const data = await response.json();
   try {
-    const { nameBook, amountBook, yearbook, authbook, postbook, genBook, sumBook, } = data[0]; // Destructurar la query.
+    const {
+      nameBook,
+      amountBook,
+      yearbook,
+      authbook,
+      postbook,
+      genBook,
+      sumBook,
+    } = data[0]; // Destructurar la query.
 
     //Elementos del html
     const modalTitle = document.getElementById("modal-title"); // llamar modelo.
@@ -132,22 +139,33 @@ async function getBooksById(idBook) {
     modalBody.innerHTML = "";
     //Creacion de elemenetos para agregar en el modal
     const createDivText = (text) => {
-      const div = document.createElement('div');
+      const div = document.createElement("div");
       div.innerHTML = text;
       return div;
-    }
+    };
     //Agregar el contenido a html
-    const poster = createDivText(`<img class="post-book" src="${postbook}" alt="${nameBook}" onerror="this.onerror=null; this.src=' https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">`);
-    const year = createDivText(`<p class="fs-4 m-0"><b>Age:</b> ${yearbook}</p>`);
-    const amount = createDivText(`<p class="fs-4 m-0"> <b>Amount:</b>${amountBook}</p>`);
-    const auth = createDivText(`<p class="fs-4 mt-4 m-0"> <b>Auth:</b>${authbook}</p>`);
-    const gender = createDivText(`<p class="fs-4 m-0"> <b>Gender:</b>${genBook}</p>`);
-    const sumary = createDivText(`<p class="fs-4 m-0"> <b>Sumary:</b>${sumBook}</p>`);
+    const poster = createDivText(
+      `<img class="post-book" src="${postbook}" alt="${nameBook}" onerror="this.onerror=null; this.src=' https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg';">`
+    );
+    const year = createDivText(
+      `<p class="fs-4 m-0"><b>Age:</b> ${yearbook}</p>`
+    );
+    const amount = createDivText(
+      `<p class="fs-4 m-0"> <b>Amount:</b>${amountBook}</p>`
+    );
+    const auth = createDivText(
+      `<p class="fs-4 mt-4 m-0"> <b>Auth:</b>${authbook}</p>`
+    );
+    const gender = createDivText(
+      `<p class="fs-4 m-0"> <b>Gender:</b>${genBook}</p>`
+    );
+    const sumary = createDivText(
+      `<p class="fs-4 m-0"> <b>Sumary:</b>${sumBook}</p>`
+    );
 
     // Agregar al modal
     modalTitle.innerHTML = nameBook;
     modalBody.append(poster, auth, gender, year, amount, sumary);
-
   } catch (err) {
     console.log("hubo un error a mostrar el libro por el id ", err);
   }
@@ -183,7 +201,10 @@ async function updateBookDisable(data) {
   const postbook = document.getElementById("inpt-postBook").value;
   const disableBook = document.getElementById("inpt-stateBook").value;
   async function actualizarInput() {
-    genBook = Array.from(select.selectedOptions).map((option) => option.value).join(",").replace(/\s/g, "");
+    genBook = Array.from(select.selectedOptions)
+      .map((option) => option.value)
+      .join(",")
+      .replace(/\s/g, "");
     input.value = genBook;
   }
   try {
@@ -221,7 +242,7 @@ async function viewBook(data) {
     document.getElementById("inpt-sumBook").value = data.sumBook;
     document.getElementById("inpt-postBook").value = data.postbook;
     document.getElementById("inpt-stateBook").value = data.disableBook;
-    
+
     const btnSaveUpdate = document.getElementById("btn-save_update");
     //Mostrar en el Html
 
@@ -251,7 +272,9 @@ if (currentPage === "adminBooks") {
 
 async function searchBooksActive() {
   const searchBy = document.getElementById("searchBoook").value;
-  const inputSearchActive = document.getElementById("inputSearchBookActive").value;
+  const inputSearchActive = document.getElementById(
+    "inputSearchBookActive"
+  ).value;
   const tableBodyActive = document.getElementById("body-table_active");
   const notFound = document.getElementById("notFoundActive");
 
@@ -264,7 +287,7 @@ async function searchBooksActive() {
       `http://localHost:3000/admin/books/shearchBook/${searchBy}/${inputSearchActive}/1`
     );
     const data = await response.json();
-      console.log(data);
+    console.log(data);
     if (inputSearchActive.length > 0 && data.length > 0) {
       const newData = { queryActive: data };
       renderData(newData);
