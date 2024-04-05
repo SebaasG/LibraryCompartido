@@ -56,7 +56,7 @@ async function pagination(tabs) {
 function renderData(data) {
   let tdButtons, tableBody;
 
-  data.forEach((d) => {
+  data.forEach((data) => {
     const tr = document.createElement("tr");
     count++;
 
@@ -83,35 +83,35 @@ function renderData(data) {
     }
 
     tr.innerHTML = `
-      <td>${d.nameBook}</td>
-      <td>${d.yearbook}</td>
-      <td>${d.authbook}</td>
-      <td>${d.amountBook}</td>
+      <td>${data.nameBook}</td>
+      <td>${data.yearbook}</td>
+      <td>${data.authbook}</td>
+      <td>${data.amountBook}</td>
      ${tdButtons}
       `;
     tableBody.appendChild(tr);
 
-    // if (currentPage === "adminActive") {
-    //   document
-    //     .querySelector("#idBook" + count)
-    //     .addEventListener("click", async () => {
-    //       localStorage.setItem("idBook", d.idBook);
-    //       await getBooksById(d.idBook);
-    //     });
-    //   document
-    //     .getElementById("btn-update" + count)
-    //     .addEventListener("click", async () => {
-    //       d.disableBook = 2;
-    //       await updateBook(d);
-    //     });
-    // } else {
-    //   document
-    //     .querySelector("#idBook" + count)
-    //     .addEventListener("click", async () => {
-    //       localStorage.setItem("idBook", d.idBook);
-    //       await viewBook(d);
-    //     });
-    // }
+    if (currentPage === "adminBooks") {
+      document
+        .querySelector("#idBook" + count)
+        .addEventListener("click", async () => {
+          localStorage.setItem("idBook", data.idBook);
+          await getBooksById(data.idBook);
+        });
+      document
+        .getElementById("btn-update" + count)
+        .addEventListener("click", async () => {
+          data.disableBook = 2;
+          await updateBook(data);
+        });
+    } else {
+      document
+        .querySelector("#idBook" + count)
+        .addEventListener("click", async () => {
+          localStorage.setItem("idBook", data.idBook);
+          await viewBook(data);
+        });
+    }
   });
 }
 
