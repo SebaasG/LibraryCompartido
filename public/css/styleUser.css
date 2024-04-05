@@ -2,9 +2,11 @@
     padding: 0% !important;
     margin: 0%;
 }
-
-.navBarUserData {
+*{
     font-family: cursive;
+}
+.navBarUserData {
+    
     background-color: black;
     width: 100%;
 
@@ -69,6 +71,21 @@
     padding: 0% !important;
 }
 
-.nameUserindex{
-    margin: 25px;
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 992px) {
+    .nameUserindex, .secondtittleData {
+        width: 100%; 
+        font-size:small ;
+    }
 }
+
+/* Estilos para pantallas grandes */
+@media (min-width: 992px) {
+    .nameUserindex, .secondtittleData{
+        width: 35%; /* El primer elemento ocupa el 35% del ancho disponible */
+        max-width: 100%; /* Para asegurarse de que no se extienda más allá del 35% */
+    }
+
+}
+

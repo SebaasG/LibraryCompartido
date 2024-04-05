@@ -30,8 +30,8 @@ async function getUser() {
 
     nameUser.innerHTML = '';
 
-    const nameContainer = document.createElement('h5');
-    nameContainer.innerHTML = `Bienvenid@ ${datos[0].nameUser}`;
+    const nameContainer = document.createElement('p');
+    nameContainer.innerHTML = `<strong>Bienvenid@ ${datos[0].nameUser}</strong>`;
 
     nameUser.appendChild(nameContainer);
 }
