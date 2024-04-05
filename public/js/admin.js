@@ -9,20 +9,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function getBooks(page) {
   const response = await fetch("http://localHost:3000/admin/books/" + page);
   const data = await response.json();
+  let tableBody, tabs;
   //Desctructurar respuesta
   const { tabsActive, tabsDisable, queryActive, queryDisable } = data;
-
+  
   if (currentPage === "adminBooks") {
+    tableBody = document.querySelector('#body-table_active');
+    tabs = tabsActive
     renderData(queryActive);
-    await pagination(tabsActive);
+    await pagination(tabs, tableBody);
   } else {
+    tableBody = document.querySelector('#body-table_disable');
+    tabs = tabsDisable
     renderData(queryDisable);
-    await pagination(tabsDisable);
+    await pagination(tabs, tableBody);
   }
 }
 
 // Funcion donde se va crear la paginacion
-async function pagination(tabs) {
+async function pagination(tabs, tableBody) {
   if (!Number.isInteger(tabs)) {
     tabs = Math.ceil(tabs);
   }
@@ -37,17 +42,10 @@ async function pagination(tabs) {
     li.innerHTML = ` <a  id ="page${i}"  class="page-link" >${i}</a> `;
 
     container.appendChild(li);
-    const page = document.getElementById("page" + i);
+    const page = document.querySelector("#page" + i);
     page.addEventListener("click", async () => {
-      if (currentPage === "adminBooks") {
-        const tableBodyActive = document.getElementById("body-table_active");
-        tableBodyActive.innerHTML = "";
+        tableBody.innerHTML = "";
         await getBooks(i);
-      } else {
-        const table_disable = document.getElementById("body-table_disable");
-        table_disable.innerHTML = "";
-        await getBooks(i);
-      }
     });
   }
 }
