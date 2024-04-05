@@ -15,30 +15,16 @@
   <!-- Navbar -->
   <header class="header">
     <nav class="navbar">
-      <div class="container-fluid">
+      <div class="container-nav container-fluid">
 
-        <h3 class="navbar-brand mb-0 fs-4">Library</h3>
+        <h3 class="navbar-brand mb-0 " id="text-h3">Library</h3>
 
         <div class="container-vinculo">
 
-          <a href="../views/adminBooks.html" class="vinculo-a">Active Books</a>
 
-        </div>
-
-        <div class="justify-content-end">
-          <label for="shearchBoook">Search By:</label>
-          <select id="searchBoook"" name=" searchBoook" class="searchBoook"">
-              <option value=" nameBook">Name Book</option>
-            <option value="yearbook">Year Book</option>
-            <option value="authbook">Author</option>
-          </select>
-          <input style="width: 200px; height: 37px; " class="inputSearchBook p-1 mt-2" type="search"
-            placeholder="Search Book" aria-label="Search" id="inputSearchBookDisable" />
-          <button class="btn btn-dark mb-1" type="submit">Search</button>
-          <a class="navbar-brand" href="#" type="button"><img width="25" height="25" class="img"
-              src="..//images/icons8-usuario-40.png" alt="Profile" /></a>
-        </div>
-      </div>
+       <button>
+        <a href="../views/adminBooks.html" class="vinculo-a">Active Books</a>
+       </button>
     </nav>
   </header>
 
@@ -47,12 +33,20 @@
       <h2 class="mb-0 mt-3 m-0">
         <img width="50" height="40" src="../images/icons8-libro.gif" alt="gif" />Disabled Books
       </h2>
-      <div class="d-flex justify-content-end">
-      </div>
+      
     </div>
-
   </div>
 
+
+  <div class="container-search">
+    <select id="searchBoook"" name=" searchBoook" class="searchBoook"">
+        <option value=" nameBook">Name Book</option>
+      <option value="yearbook">Year Book</option>
+      <option value="authbook">Author</option>
+    </select>
+    <input placeholder="Search Book" aria-label="Search" id="inputSearchBookDisable" />
+    <button  type="submit">Search</button>
+  </div>
   <!-- Tabla para los books -->
   <div class="table-responsive">
   <div style="margin-top: 0px; " class="container">

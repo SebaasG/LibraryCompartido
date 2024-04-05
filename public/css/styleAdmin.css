@@ -5,7 +5,6 @@
 }
 
 .header{
-    
     background-color: #000;
     color: #fff;
     font-family: cursive;
@@ -16,17 +15,12 @@
     margin: 5px;
     
 }
-/* .navbar-brand>img{
-    width: 35px;
-    height: 35px;
-} */
 .navbar-brand:hover{
     color: rgb(187, 184, 184);
 }
-.table>thead:not(caption)>*>*{
-    background-color: #000;
-    border-radius: 5px;
-    font-family: cursive;
+.container-vinculo>button{
+    background-color: transparent;
+    border: none;
 }
 .container-vinculo{
     justify-content: center;
@@ -38,17 +32,22 @@
     border-bottom: 1px solid #fff;
     margin:5px ;
     font-size: 17px;
-
+    
 }
 .vinculo-a:hover{
     color: #f5cbcb;
     border-bottom: #f5cbcb solid 1px ;
-
+    
+}
+.table>thead:not(caption)>*>*{
+    background-color: #000;
+    border-radius: 5px;
+    font-family: cursive;
 }
 .btn-dark{
     background-color: #8f8b8b;
     color: #fff;
-
+    
 }
 .container{
     font-family:cursive;
@@ -63,7 +62,7 @@
     background-color:transparent;
     border-radius: 5px;
     padding:1px;
-
+    
 }
 tr{
     height: 53px;
@@ -80,7 +79,6 @@ tr{
     height: 30px;
     
 }
-
 .post-book{
     width: 250px;
     height: 350px;
@@ -168,16 +166,47 @@ tr{
 }
 
 /*Buscador*/
-.searchBoook{
+.container-search{
     background-color: transparent;
-    border:none;
-    border-bottom: 1px #fff solid;
+    display:flex;
+justify-content: center;
+    margin: 0;
+    border-radius: 5px;
+    color: #000;
+    margin: 5px auto;
+}
+.container-search>button{
+    background-color: #000;
     color: #fff;
-    padding: 7px;
+    padding: 4px;
+    height: 40px;
+    width: 80px;
+    margin: 5px ;
+    border-radius: 5px;
+}
+.container-search>button:hover{
+    background-color: rgb(19, 18, 18);
+    color: #8f8b8b;
+}
+
+.container-search>input{
+    height: 40px;
+    padding: 4px;
+    margin: 5px 0px;
+    width: auto;
+}
+.searchBoook{
+    width:auto;
+        height: 40px;
+    border-radius: 5px;
+    border:none;
+    background-color: #000;
+    color: #fff;
+    padding: 4px;
     margin: 5px;
 }
 .searchBoook > option{
-    background-color: rgba(0,0,0,0.7);
+    background-color: #333;
     color: #fff;
 }
 
@@ -215,4 +244,51 @@ tr{
 
 .container-paginacion > ul > li > a:hover{
     color: #000;
+}
+
+@media screen and (max-width:800px) {
+    .container-nav{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    #text-h3{
+        border-bottom: 1px solid #f5cbcb;
+        font-size: 35px;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .container-vinculo{
+        flex-direction: column;
+        display: flex;
+        padding: 0;
+        width: 100%;   
+        margin:15px 0;     
+    }
+ 
+    .container-vinculo>button{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    .container-vinculo>button>a{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: block;
+        justify-content: center;
+        border: none;
+        font-size: 17px;
+    }   
+    .container-vinculo>button>a:hover{
+        border: 0;
+    }
+}
+@media screen and (max-width:1200px) {
+    .container-search{
+        display: flex;
+        justify-content: center;
+    }
 }
