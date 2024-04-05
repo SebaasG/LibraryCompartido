@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/historyStyle.css">
+    <title>History</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+          <div class="container-nav container-fluid">
+    
+            <h3 class="navbar-brand mb-0 " id="text-h3">Library</h3>
+    
+            <div class="container-vinculo">
+    
+    
+           <button>
+            <a href="../views/adminBooks.html" class="vinculo-a">Home</a>
+           </button>
+        </nav>
+      </header>
+
+    <div class="container">
+        <div class="container-fluid">
+          <h2 class="mb-0 mt-3 m-0">
+            <img width="50" height="40" src="../images/icons8-libro.gif" alt="gif" /> Hystory and Transactions
+          </h2>
+          <div class="d-flex justify-content-end">
+          </div>
+        </div>
+    
+      </div>
+    
+            <!--Shearch Button-->
+      <div class="container-search">
+        <select id="searchTransac" name="searchTransac" class="searchTransac">
+          <option value="new book">New Book</option>
+          <option value="update book">Update Book</option>
+        </select>
+        <input type="search"
+          placeholder="Search " aria-label="Search" id="inputSearch" />
+    
+        <button  type="submit">Search</button>
+      </div>
+    
+      <!-- Tabla para los books -->
+      <div class="table-responsive">
+      <div style="margin-top: 0px; " class="container">
+        <table class="table-transac table table-dark table-bordered border-light m-2">
+          <thead>
+            <tr>
+    
+              <th scope="col">Transaction</th>
+              <th scope="col">Name User</th>
+              <th scope="col">Name Book</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Acctions</th>
+    
+            </tr>
+          </thead>
+          <tbody id="body-table"></tbody>
+        </table>
+      </div>
+      </div>
+
+
+
+</body>
+</html>

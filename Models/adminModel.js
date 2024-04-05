@@ -119,3 +119,14 @@ export class adminMdl {
 
 
 }
+
+
+function ada (n, callback){
+  n
+}
+
+
+const select= ada(1,(err,info)=>{
+
+  console.log(info)
+})
