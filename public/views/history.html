@@ -36,7 +36,7 @@
     
             <!--Shearch Button-->
       <div class="container-search">
-        <select id="searchTransac" name="searchTransac" class="searchTransac">
+        <select id="selectTransac" name="searchTransac" class="selectTransac">
           <option value="new book">New Book</option>
           <option value="update book">Update Book</option>
         </select>
@@ -54,8 +54,11 @@
             <tr>
     
               <th scope="col">Transaction</th>
+              <th scope="col">User Name</th>
               <th scope="col">Name Book</th>
               <th scope="col">Date</th>
+              <th scope="col">Hour</th>
+
     
             </tr>
           </thead>
@@ -63,7 +66,16 @@
         </table>
       </div>
       </div>
-
+     
+      <nav  aria-label="Page navigation example " class="container-paginacion d-flex justify-content-center m-5">
+       
+        <ul class="pagination" id="pagination" >
+  
+        </ul>
+       
+          
+      </nav> 
+    
 <script src="../js/history.js"></script>
 
 </body>
