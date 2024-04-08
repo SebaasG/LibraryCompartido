@@ -1,4 +1,5 @@
 import {createConnection} from '../Databases/config.js';
+import { filterTransac } from '../public/js/utils.js';
 
 const connection = await createConnection();
 
@@ -13,11 +14,16 @@ export class historyMDL{
             return {data: sql ,  tabs: count};
 
         }catch(e){
-            console.log(e);
+            console.log$(`Error en el modelo getTransac ${e}`);
             throw new Error;
         }
     }
-    static async searchTransac(filterTransac, input){
-        
+    static async searchTransac(type, filter, input){
+        try{
+            const [sql] = await filterTransac(type, filter, input, connection)
+            return sql;
+        }catch(e){
+            console.log(`Error en el modelo search ${e}`);
+        }
     }
 }

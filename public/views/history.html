@@ -36,9 +36,16 @@
     
             <!--Shearch Button-->
       <div class="container-search">
-        <select id="selectTransac" name="searchTransac" class="selectTransac">
+        <select id="selectType" name="searchTransac" class="selectTransac">
+          <option value="ALL">All</option>
           <option value="new book">New Book</option>
           <option value="update book">Update Book</option>
+        </select>
+        <select id="selectFilter" name="searchValue" class="selectTransac">
+          <option value="u.nameUser">Name User</option>
+          <option value="b.nameBook">Book Name</option>
+          <option value="t.dateTrans ">Date</option>
+
         </select>
         <input type="search"
           placeholder="Search " aria-label="Search" id="inputSearch" />

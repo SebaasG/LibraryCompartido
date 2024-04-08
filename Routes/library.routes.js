@@ -45,6 +45,7 @@ export const adminBookRoute = ({ adminMdl, historyMDL }) => {
     adminRouter.get('/books/shearchBook/:filter/:data/:state', adminController.shearchBooks);
 
     adminRouter.get('/books/history/:page', historyController.getTransac);
+    adminRouter.get('/books/history/search/:type/:filter/:input', historyController.searchTransac);
     return adminRouter;
 }
 

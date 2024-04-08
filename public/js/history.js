@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  await getTrasacData(1);
+  await getTransacData(1);
 });
 
-async function getTrasacData(page) {
+async function getTransacData(page) {
   const response = await fetch(
     `http://localhost:3000/admin/books/history/${page}`
   );
@@ -27,7 +27,7 @@ function pagination(tabs) {
     const page = document.querySelector(`#page${i}`);
     page.addEventListener("click", async () => {
       console.log("epa", i);
-      await getTrasacData(i);
+      await getTransacData(i);
     });
   }
 }
@@ -48,7 +48,6 @@ function renderData(data) {
         <td class="" >${d.nameBook} </td>
         <td class="" >${newDate} </td>
         <td class="" >${newHour} </td>
-
         `;
     bodyTable.appendChild(tr);
   });
@@ -60,14 +59,20 @@ inputSearch.addEventListener("input", async () => {
 });
 async function searchTransac() {
   const inputSearch = document.querySelector("#inputSearch").value;
-  const selectTransac = document.querySelector("#selectTransac").value;
+  const selectType = document.querySelector("#selectType").value;
+  const selectFilter = document.querySelector("#selectFilter").value;
+
+    console.log(selectFilter, selectType)
+
   const tableBody = document.querySelector('#body-table');
   tableBody.innerHTML = '';   
+  if(inputSearch === ''){
+    await getTransacData(1);
 
-  console.log(inputSearch)
-  console.log(selectTransac)
-  const response = fetch(``)
+  }else{
+      const response = await fetch(`http://localhost:3000/admin/books/history/search/${selectType}/${selectFilter}/${inputSearch}`)
+      const data = await response.json();
+      await renderData(data);
 
-
-
+  }
 }

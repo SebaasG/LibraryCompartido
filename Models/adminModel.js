@@ -108,7 +108,7 @@ export class adminMdl {
   static async searchBooks(filter, data, state) {
     try {
       const [sql] = await connection.query(
-        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook,  yearbook, authbook, disableBook, postbook, sumBook FROM book WHERE " + filter + " LIKE ? AND disableBook = ? LIMIT 10 OFFSET 0", [`%${data}%`,state]
+        "SELECT BIN_TO_UUID(idBook) as idBook,nameBook, amountBook,  yearbook, authbook, disableBook, postbook, sumBook FROM book WHERE ?? LIKE ? AND disableBook = ? LIMIT 10 OFFSET 0", [filter,`%${data}%`,state]
       );
       return sql;
     } catch (err) {
