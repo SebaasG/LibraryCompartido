@@ -4,6 +4,7 @@ import { userCtrl } from '../Controllers/userController.js';
 import { bookController } from '../Controllers/bookController.js';
 import { userMdl } from '../Models/userModel.js';
 import { adminCtrl } from '../Controllers/adminController.js';
+import { historyCtrl } from '../Controllers/historyController.js';
 
 export const routerLibrary = () => {
     const libraryRouter = router();
@@ -16,6 +17,7 @@ export const routerLibrary = () => {
 export const createBookRoutes = ({ bookModel }) => {
     const bookRouter = router();
     const BookController = new bookController({ bookModel });
+    
     bookRouter.get('/index/:id', BookController.getBooksById);
     bookRouter.get('/index/author/:authbook', BookController.getBookByAuthor);
     bookRouter.get('/index/year/:yearBook', BookController.getBookByAge);
@@ -30,14 +32,19 @@ export const createBookRoutes = ({ bookModel }) => {
     return bookRouter;
 }
 
-export const adminBookRoute = ({ adminMdl }) => {
+export const adminBookRoute = ({ adminMdl, historyMDL }) => {
     const adminRouter = router();
     const adminController = new adminCtrl({ adminMdl });
+    const historyController = new historyCtrl({historyMDL});
+
     adminRouter.get('/books/:page', adminController.getBooks);
     adminRouter.get('/books/getById/:idBook', adminController.getBookById);
     adminRouter.put('/books/update', adminController.updateBooks);
     adminRouter.put('/books/disableBook', adminController.disableBook);
     adminRouter.post('/books/create', adminController.createBooks);
     adminRouter.get('/books/shearchBook/:filter/:data/:state', adminController.shearchBooks);
+
+    adminRouter.get('/books/history/:page', historyController.getTransac);
     return adminRouter;
 }
+

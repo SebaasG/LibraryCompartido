@@ -80,6 +80,43 @@ margin: 0;
     background-color: #333;
     color: #fff;
   }
+  .table > thead:not(caption) > * > * {
+    background-color: #000;
+    border-radius: 5px;
+    font-family: cursive;
+  }
+  .btn-dark {
+    background-color: #8f8b8b;
+    color: #fff;
+  }
+  .container {
+    font-family: cursive;
+  }
+  .container-td_buttons {
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    height: 53px;
+  }
+  .btn-td1 {
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 1px;
+  }
+  tr {
+    height: 53px;
+  }
+  .btn-td2 {
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 1px;
+  }
+  
+  .btn-td > img {
+    align-items: center;
+    width: 30px;
+    height: 30px;
+  }
 
   
 @keyframes slideIn {
