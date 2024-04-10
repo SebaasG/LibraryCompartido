@@ -154,5 +154,16 @@ export class bookController {
             console.log(error)
         }
     }
+
+    getTransc = async (req,res) =>{
+        const docUser = req.params.docUser;
+
+        const [result] = await this.bookModel.getTransacUser(docUser)
+        if(result){
+            res.status(200).json(result)
+        }else{
+            res.status(404).json('Error al cargar las transacciones del usuario')
+        }
+    }
 }
 

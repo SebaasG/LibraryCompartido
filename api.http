@@ -37,6 +37,10 @@ GET http://localHost:3000/book/user/miguel.poveda1220@gmail.com
 ###
 GET http://localHost:3000/book/index/author/Tapa blanda
 
+
+###
+GET http://localHost:3000/book/get/transac/1052382113/0
+
 ###
 GET http://localHost:3000/book/index/year/2014
 

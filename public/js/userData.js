@@ -4,7 +4,10 @@ backButton.addEventListener('click', () => {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
+
+ 
     getUser();
+    renderData();
 });
 
 function selectUnderline(elemento) {
@@ -37,6 +40,43 @@ async function getUser() {
 }
 
 
+
+async function renderData(){
+    const emailUser = localStorage.getItem('correo');
+    const response = await fetch('http://localhost:3000/book/user/' + emailUser);
+    const datos = await response.json();
+    docUser = datos[0].docUser;
+
+    console.log(datos[0].docUser)
+const responseData = await fetch(`http://localHost:3000/book/get/transac/${docUser}`)
+const data  = await responseData.json()
+
+const bodyTable = document.getElementById("ContenTableInfo")
+console.log(data)
+
+
+bodyTable.innerHTML = "";
+let contador = 0;
+
+data.forEach((d) =>{
+   contador = contador +1
+    const tr = document.createElement("tr")
+    let type ;
+    if (d.TypeTrans ===2){
+        type = "Loan"
+    }else{
+        type = "Refund"
+    }
+    tr.innerHTML = `
+   <td class= ""> ${contador} </td>
+    <td class= ""> ${type} </td>
+    <td class= ""> ${d.nameBook} </td>
+    <td class= ""> ${d.date} </td>
+    `
+    bodyTable.appendChild(tr)
+})
+
+}
 
 
 

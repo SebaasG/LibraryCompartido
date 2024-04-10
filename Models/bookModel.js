@@ -49,6 +49,17 @@ export class bookModel {
         }
     }
 
+    static async getTransacUser (docUser){
+    try {
+        let offset = 0;
+        const Trasc = await connection.query(" Select TypeTrans, b.nameBook, DATE_FORMAT(dateTrans,'%d %M %Y %hh')as date from transac t join book b on t.idBook = b.idBook where docUser = ? limit 15 offset ?", [docUser, offset]);
+
+        return Trasc;
+    } catch (error) {
+        console.log('Error al cargar las transacciones del usuario' +error);
+    }
+    }
+
 
     static async getBookByAuthor(criterio, clave) {
         try {
@@ -104,7 +115,7 @@ export class bookModel {
 
     static async getNameUser(name) {
         try {
-            const [nameUser] = await connection.query('select nameUser from user where emailUser = ?', [name])
+            const [nameUser] = await connection.query('select nameUser,docUser from user where emailUser = ?', [name])
             return nameUser;
         } catch (error) {
             console.log(error)

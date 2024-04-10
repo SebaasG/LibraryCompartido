@@ -29,6 +29,7 @@ export const createBookRoutes = ({ bookModel }) => {
     bookRouter.get('/name/:nameBook', BookController.getBookByName);
     bookRouter.get('/all', BookController.getBooks);
     bookRouter.put('/save', BookController.postBooks);
+    bookRouter.get('/get/transac/:docUser', BookController.getTransc);
     return bookRouter;
 }
 
