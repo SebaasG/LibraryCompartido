@@ -52,7 +52,7 @@ export class bookModel {
     static async getTransacUser (docUser){
     try {
         let offset = 0;
-        const Trasc = await connection.query(" Select TypeTrans option1, b.nameBook option2, DATE_FORMAT(dateTrans,'%d %M %Y %hh')as option3 from transac t join book b on t.idBook = b.idBook where docUser = ? limit 15 offset ?", [docUser, offset]);
+        const Trasc = await connection.query(" Select TypeTrans option1, b.nameBook option2, DATE_FORMAT(dateTrans,'%d %M %Y %hh')as option3 from transac t join book b on t.idBook = b.idBook where docUser = ? limit 10 offset ?", [docUser, offset]);
 
         return Trasc;
     } catch (error) {
