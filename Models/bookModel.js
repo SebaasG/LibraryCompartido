@@ -52,13 +52,25 @@ export class bookModel {
     static async getTransacUser (docUser){
     try {
         let offset = 0;
-        const Trasc = await connection.query(" Select TypeTrans, b.nameBook, DATE_FORMAT(dateTrans,'%d %M %Y %hh')as date from transac t join book b on t.idBook = b.idBook where docUser = ? limit 15 offset ?", [docUser, offset]);
+        const Trasc = await connection.query(" Select TypeTrans option1, b.nameBook option2, DATE_FORMAT(dateTrans,'%d %M %Y %hh')as option3 from transac t join book b on t.idBook = b.idBook where docUser = ? limit 15 offset ?", [docUser, offset]);
 
         return Trasc;
     } catch (error) {
         console.log('Error al cargar las transacciones del usuario' +error);
     }
     }
+
+    
+    static async getTransacUserLoan (docUser){
+        try {   
+            let offset = 0;
+            const Trasc = await connection.query("Select b.nameBook option1, DATE_FORMAT(l.dateOut, '%d %M %Y %hh')as option2, DATE_FORMAT(timelimit, '%d %M %Y %hh') option3 from loan l join book b on l.idBook = b.idBook where stateLoan = 1 and docUser = ? limit 10 offset ?;", [docUser, offset]);
+    
+            return Trasc;
+        } catch (error) {
+            console.log('Error al cargar las transacciones del usuario' +error);
+        }
+        }
 
 
     static async getBookByAuthor(criterio, clave) {

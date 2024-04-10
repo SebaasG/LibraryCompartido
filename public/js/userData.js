@@ -3,11 +3,23 @@ backButton.addEventListener('click', () => {
     window.location.href = '../views/booksIndex.html'
 })
 
-document.addEventListener('DOMContentLoaded', function () {
 
- 
+const loanButton = document.getElementById('option2');
+loanButton.addEventListener('click', () => {
+    dataOfTable(2);
+})
+
+const historyButton = document.getElementById("option1")
+
+historyButton.addEventListener('click', () =>{
+    dataOfTable(1);
+})
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
     getUser();
-    renderData();
+    dataOfTable(1);
 });
 
 function selectUnderline(elemento) {
@@ -40,43 +52,63 @@ async function getUser() {
 }
 
 
-
-async function renderData(){
+async function dataOfTable(typeP) {
     const emailUser = localStorage.getItem('correo');
     const response = await fetch('http://localhost:3000/book/user/' + emailUser);
     const datos = await response.json();
     docUser = datos[0].docUser;
+    let parameter = typeP;
+    let opheader1;
+    let opheader2;
+    let opheader3;
 
-    console.log(datos[0].docUser)
-const responseData = await fetch(`http://localHost:3000/book/get/transac/${docUser}`)
-const data  = await responseData.json()
-
-const bodyTable = document.getElementById("ContenTableInfo")
-console.log(data)
-
-
-bodyTable.innerHTML = "";
-let contador = 0;
-
-data.forEach((d) =>{
-   contador = contador +1
-    const tr = document.createElement("tr")
-    let type ;
-    if (d.TypeTrans ===2){
-        type = "Loan"
-    }else{
-        type = "Refund"
+    if (typeP === 1) {
+        opheader1 = "Type"
+        opheader2 = "Name"
+        opheader3 = "Date"
+    } else {
+        opheader1 = "Name"
+        opheader2 = "Date Out"
+        opheader3 = "Date limit"
     }
-    tr.innerHTML = `
-   <td class= ""> ${contador} </td>
-    <td class= ""> ${type} </td>
-    <td class= ""> ${d.nameBook} </td>
-    <td class= ""> ${d.date} </td>
+
+    const responseData = await fetch(`http://localHost:3000/book/get/transac/${parameter}/${docUser}`)
+    const data = await responseData.json()
+    const tableHeader = document.getElementById("ContentHeader")
+    const bodyTable = document.getElementById("ContenTableInfo")
+    tableHeader.innerHTML = "";
+    const th = document.createElement("tr")
+    th.innerHTML = `
+    <th scope="col">#</th>
+    <th scope="col">${opheader1}</th>
+    <th scope="col">${opheader2}</th>
+    <th scope="col">${opheader3}</th>
     `
-    bodyTable.appendChild(tr)
-})
+    tableHeader.appendChild(th);
 
+    bodyTable.innerHTML = "";
+    let contador = 0;
+    let type;
+    data.forEach((d) => {
+        contador = contador + 1
+        const tr = document.createElement("tr")
+        console.log(d.option1)
+        if (d.option1 === 2) {
+            type = "Loan"
+        } else if (d.option1 === 3) {
+            type = "Refund"
+        } else {
+            type = d.option1
+        }
+        tr.innerHTML = `
+    <td class= ""> ${contador} </td>
+    <td class= ""> ${type} </td>
+    <td class= ""> ${d.option2} </td>
+    <td class= ""> ${d.option3} </td>
+    `
+        bodyTable.appendChild(tr)
+
+    })
 }
-
 
 
