@@ -3,7 +3,6 @@ backButton.addEventListener('click', () => {
     window.location.href = '../views/booksIndex.html'
 })
 
-
 const loanButton = document.getElementById('option2');
 loanButton.addEventListener('click', () => {
     dataOfTable(2);
@@ -11,51 +10,41 @@ loanButton.addEventListener('click', () => {
 
 const historyButton = document.getElementById("option1")
 
-historyButton.addEventListener('click', () =>{
+historyButton.addEventListener('click', () => {
     dataOfTable(1);
 })
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
-    getUser();
+    welcom();
     dataOfTable(1);
 });
 
 function selectUnderline(elemento) {
-    // Obtén todos los elementos con la clase 'optionTittleNav'
     var elementos = document.querySelectorAll('.optionTittleNav');
-
-    // Remueve la clase 'seleccionado' de todos los elementos
     elementos.forEach(function (el) {
         el.classList.remove('selectElement');
     });
-
-    // Añade la clase 'seleccionado' al elemento actual
     elemento.classList.add('selectElement');
 }
 
-
-async function getUser() {
+async function getUserEmail() {
     const emailUser = localStorage.getItem('correo');
     const response = await fetch('http://localhost:3000/book/user/' + emailUser);
-    const datos = await response.json();
+    return datos = await response.json();
+}
 
+async function welcom() {
+    const datos = await getUserEmail()
     const nameUser = document.getElementById('nameUser');
-
     nameUser.innerHTML = '';
-
     const nameContainer = document.createElement('p');
     nameContainer.innerHTML = `<strong>Bienvenid@ ${datos[0].nameUser}</strong>`;
 
     nameUser.appendChild(nameContainer);
 }
 
-
 async function dataOfTable(typeP) {
-    const emailUser = localStorage.getItem('correo');
-    const response = await fetch('http://localhost:3000/book/user/' + emailUser);
-    const datos = await response.json();
+    const datos = await getUserEmail();
     docUser = datos[0].docUser;
     let parameter = typeP;
     let opheader1;
