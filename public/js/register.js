@@ -1,6 +1,7 @@
-const btn = document.getElementById('btn-register');
+const form = document.querySelector('.form-register');
 
-btn.addEventListener('click', async () => {
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
     await register()
 })
 

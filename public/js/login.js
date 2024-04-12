@@ -1,16 +1,14 @@
-const btn = document.getElementById('btn-login');
+const form = document.querySelector('.form-login');
 
-btn.addEventListener('click', async () => {
+form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
     await login();
 })
 
 async function login() {
     const emailUser = document.getElementById('emailUser').value;
     const passUser = document.getElementById('passUser').value;
-
-
     if (!emailUser || !passUser) {
-        // Si alguno de los campos está vacío, muestra una alerta
         Swal.fire({
             icon: 'error',
             title: 'Campos requeridos.',
@@ -20,7 +18,8 @@ async function login() {
         });
         return;
     }
-    fetch('http://localhost:3000/library/login', {
+    
+   await fetch('http://localhost:3000/library/login', {
         method: 'POST',
         body: JSON.stringify({
             "emailUser": emailUser,
@@ -72,7 +71,6 @@ async function login() {
                 }
             });
         }
+
     })
-
-
 }
