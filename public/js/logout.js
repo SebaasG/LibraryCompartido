@@ -1,9 +1,8 @@
+
 const btnLogOut = document.querySelector(".logout-icon");
 
-btnLogOut.addEventListener("click", (e) => {
-  e.preventDefault();
-  window.location.replace("../index.html");
-  setTimeout(() => {
-    window.location.reload();
-  }, 1000);
-});
+btnLogOut.addEventListener('click',()=>{
+  setTimeout(()=> {
+    window.open("about:blank", "_self").close();
+  }, 2);
+})

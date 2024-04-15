@@ -18,15 +18,14 @@
       <div class="container-nav container-fluid">
 
         <h3 class="navbar-brand mb-0 " id="text-h3">Library</h3>
-
+        
         <div class="container-vinculo">
-
+        
+          <button data-bs-toggle="modal" data-bs-target="#modal-actions"><a class="vinculo-a">Actions</a> </button>
           <button id="btn-disableBooks" ><a href="../views/adminDisabledBooks.html" class="vinculo-a">Disabled Books</a> </button>
           <button data-bs-toggle="modal" data-bs-target="#modal-create_book"><a class="vinculo-a">New Book</a> </button>
           <button><a href="./history.html" class="vinculo-a">History</a> </button>
-          <button><a id="btn-logout" class="logout-icon"><img src="../images/log out.png" alt="Log Out"></a> </button>
-
-        
+          <a target="_blank" href="../index.html" id="btn-logout" class="logout-icon"><img src="../images/log out.png" alt="Log Out"></a>  
     </nav>
   </header>
 
@@ -145,6 +144,34 @@
       </div>
     </div>
   </div>
+
+
+
+  <div class="modal fade" id="modal-actions" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-center aling-content-center">
+          <h4 class="title" id="modal-title">Create Book</h4>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <div class="container">
+            <form class="form-update" id="form-update">
+              <label for="inpt-idUser" >ID User:</label>
+              <input type="text" name="inpt-idUser" id="inpt-idUser" placeholder="ID User"><br>
+              <label for="inpt-book" > Author:</label>
+              <input type="text" name="inpt-authBook" id="inpt-authBook" placeholder="Author Book"><br>
+              <select >
+                <option value="">Loan</option>
+                <option value="">Refund</option>
+              </select>
+        </div>
+      </div>
+      <div class="modal-footer"></div>
+      <button id="btn-newBook" class="form-btn btn btn-success" id="btn-save_update">Create</button>
+      </form>
+    </div>
+  </div>
+</div>
 
   <!---PAGINACION-->
 
