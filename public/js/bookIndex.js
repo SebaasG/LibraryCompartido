@@ -176,3 +176,12 @@ searchButton.addEventListener('click    ', () => {
 userBook.addEventListener('click', () => {
     window.location.href = '../views/userData.html'
 })
+
+
+
+
+const buttonExit = document.getElementById('ButtonCloseSession');
+
+buttonExit.addEventListener("click",()=>{
+alert("se esta presionando")
+})

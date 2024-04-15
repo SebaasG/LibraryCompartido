@@ -101,3 +101,9 @@ async function dataOfTable(typeP) {
 }
 
 
+
+const buttonExit = document.getElementById('ButonCloseSession');
+
+buttonExit.addEventListener("click",()=>{
+alert("se esta presionando")
+})
